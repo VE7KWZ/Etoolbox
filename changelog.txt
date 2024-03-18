@@ -1,0 +1,32 @@
+13 MAR 2024
+- Updates to each tool.
+- Added R2 input on divider calculator
+- Changed style and template
+
+22 DEC 2023
+- Applied new layout to all existing pages
+- Tweaked the code for Standard Value calculator to include timer
+- Tweaked the code for Equivalent Value calulator to include precision input
+- Added functionality to where pressing enter anywhere on the page will trigger the calculate button
+
+21 DEC 2023
+- New Template Layout
+- Applied new Layout to the Index and Component Combination Calculator
+
+18 DEC 2023
+- Added RIAA Passive Filter Calculator
+- Fixed bugs
+
+13 DEC 2023
+- Added Equivalent Solver
+
+12 DEC 2023
+- Added Component Marking Decoder
+- Added Resistor Divider/Ratio Calculator
+
+07 DEC 2023
+- Added Standard Value Calculator
+- Added Component Combination Calculator
+
+27 NOV 2023
+- Project Started

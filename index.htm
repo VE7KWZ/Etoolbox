@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Etoolbox by Michael Bell</title>
+    
+  <!-- DEFAULT LINKS, STYLES, AND SCRIPTS -->
+	<meta name="etoolbox" charset="UTF-8" content="width=device-width, initial-scale=1">
+  
+	<link rel="icon" href="./resources/images/favicon.ico" />
+	<link rel="stylesheet" href="./resources/css/styles.css">
+    
+	
+	<style>
+		#index_container { 
+			width: 100%;
+			display: flex;
+			flex-direction: row;
+			align-items: stretch;
+		}
+		
+		.index_column { width: 100%; }
+		.index_column a { padding: 8px 0; }
+		
+		.section_title {
+			margin: 0 0 10px 0;
+			color: #A22;
+			text-decoration: underline;
+		}
+    
+		#sections {
+			width:100%;
+			float: left;
+			display: flex;
+			justify-content: center;
+			overflow: auto;
+			margin: 15px 0 20px 0;
+		}
+		
+		#sections a {
+			float: left;
+			flex-grow: 1;
+			padding: 6px 10px;
+			color: black;
+			text-align: center;
+			text-decoration: none;
+			border-bottom: 3px solid #333;
+			transition: border 0.35s;
+			transition: background 0.35s;
+			transition: color 0.35s;
+		}
+		
+		#sections a:hover {
+			color: white;
+			border-bottom: 3px solid #A22;
+			background-color: #333;
+			transition: background 0.35s;
+		}
+		
+		#sections a:active {
+			background-color: #222;
+		}
+	</style>
+	
+</head>
+
+<body>
+	<div id="backdiv">
+	
+	<!-- HEADER -->
+	<div class="header" id="top">
+		<span class="title" style="font-size: 17px; font-weight: bold;">Michael's <span style="color:#EE0000">E</span>toolbox</span>
+	</div>
+	
+	
+	<!-- CALCULATOR -->
+	<div class="card">
+		
+		<!-- TITLE -->
+		<h2 style="margin:0; text-align:center;">Index</h2>
+		
+    <!-- NAVIGATION -->
+		<div id="sections">
+			<a href="#general">General</a>
+			<a href="#analog">Analog</a>
+			<a href="#radio">Radio</a>
+			<a href="#wire">Wire</a>
+		</div>
+		
+		
+		<!-- INDEX COLUMNS -->
+		<div id="index_container">
+			<div class="index_column">
+				<h4 id="general" class="section_title">General</h4>
+				
+				<a target="_top" href="./pages/equivalent_solver.htm">&#x2B9E; Equivalent Solver</a><br>
+				<a target="_top" href="./pages/combination_calculator.htm">&#x2B9E; Component Combinations</a><br>
+				<a target="_top" href="./pages/standard_value.htm">&#x2B9E; Closest Standard Value</a><br>
+				<a target="_top" href="./pages/marking_decode.htm">&#x2B9E; Marking Decoder</a><br>
+				<a target="_top" href="./pages/divider_calculator.htm">&#x2B9E; Divider Calculator</a><br>
+				
+			</div>
+			<div class="index_column">
+				<h4 id="analog" class="section_title">Analog</h4>
+				
+				<a target="_top" href="./pages/ac_voltage_convert.htm">&#x2B9E; AC/RF Voltage Conversion</a><br>
+				<a target="_top" href="./pages/reactance_calc.htm">&#x2B9E; Reactance Calculator</a><br>
+				<a target="_top" href="./pages/resonance_calc.htm">&#x2B9E; Resonance Calculator</a><br>
+				
+				<a target="_top" href="./pages/riaa_filter.htm">&#x2B9E; RIAA Filter Calculator</a><br>
+			</div>
+			<div class="index_column">
+				
+			</div>
+		</div>
+		
+    
+	</div>
+	
+	
+	<!-- OTHER CARD -->
+	<div class="card">
+		<a href="#top" style="font-size:0.95em; font-weight:bold;">&#x2B9E; Top</a><br>
+	</div>
+	
+	
+	<!-- FOOTER COPYRIGHT -->
+	<div class="footer">
+	<span style="font-size: 14px">Copyright &copy; <span id="year"></span> Michael Bell. All Rights Reserved.</span>
+	<script>document.getElementById("year").innerHTML = new Date().getFullYear();</script>
+	</div>
+	
+	</div>
+</body>
+
+</html>

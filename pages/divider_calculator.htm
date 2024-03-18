@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Etoolbox by Michael Bell</title>
+    
+  <!-- DEFAULT LINKS, STYLES, AND SCRIPTS -->
+	<meta name="etoolbox" charset="UTF-8" content="width=device-width, initial-scale=1">
+  
+	<link rel="icon" href="../resources/images/favicon.ico" />
+	<link rel="stylesheet" href="../resources/css/styles.css">
+	
+	<script type="text/javascript" src="../resources/js/functions.js"></script>
+	
+	
+	<!-- ADDITIONAL LINKS, STYLES, AND SCRIPTS -->
+	<script type="text/javascript" src="../resources/js/divider_ratio.js"></script>
+	
+	
+</head>
+
+<body>
+	<div id="backdiv">
+	
+	<!-- HEADER -->
+	<div class="header" id="top">
+		<span class="title" style="font-size: 17px; font-weight: bold;">Michael's <span style="color:#EE0000">E</span>toolbox</span>
+		<a target="_top" href="../index.htm">Index</a>
+	</div>
+	
+	
+	<!-- CALCULATOR -->
+	<div class="card" id="calc">
+		
+		<!-- TITLE AND SHORT DESCRIPTION -->
+		<h2 style="margin:0">Resistor Divider/Ratio Calculator</h2>
+		<a href="#info" style="font-size:0.95em; font-weight:bold;">&#x2B9E; Further Information</a><br>
+		<p>
+			Calculate standard values to achieve a specific voltage divider ratio, or resistor ratio for op-amps.
+		</p>
+		
+		<!-- METRIC INPUT NOTE -->
+		<p style="color:#A00; margin: 32px 0 16px 0; font-size:13px; text-align:center">
+			[1] Metric (SI) suffixes such as p=pico, n=nano, u=micro, m=milli, k=kilo, M=mega, G=giga are valid.
+		</p>
+		
+		<!-- CALCULATOR INPUT TABLE FORM -->
+		<form name="inputform" onkeydown="return event.key != 'Enter';">
+		<table class="intable">
+			
+			<!-- INPUT -->
+			<tr>
+				<td class="c1">
+					Calculation
+				</td>
+				<td class="c2">
+					<select id="calc_type">
+						<option value="0" selected="selected">Resistor Divider --> R2/(R1+R2)</option>
+						<option value="1">Resistor Ratio --> R1/R2</option>
+					</select>
+				</td>
+				<td class="c3">
+					Number of Outputs&nbsp;
+					<input style="width:3em; font-family:monospace;" type="number" id="num_outputs" min="1" max="50" value="10">
+				</td>
+			</tr>
+			
+			<!-- INPUT -->
+			<tr>
+				<td class="c1">
+					Target Ratio
+				</td>
+				<td class="c2">
+					<input type="text" id="target_ratio">
+				</td>
+				<td class="c3">
+					<code>0.##</code> (decimal) format
+				</td>
+			</tr>
+			
+			<!-- INPUT -->
+			<tr>
+				<td class="c1">
+					Tolerance
+				</td>
+				<td class="c2">
+					<select name="series" id="series">
+						<option value="3">E3 (40%)</option>
+						<option value="6">E6 (20%)</option>
+						<option value="12">E12 (10%)</option>
+						<option value="24" selected="selected">E24 (5%)</option>
+						<option value="48">E48 (2%)</option>
+						<option value="96">E96 (1%)</option>
+						<option value="192">E192 (<0.5%)</option>
+					</select>
+				</td>
+				<td class="c3">
+				</td>
+			</tr>
+			
+			<!-- INPUT -->
+			<tr>
+				<td class="c1">
+					Set R2 to
+				</td>
+				<td class="c2">
+					<input type="text" id="r2_value">
+				</td>
+				<td class="c3">
+					Leave blank if N/A <span style="color:#A00;">[1]</span>
+				</td>
+			</tr>
+			
+
+			<!-- CALCULATE BUTTON-->
+			<tr>
+				<td class="c1">
+					
+				</td>
+				<td class="c2">
+					<input type="button" style="width:100%;" onclick="divider_ratio()" id="calc_button" value="Calculate">
+				</td>
+				<td class="c3">
+					<input type="button" style="width:80px;" onclick="this.form.reset()" value="Clear">
+				</td>
+			</tr>
+			
+		</table>
+		
+		<br>
+		<span>Output</span>
+		<span style="font-size:12px; float:right;" id="time">Time: 0.0ms</span>
+		<br>
+		
+		<div class="justified">
+			<textarea id="output" rows=5 readonly></textarea>
+		</div>
+		
+		</form>
+		
+		
+		<script>
+			// Pressing enter anywhere on page will trigger the calculate button if it has the ID "calculate_button"
+			window.addEventListener( "keyup", (event) => {
+				if (event.key === "Enter") {
+					document.getElementById("calc_button").click() 
+				} 
+			} );
+		</script>
+		
+	</div>
+	
+	
+	<!-- CALCULATION INFO CARD -->
+	<div class="card" id="info">
+		Info
+		<br>
+		<a href="#top" style="font-size:0.95em; font-weight:bold;">&#x2B9E; Top</a><br>
+	</div>
+	
+	
+	
+	<!-- FOOTER COPYRIGHT -->
+	<div class="footer">
+	<span style="font-size: 14px">Copyright &copy; <span id="year"></span> Michael Bell. All Rights Reserved.</span>
+	<script>
+		document.getElementById("year").innerHTML = new Date().getFullYear();
+	</script>
+	</div>
+	
+	</div>
+</body>
+
+</html>

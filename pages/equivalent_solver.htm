@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Etoolbox - Equivalent Value Solver</title>
+    
+  <!-- DEFAULT LINKS, STYLES, AND SCRIPTS -->
+	<meta name="etoolbox" charset="UTF-8" content="width=device-width, initial-scale=1">
+  
+	<link rel="icon" href="../resources/images/favicon.ico" />
+	<link rel="stylesheet" href="../resources/css/styles.css">
+	
+	<script type="text/javascript" src="../resources/js/functions.js"></script>
+	
+	
+	<!-- ADDITIONAL LINKS, STYLES, AND SCRIPTS -->
+	<script type="text/javascript" src="../resources/js/equivalent_solver.js"></script>
+    
+</head>
+
+<body>
+	<div id="backdiv">
+	
+	<!-- HEADER -->
+	<div class="header" id="top">
+		<span class="title" style="font-size: 17px; font-weight: bold;">Michael's <span style="color:#EE0000">E</span>toolbox</span>
+		<a target="_top" href="../index.htm">Index</a>
+	</div>
+	
+	
+	<!-- CALCULATOR -->
+	<div class="card" id="calc">
+		
+		<!-- TITLE AND SHORT DESCRIPTION -->
+		<h2 style="margin:0">Equivalent Value Solver</h2>
+		<a href="#info" style="font-size:0.95em; font-weight:bold;">&#x2B9E; Further Information</a><br>
+		<p>
+			Solves for the equivalent value given a resistor, inductor, capacitor network formula.<br>
+			Operators:
+			<code>"+"</code>, Series connection. <code>"|"</code>, Parallel connection. <code>"("</code> and <code>")"</code> are parenthesis.<br>
+			<br>
+			Operations contained in parenthesis <code>"()"</code> are caluclated first with <code>"+"</code> series or <code>"|"</code> parallel being calculated by whichever is leftmost.
+		</p>
+		
+		
+		<!-- CALCULATOR INPUT TABLE FORM -->
+		<form name="inputform" onkeydown="return event.key != 'Enter';">
+		<table class="intable" style="padding:0; margin:0;">
+			<tr>
+				<td style="width:18%; padding:0; text-align: left;">
+					Component Type
+				</td>
+				<td style="width: 80%; padding:0;">
+					<select id="component_type" style="width:10em">
+						<option value="0" selected="selected">Resistor/Inductor</option>
+						<option value="1">Capacitor</option>
+					</select>
+					<label for="hide_stack">
+					<input type="checkbox" id="hide_stack" style="margin: 0 6pt 0 12pt;">Hide Stack Operations</label>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:18%; padding:0; text-align: left;">
+					Output Precision
+				</td>
+				<td style="width: 80%; padding:0;">
+					<input style="width:3em; font-family:monospace;" type="number" id="precision" min="1" max="15" value="6">
+				</td>
+			</tr>
+		</table>
+		<br>
+		
+		Expression
+		<!-- METRIC INPUT NOTE -->
+		<span style="color:#A00; font-size:13px; float:right;">
+			Metric (SI) suffixes such as p=pico, n=nano, u=micro, m=milli, k=kilo, M=mega, G=giga are valid.
+		</span>
+		<br>
+		
+		<div class="justified">
+			<textarea type="text" id="formula_input" rows=1 onkeypress="return noenter(event);" style="resize:none; width:100%; margin: 5px 0 15px 0; padding: 6px;"></textarea>
+		</div>
+		
+		
+		<!-- CALCULATE BUTTON -->
+		<div class="justified">
+			<input type="button" style="width:80%; margin-right: 10px" onclick="equivalent_solver()" id="calc_button" value="Calculate">
+			<input type="button" style="width:20%;" onclick="this.form.reset()" value="Clear">
+		</div>
+		
+		<!-- OUTPUT -->
+		<br>
+		<span>Output</span>
+		<span style="font-size:10pt; float:right;" id="time">Time: 0.0ms</span>
+		<br>
+		
+		<div class="justified">
+			<textarea id="output" rows=2 readonly></textarea>
+		</div>
+		
+		</form>
+		
+		
+		<script>
+			// Pressing enter anywhere on page will trigger the calculate button if it has the ID "calculate_button"
+			window.addEventListener( "keyup", (event) => {
+				if (event.key === "Enter") {
+					document.getElementById("calc_button").click() 
+				} 
+			} );
+			
+			// Disable enter key event on input or textarea when you add onkeypress="return noenter(event);" property
+			function noenter(e) {
+				e = e || window.event;
+				var key = e.keyCode || e.charCode;
+				return key !== 13; 
+			}
+		</script>
+		
+	</div>
+	
+	
+	<!-- CALCULATION INFO CARD -->
+	<div class="card" id="info">
+		Info
+		<br>
+		<a href="#top" style="font-size:0.95em; font-weight:bold;">&#x2B9E; Top</a><br>
+	</div>
+	
+	
+	
+	<!-- FOOTER COPYRIGHT -->
+	<div class="footer">
+	<span style="font-size: 14px">Copyright &copy; <span id="year"></span> Michael Bell. All Rights Reserved.</span>
+	<script>
+		document.getElementById("year").innerHTML = new Date().getFullYear();
+	</script>
+	</div>
+	
+	</div>
+</body>
+
+</html>

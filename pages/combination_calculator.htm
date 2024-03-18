@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Etoolbox - Combination Calculator</title>
+    
+  <!-- DEFAULT LINKS, STYLES, AND SCRIPTS -->
+	<meta name="etoolbox" charset="UTF-8" content="width=device-width, initial-scale=1">
+  
+	<link rel="icon" href="../resources/images/favicon.ico" />
+	<link rel="stylesheet" href="../resources/css/styles.css">
+	
+	<script type="text/javascript" src="../resources/js/functions.js"></script>
+	
+	
+	<!-- ADDITIONAL LINKS, STYLES, AND SCRIPTS -->	
+	<script type="text/javascript" src="../resources/js/combination_calc.js"></script>
+	
+	
+</head>
+
+
+<body onload="incexc_chng()">
+	<div id="backdiv">
+	
+	<!-- HEADER -->
+	<div class="header" id="top">
+		<span class="title" style="font-size: 17px; font-weight: bold;">Michael's <span style="color:#EE0000">E</span>toolbox</span>
+		<a target="_top" href="../index.htm">Index</a>
+	</div>
+	
+	
+	<!-- CALCULATOR -->
+	<div class="card" id="calc">
+		
+		<!-- TITLE AND SHORT DESCRIPTION -->
+		<h2 style="margin:0">Component Combination Calculator</h2>
+		<a href="#info" style="font-size:0.95em; font-weight:bold;">&#x2B9E; Further Information</a><br>
+		<p>
+			This calculator will calculate the best combination of components (resistors, capacitors, inductors)
+			to achieve a specified arbitrary value.
+		</p>
+		
+		<!-- METRIC INPUT NOTE -->
+		<p style="color:#A00; margin: 32px 0 16px 0; font-size:13px; text-align:center">
+			Metric (SI) suffixes such as p=pico, n=nano, u=micro, m=milli, k=kilo, M=mega, G=giga are valid.
+		</p>
+		
+		<!-- CALCULATOR INPUT TABLE FORM -->
+		<form name="inputform" onkeydown="return event.key != 'Enter';">
+		<table class="intable">
+			
+			<!-- INPUT -->
+			<tr>
+				<td class="c1">
+					Target Value
+				</td>
+				<td class="c2">
+					<input type="text" id="target_value">
+				</td>
+				<td class="c3">
+					<label for="three_component">
+					<input type="checkbox" id="three_component">3 Component Solution (Slow)</label>
+				</td>
+			</tr>
+			
+			<!-- INPUT -->
+			<tr>
+				<td class="c1">
+					Tolerance
+				</td>
+				<td class="c2">
+					<select name="series" autocomplete="off" id="series">
+						<option value="3">E3 (40%)</option>
+						<option value="6">E6 (20%)</option>
+						<option value="12">E12 (10%)</option>
+						<option value="24" selected="selected">E24 (5%)</option>
+					</select>
+				</td>
+				<td class="c3">
+				</td>
+			</tr>
+			
+			<!-- INPUT -->
+			<tr>
+				<td class="c1">
+					Values
+				</td>
+				<td class="c2">
+					<select id="in_ex_custom" onchange="incexc_chng()">
+						<option value="0" selected="selected">Include & Exclude list</option>
+						<option value="1">Custom List</option>
+					</select>
+				</td>
+				<td class="c3">
+				</td>
+			</tr>
+			
+			<!-- Function to change page layout when selecting between 'include/exclude' and 'with only' options -->
+			<script defer>
+				function incexc_chng() {
+					slct = Number(document.getElementById("in_ex_custom").value);
+					if (slct) {
+						document.getElementById("custom").style.display="";
+						document.getElementById("include").style.display="none";
+						document.getElementById("exclude").style.display="none";
+					} else {
+						document.getElementById("custom").style.display="none";
+						document.getElementById("include").style.display="";
+						document.getElementById("exclude").style.display="";
+					}
+				}
+			</script>
+			
+			
+			<!-- INPUT (INCLUDE) -->
+			<tr id="include">
+				<td class="c1">
+					Include
+				</td>
+				<td class="c2">
+					<input type="text" id="include_vals">
+				</td>
+				<td class="c3">
+					Comma Seperated Values
+				</td>
+			</tr>
+			
+			<!-- INPUT (EXCLUDE) -->
+			<tr id="exclude">
+				<td class="c1">
+					Exclude
+				</td>
+				<td class="c2">
+					<input type="text" id="exclude_vals">
+				</td>
+				<td class="c3">
+					Comma Seperated Values
+				</td>
+			</tr>
+			
+			<!-- INPUT (CUSTOM VALUES) -->
+			<tr id="custom" style="display:none">
+				<td class="c1">
+					Custom List
+				</td>
+				<td class="c2">
+					<textarea id="custom_vals" onkeypress="return noenter(event);" style="resize:none; height:3.16em;"></textarea>
+				</td>
+				<td class="c3">
+					Arbitrary Comma Seperated Values
+				</td>
+			</tr>
+			
+			<!-- INPUT -->
+			<tr>
+				<td class="c1">
+					Must Include
+				</td>
+				<td class="c2">
+					<input type="text" id="must_include">
+				</td>
+				<td class="c3">
+					Single Value, leave blank if none
+				</td>
+			</tr>
+			
+			<!-- INPUT -->
+			<tr>
+				<td class="c1">
+					Results
+				</td>
+				<td class="c2">
+					<select id="par_ser_only">
+						<option value="0" selected="selected">Parallel & Series Combinations</option>
+						<option value="1">Parallel (|) Combinations Only</option>
+						<option value="2">Series (+) Combinations Only</option>
+					</select>
+				</td>
+				<td class="c3">
+				</td>
+			</tr>
+			
+			<!-- CALCULATE BUTTON-->
+			<tr>
+				<td class="c1">
+					
+				</td>
+				<td class="c2">
+					<input type="button" style="width:100%;" onclick="combination_calc()" id="calc_button" value="Calculate">
+				</td>
+				<td class="c3">
+					<input type="button" style="width:80px;" onclick="this.form.reset(); incexc_chng()" value="Clear">
+				</td>
+			</tr>
+			
+		</table>
+		
+		<br>
+		<span>Output</span>
+		<span style="font-size:10pt; float:right;" id="time">Time: 0.0ms</span>
+		<br>
+		
+		<div class="justified">
+			<textarea id="output" rows=5 readonly></textarea>
+		</div>
+		
+
+		</form>
+		
+		
+		<script>
+			// Pressing enter anywhere on page will trigger the calculate button if it has the ID "calculate_button"
+			window.addEventListener( "keyup", (event) => {
+				if (event.key === "Enter") {
+					document.getElementById("calc_button").click() 
+				} 
+			} );
+			
+			// Disable enter key event on input or textarea when you add onkeypress="return noenter(event);" property
+			function noenter(e) {
+				e = e || window.event;
+				var key = e.keyCode || e.charCode;
+				return key !== 13; 
+			}
+		</script>
+		
+	</div>
+	
+	
+	<!-- CALCULATION INFO CARD -->
+	<div class="card" id="info">
+		Info
+		<br>
+		<a href="#top" style="font-size:0.95em; font-weight:bold;">&#x2B9E; Top</a><br>
+	</div>
+	
+	
+	<!-- FOOTER COPYRIGHT -->
+	<div class="footer">
+	<span style="font-size: 14px">Copyright &copy; <span id="year"></span> Michael Bell. All Rights Reserved.</span>
+	<script>
+		document.getElementById("year").innerHTML = new Date().getFullYear();
+	</script>
+	</div>
+	
+	</div>
+</body>
+
+</html>

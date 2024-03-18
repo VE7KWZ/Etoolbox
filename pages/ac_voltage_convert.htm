@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Etoolbox by Michael Bell</title>
+    
+  <!-- DEFAULT LINKS, STYLES, AND SCRIPTS -->
+	<meta name="etoolbox" charset="UTF-8" content="width=device-width, initial-scale=1">
+  
+	<link rel="icon" href="../resources/images/favicon.ico" />
+	<link rel="stylesheet" href="../resources/css/styles.css">
+	
+	<script type="text/javascript" src="../resources/js/functions.js"></script>
+	
+	
+	<!-- ADDITIONAL LINKS, STYLES, AND SCRIPTS -->
+	<script type="text/javascript" src="../resources/js/ac_voltage_convert.js"></script>
+    
+</head>
+
+<body>
+	<div id="backdiv">
+	
+	<!-- HEADER -->
+	<div class="header" id="top">
+		<span class="title" style="font-size: 17px; font-weight: bold;">Michael's <span style="color:#EE0000">E</span>toolbox</span>
+		<a target="_top" href="../index.htm">Index</a>
+	</div>
+	
+	
+	<!-- CALCULATOR -->
+	<div class="card" id="calc">
+		
+		<!-- TITLE AND SHORT DESCRIPTION -->
+		<h2 style="margin:0">AC Voltage Conversion Calculator</h2>
+		<a href="#info" style="font-size:0.95em; font-weight:bold;">&#x2B9E; Further Information</a><br>
+		<p>
+			Description
+		</p>
+		
+		<!-- METRIC INPUT NOTE -->
+		<p style="color:#A00; margin: 32px 0 16px 0; font-size:13px; text-align:center">
+			Metric (SI) suffixes such as p=pico, n=nano, u=micro, m=milli, k=kilo, M=mega, G=giga are valid.
+		</p>
+		
+		<!-- CALCULATOR INPUT TABLE FORM -->
+		<form name="inputform" onkeydown="return event.key != 'Enter';">
+		<table class="intable">
+			
+			<!-- INPUT -->
+			<tr>
+				<td class="c1">
+					Input Value
+				</td>
+				<td class="c2">
+					<input type="text" id="value_in">
+				</td>
+				<td class="c3">
+					<select id="input_type" style="width: 200px;">
+						<option value="0">Vp (peak)</option>
+						<option value="1">Vpp (peak-to-peak)</option>
+						<option value="2">Vrms (root mean square)</option>
+						<option value="3">Vavg (average)</option>
+						<option value="4">P (power watts)</option>
+						<option value="5">dBm (decibel milliwatts)</option>
+					</select>
+				</td>
+			</tr>
+			
+			<!-- INPUT -->
+			<tr>
+				<td class="c1">
+					Impedance
+				</td>
+				<td class="c2">
+					<input type="text" id="impedance_in">
+				</td>
+				<td class="c3">
+					Ohms (Optional)
+				</td>
+			</tr>
+			
+			
+			<!-- CALCULATE BUTTON-->
+			<tr>
+				<td class="c1">
+					
+				</td>
+				<td class="c2">
+					<input type="button" style="width:100%;" onclick="volt_power()" id="calc_button" value="Calculate">
+				</td>
+				<td class="c3">
+					<input type="button" style="width:80px;" onclick="this.form.reset()" value="Clear">
+				</td>
+			</tr>
+			
+		</table>
+		
+		<br>
+		<span>Output</span>
+		<br>
+		
+		<div class="justified">
+			<textarea id="output" rows=3 readonly></textarea>
+		</div>
+		
+		</form>
+		
+		
+		<script>
+			// Pressing enter anywhere on page will trigger the calculate button if it has the ID "calculate_button"
+			window.addEventListener( "keyup", (event) => {
+				if (event.key === "Enter") {
+					document.getElementById("calc_button").click() 
+				} 
+			} );
+		</script>
+		
+	</div>
+	
+	
+	<!-- CALCULATION INFO CARD -->
+	<div class="card" id="info">
+		Info
+		<br>
+		<a href="#top" style="font-size:0.95em; font-weight:bold;">&#x2B9E; Top</a><br>
+	</div>
+	
+	
+	
+	<!-- FOOTER COPYRIGHT -->
+	<div class="footer">
+	<span style="font-size: 14px">Copyright &copy; <span id="year"></span> Michael Bell. All Rights Reserved.</span>
+	<script>
+		document.getElementById("year").innerHTML = new Date().getFullYear();
+	</script>
+	</div>
+	
+	</div>
+</body>
+
+</html>

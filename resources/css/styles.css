@@ -1,0 +1,243 @@
+/* MAX HEIGHT */
+@media screen and (max-height: 300px) {
+  body { overflow: auto; }
+}
+
+/* MAKE ELEMENTS NOT PRINT WITH CTRL+P */
+@media print {
+  .noprint, .noprint * { display: none !important; } 
+  body, body * { box-shadow: none !important; }
+  body {  padding: 24px !important; }
+  input[type="button"] { display: none !important; }
+  input[type="checkbox"] { appearance: checkbox !important; }
+  .card { margin: 0 !important; }
+  #backdiv { padding: 0px !important; } 
+  .header a { display: none !important; }
+}
+
+
+/* BODY STYLING */
+body {
+  font-family: Arial;
+  font-size: 12pt;
+  background-image: url('../images/background.jpg');
+  max-width: 800px;
+  min-width: 600px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+#backdiv {
+  display: block;
+  max-width: inherit; 
+  min-width: inherit;
+  height: 100%;
+  padding: 15px;
+  background-color: rgba(0,0,0,0.22);
+  box-shadow: 0 0px 30px 0 rgba(0, 0, 0, 0.25);
+  transition: box-shadow 0.5s;
+}
+
+#backdiv:hover {
+  box-shadow: 0 0px 30px 0 rgba(0, 0, 0, 0.33);
+}
+
+input, select, textarea {
+  -ms-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  font-size: 10.5pt;
+}
+
+input[type="text"] {
+  border-radius: 0px;
+  border: 1px solid #AAA;
+  color: black;
+  padding: 2px;
+  transition: border 0.25s;
+}
+
+input[type="text"]:hover {
+  border: 1px solid #A55;
+  transition: border 0.25s;
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  accent-color: #A22;
+  vertical-align: middle;
+  width: 1em;
+  height: 1em;
+  background-color: #fff;
+  margin-right: 6px;
+  padding: 0px;
+  border: 1px solid #AAA;
+  transition: border 0.25s;
+  transition: background-color 0.25s;
+}
+
+input[type="checkbox"]:hover {
+  border: 1px solid #811;
+  background-color: #FDD;
+}
+
+input[type="checkbox"]:checked {
+  background-color: #A22;
+}
+
+input[type="checkbox"]:checked:hover {
+  border: 1px solid #811;
+  background-color: #C44;
+}
+
+input[type="button"] {
+  background-color: #333;
+  border: 1px solid black;
+  color: white;
+  margin: 0;
+  padding: 2px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition: background-color 0.25s;
+}
+
+input[type="button"]:hover {
+  background-color: #A22;
+}
+
+input[type="button"]:active {
+  background-color: #522;
+}
+
+select {
+  border-radius: 0px;
+  border: 1px solid #AAA;
+  background-color: #FFF;
+  padding: 1.5px 2px;
+  color: black;
+  transition: color 0.25s;
+}
+
+select:hover {
+  border: 1px solid #A55;
+  transition: border 0.25s;
+}
+
+textarea {
+  display: block;
+  border-radius: 0px;
+  border: 1px solid #AAA;
+  padding: 2px;
+  width: 100%;
+  transition: border 0.25s;
+}
+
+textarea:hover {
+  border: 1px solid #A55;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+  transition: color 0.35s;
+}
+
+a:hover {
+  color: #A22;
+}
+
+
+/* HEADER */
+.header {
+  overflow: hidden;
+  background-color: #333;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  text-decoration: none;
+}
+
+.header span.title {
+  padding: 9px 16px;
+  color: #FFF;
+  float: left;
+}
+
+.header a {
+  float: right;
+  color: #FFF;
+  text-decoration: none;
+  padding: 10px 16px;
+  transition: background-color 0.35s;
+}
+
+.header a:hover {
+  background-color: #A22;
+  transition: background-color 0.2s;
+}
+
+.header a:active {
+  background-color: #922;
+}
+
+
+
+/* BODY CARDS */
+.card {
+  background-color: white;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+
+
+/* INPUT TABLE */
+.intable {
+  width: 100%;
+}
+
+.intable input:not([type="checkbox"]), select {
+  width: 100%;
+  margin: 0px;
+}
+
+.calculate { width: 100%; }
+
+.intable td {
+  padding: 2px 6px;
+}
+
+.intable td.c1 { width: 16%; text-align: right; padding-left:0;}
+.intable td.c1 > select { text-align: right; direction: rtl; }
+.intable td.c2 { width: 44%; }
+.intable td.c3 { width: 40%; }
+
+
+/* OUTPUT TEXTAREA */
+#output {
+  padding: 8px;
+  font-size: 11pt;
+  margin: 5px auto 0 auto;
+  resize: none;
+  width: 100%;
+}
+
+div.justified {
+  display: flex;
+  justify-content: center;
+}
+
+
+
+/* FOOTER */
+.footer {
+  display: block;
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  margin-top: 20px;
+}

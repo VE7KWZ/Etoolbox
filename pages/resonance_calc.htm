@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Etoolbox by Michael Bell</title>
+    
+  <!-- DEFAULT LINKS, STYLES, AND SCRIPTS -->
+	<meta name="etoolbox" charset="UTF-8" content="width=device-width, initial-scale=1">
+  
+	<link rel="icon" href="../resources/images/favicon.ico" />
+	<link rel="stylesheet" href="../resources/css/styles.css">
+	
+	<script type="text/javascript" src="../resources/js/functions.js"></script>
+	
+	
+	<!-- ADDITIONAL LINKS, STYLES, AND SCRIPTS -->
+	<script type="text/javascript" src="../resources/js/resonance_calc.js"></script>
+    
+	<style>
+		#zq_out_series {
+			width: 41%;
+			margin: 0;
+			padding-left: 1px;
+			overflow: hidden;
+			resize: none;
+			font-size: 12pt;
+			border-right: 0;
+			outline: none;
+		}
+		
+		#zq_out_parallel {
+			width: 41%;
+			margin: 0;
+			padding-left: 1px;
+			overflow: hidden;
+			resize: none;
+			font-size: 12pt;
+			border-left: 0;
+			outline: none;
+		}
+	</style>
+	
+	
+</head>
+
+<body>
+	<div id="backdiv">
+	
+	<!-- HEADER -->
+	<div class="header" id="top">
+		<span class="title" style="font-size: 17px; font-weight: bold;">Michael's <span style="color:#EE0000">E</span>toolbox</span>
+		<a target="_top" href="../index.htm">Index</a>
+	</div>
+	
+	
+	<!-- RESONANCE CALCULATOR -->
+	<div class="card" id="calc2">
+		
+		<!-- TITLE AND SHORT DESCRIPTION -->
+		<h2 style="margin:0">Resonance Calculator</h2>
+		<a href="#info" style="font-size:0.95em; font-weight:bold;">&#x2B9E; Further Information</a><br>
+		<p>
+			Given capacitance and inductance, calculates the resonant frequency of an RLC network. 
+			Given either inductance or capacitance and frequency, calculates the missing value.
+			Providing resistance will give the Q factor and maximum dynamic impedance of the network.
+		</p>
+		
+		<!-- METRIC INPUT NOTE -->
+		<p style="color:#A00; margin: 24px 0 16px 0; font-size:13px; text-align:center">
+			Metric (SI) suffixes such as p=pico, n=nano, u=micro, m=milli, k=kilo, M=mega, G=giga are valid.
+		</p>
+		
+		<!-- CALCULATOR INPUT TABLE FORM -->
+		<form name="inputform" onkeydown="return event.key != 'Enter';">
+		<table class="intable">
+			
+			<!-- INPUT -->
+			<tr>
+				<td style="width:20%; text-align:right;">
+					Capacitance
+				</td>
+				<td style="width:15%">
+					<input type="text" tabindex="1" id="capacitance" placeholder="?">
+				</td>
+				<td style="width:5%">
+					F
+				</td>
+				<td style="width:15%; text-align:right;">
+					Resistance
+				</td>
+				<td style="width:15%">
+					<input type="text" tabindex="4" id="resistance" placeholder="?">
+				</td>
+				<td>
+					&#x2126;
+				</td>
+			</tr>
+			
+			<!-- INPUT -->
+			<tr>
+				<td style="width:20%; text-align:right;">
+					Inductance
+				</td>
+				<td style="width:15%">
+					<input type="text" tabindex="2" id="inductance" placeholder="?">
+				</td>
+				<td style="width:5%">
+					H
+				</td>
+				<td style="width:15%; text-align:right;" rowspan=2>
+					Q Factor &<br>Dynamic Z
+				</td>
+				<td colspan=2 rowspan=2>
+					<div style="display:flex;">
+					<textarea id="zq_out_series" rows=3 tabindex="-1" readonly></textarea>
+					<textarea id="zq_out_parallel" rows=3 tabindex="-1" readonly></textarea>
+					</div>
+				</td>
+			</tr>
+			
+			<!-- INPUT -->
+			<tr>
+				<td style="width:20%; text-align:right;">
+					Frequency
+				</td>
+				<td style="width:15%">
+					<input type="text" tabindex="3" id="frequency" placeholder="?">
+				</td>
+				<td style="width:5%">
+					Hz
+				</td>
+			</tr>
+			
+		</table>
+		
+		<br>
+		
+		<!-- CALCULATE BUTTON -->
+		<div style="display:flex; justify-content:right;">
+			<input type="button" style="width:30%; margin-right: 10px" onclick="resonance_calc()" id="calc_button" value="Calculate">
+			<input type="button" style="width:15%;" onclick="this.form.reset()" value="Clear">
+		</div>
+		
+		</form>
+		
+		<script>
+			// Pressing enter anywhere on page will trigger the calculate button if it has the ID "calculate_button"
+			window.addEventListener( "keyup", (event) => {
+				if (event.key === "Enter") {
+					document.getElementById("calc_button").click() 
+				} 
+			} );
+		</script>
+		
+	</div>
+	
+	
+	<!-- CALCULATION INFO CARD -->
+	<div class="card" id="info">
+		Info
+		<br>
+		<a href="#top" style="font-size:0.95em; font-weight:bold;">&#x2B9E; Top</a><br>
+	</div>
+	
+	
+	
+	<!-- FOOTER COPYRIGHT -->
+	<div class="footer">
+	<span style="font-size: 14px">Copyright &copy; <span id="year"></span> Michael Bell. All Rights Reserved.</span>
+	<script>
+		document.getElementById("year").innerHTML = new Date().getFullYear();
+	</script>
+	</div>
+	
+	</div>
+</body>
+
+</html>

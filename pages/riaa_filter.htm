@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Etoolbox by Michael Bell</title>
+    
+  <!-- DEFAULT LINKS, STYLES, AND SCRIPTS -->
+	<meta name="etoolbox" charset="UTF-8" content="width=device-width, initial-scale=1">
+  
+	<link rel="icon" href="../resources/images/favicon.ico" />
+	<link rel="stylesheet" href="../resources/css/styles.css">
+	
+	<script type="text/javascript" src="../resources/js/functions.js"></script>
+	
+	
+	<!-- ADDITIONAL LINKS, STYLES, AND SCRIPTS -->
+	<script type="text/javascript" src="../resources/js/riaa_calculator.js"></script>
+    
+</head>
+
+<body>
+	<div id="backdiv">
+	
+	<!-- HEADER -->
+	<div class="header" id="top">
+		<span class="title" style="font-size: 17px; font-weight: bold;">Michael's <span style="color:#EE0000">E</span>toolbox</span>
+		<a target="_top" href="../index.htm">Index</a>
+	</div>
+	
+	
+	<!-- CALCULATOR -->
+	<div class="card" id="calc">
+		
+		<!-- TITLE AND SHORT DESCRIPTION -->
+		<h2 style="margin:0">RIAA Passive Filter Calculator</h2>
+		<a href="#info" style="font-size:0.95em; font-weight:bold;">&#x2B9E; Further Information</a><br>
+		<p>
+			This tool calculates the values for a passive RIAA standard filter for de-emphasis of phono outputs.
+		</p>
+		
+		<!-- IMAGE -->
+		<div class="justified">
+			<img src="../resources/images/riaa.png" style="width: 90%; height: auto;"></img>
+		</div>
+		
+		<!-- METRIC INPUT NOTE -->
+		<p style="color:#A00; margin: 32px 0 16px 0; font-size:13px; text-align:center">
+			Metric (SI) suffixes such as p=pico, n=nano, u=micro, m=milli, k=kilo, M=mega, G=giga are valid.
+		</p>
+		
+		<!-- CALCULATOR INPUT TABLE FORM -->
+		<form name="inputform" onkeydown="return event.key != 'Enter';">
+		<table class="intable">
+			
+			<!-- INPUT -->
+			<tr>
+				<td style="width:18%; text-align:right;">
+					Resistor R1
+				</td>
+				<td style="width:20%">
+					<input type="text" id="R1" value="10k">
+				</td>
+				<td style="width:12%">
+					Ohms
+				</td>
+				<td style="width:20%; text-align:right;">
+					Corner freq. F2
+				</td>
+				<td style="width:20%">
+					<input type="text" id="F2" value="500">
+				</td>
+				<td style="width:12%">
+					Hz
+				</td>
+			</tr>
+			
+			<!-- INPUT -->
+			<tr>
+				<td style="width:18%; text-align:right;">
+					Corner freq. F1
+				</td>
+				<td style="width:20%">
+					<input type="text" id="F1" value="50">
+				</td>
+				<td style="width:12%">
+					Hz
+				</td>
+				<td style="width:20%; text-align:right;">
+					Corner freq. F3
+				</td>
+				<td style="width:20%">
+					<input type="text" id="F3" value="2120">
+				</td>
+				<td style="width:12%">
+					Hz
+				</td>
+			</tr>
+			
+		</table>
+		
+		
+		<!-- CALCULATE BUTTON-->
+		<br>
+		<div class="justified">
+			<input type="button" style="width:60%; margin-right: 10px" onclick="riaa_calculator()" id="calc_button" value="Calculate">
+			<input type="button" style="width:20%;" onclick="this.form.reset()" value="Clear">
+		</div>
+		
+		
+		<!-- OUTPUT -->
+		<br>
+		<span>Output</span>
+		<br>
+		
+		<div class="justified">
+			<textarea id="output" rows=6 readonly></textarea>
+		</div>
+		
+		</form>
+		
+		
+		<script>
+			// Pressing enter anywhere on page will trigger the calculate button if it has the ID "calculate_button"
+			window.addEventListener( "keyup", (event) => {
+				if (event.key === "Enter") {
+					document.getElementById("calc_button").click() 
+				} 
+			} );
+		</script>
+		
+	</div>
+	
+	
+	<!-- CALCULATION INFO CARD -->
+	<div class="card" id="info">
+		Info
+		<br>
+		<a href="#top" style="font-size:0.95em; font-weight:bold;">&#x2B9E; Top</a><br>
+	</div>
+	
+	
+	
+	<!-- FOOTER COPYRIGHT -->
+	<div class="footer">
+	<span style="font-size: 14px">Copyright &copy; <span id="year"></span> Michael Bell. All Rights Reserved.</span>
+	<script>
+		document.getElementById("year").innerHTML = new Date().getFullYear();
+	</script>
+	</div>
+	
+	</div>
+</body>
+
+</html>
