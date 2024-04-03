@@ -229,8 +229,21 @@
 	
 	<!-- CALCULATION INFO CARD -->
 	<div class="card" id="info">
-		Info
+		<h3 style="margin:0 0 12pt 0">Further Information</h3>
+		<span style="font-weight:bold">Use Case for Combinations</span><br>
+		When designing a circuit board, one may need to replace a resistor, capacitor, inductor to match a non-standard "arbitrary" value, 
+		or the non-standard value may be needed as part of the original design. The calculator can calculate combinations that are series only, parallel only, 
+		or both. In the case of a quick fix (bodge) of a resistor on a circuit board, one can use this calculator to find a parallel-only combination to achieve
+		a smaller resistance by stacking an additional chip resistor on top an existing one.<br>
 		<br>
+		<span style="font-weight:bold">Calculator</span><br>
+		Given the input and select options, the calculator brute-forces all possible combinations and returns the lowest-error results. Because of the nature of 
+		this calculator, the tolerance values do not exceed E24 (5%) as any component series above that will have standard velues fairly close to the target value.
+		By default the 3-component solution is disabled as it increases the compuation duration significantly.<br>
+		<br>
+		<span style="font-weight:bold">Output</span><br>
+		The results provided (in order) are one single-component solution, 4 two-component solutions, and (if enabled) 4 three-component solutions.<br>
+		<br><br><br>
 		<a href="#top" style="font-size:0.95em; font-weight:bold;">&#x2B9E; Top</a><br>
 	</div>
 	
