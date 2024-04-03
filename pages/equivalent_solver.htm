@@ -54,8 +54,8 @@
 						<option value="0" selected="selected">Resistor/Inductor</option>
 						<option value="1">Capacitor</option>
 					</select>
-					<label for="hide_stack">
-					<input type="checkbox" id="hide_stack" style="margin: 0 6pt 0 12pt;">Hide Stack Operations</label>
+					<label for="show_stack">
+					<input type="checkbox" id="show_stack" style="margin: 0 6pt 0 12pt;">Show Stack Operations</label>
 				</td>
 			</tr>
 			<tr>
@@ -63,7 +63,7 @@
 					Output Precision
 				</td>
 				<td style="width: 80%; padding:0;">
-					<input style="width:3em; font-family:monospace;" type="number" id="precision" min="1" max="15" value="6">
+					<input style="width:3em; font-family:monospace;" type="number" id="precision" min="1" max="12" value="3">
 				</td>
 			</tr>
 		</table>
@@ -71,7 +71,7 @@
 		
 		Expression
 		<!-- METRIC INPUT NOTE -->
-		<span style="color:#A00; font-size:13px; float:right;">
+		<span style="color:#A00; font-size:13px; float:right;" class="noprint">
 			Metric (SI) suffixes such as p=pico, n=nano, u=micro, m=milli, k=kilo, M=mega, G=giga are valid.
 		</span>
 		<br>
@@ -94,7 +94,7 @@
 		<br>
 		
 		<div class="justified">
-			<textarea id="output" rows=2 readonly></textarea>
+			<textarea id="output" rows=1 readonly></textarea>
 		</div>
 		
 		</form>
@@ -121,8 +121,43 @@
 	
 	<!-- CALCULATION INFO CARD -->
 	<div class="card" id="info">
-		Info
+		<h3 style="margin:0 0 12pt 0">Further Information</h3>
+		The equivalent value solver calculates the equivalent value of a resistor/capacitor/inductor network.<br>
 		<br>
+		<span style="font-weight:bold">Resistors & Inductors</span><br>
+		The equivalent value of resistors in series can be calculated by summing all the series resistor values together.<br>
+		<code>Req = R1 + R2 + ... + Rn</code><br>
+		<br>
+		The equivalent value of resistors in parallel can be calculated by summing the inverse of all the parallel resistor values, and taking the inverse of the result.<br>
+		<code>1/Req = 1/R1 + 1/R2 + ... + 1/Rn</code><br>
+		<br>
+		Like resistors, equivalent inductor values are calculated the same way.<br>
+		<code>Series: Leq = L1 + L2 + ... + Ln</code><br>
+		<code>Parallel: 1/Leq = 1/L1 + 1/L2 + ... + 1/Ln</code><br>
+		<br>
+		<span style="font-weight:bold">Capacitors</span><br>
+		The equivalent value of capacitors in series can be calculated by summing the inverse of all the series capacitor values, and taking the inverse of the result.<br>
+		<code>1/Ceq = 1/C1 + 1/C2 + ... + 1/Cn</code><br>
+		<br>
+		The equivalent value of capacitors in parallel can be calculated by summing all the parallel capacitor values together.<br>
+		<code>Ceq = C1 + C2 + ... + Cn</code><br>
+		<br>
+		<span style="font-weight:bold">Calculator</span><br>
+		The calculator operates by taking the input expression and using the shunting yard algorithm, parsing it into values and 
+		operators, generating a Reverse Polish Notation expression, then obtaining the final result.<br>
+		<br>
+		<span style="font-weight:bold">Operators</span><br>
+		The operator for parallel combinations is the ascii pipe symbol, "|". Normally a double pipe would be used but a single 
+		pipe is used for simplicity.<br>
+		Additionally the forward slash "/" can be used as well. For series connections the ascii plus "+" symbol is used.<br>
+		<br>
+		<span style="font-weight:bold">Reverse Polish Notation (RPN)</span><br>
+		In Reverse Polish Notation, the operators follow their operands. This is also known as Postfix Notation. The notation does not need any parentheses for<br>
+		as long as each operator has a fixed number of operands. RPN is a stack-oriented method of calculating long expressions, so it was used in this calculator.<br>
+		<br>
+		<span style="font-weight:bold">Shunting Yard Algorithm</span><br>
+		<a href="https://en.wikipedia.org/wiki/Shunting_yard_algorithm">&#x2B9E; Wikipedia Page</a><br>
+		<br><br><br>
 		<a href="#top" style="font-size:0.95em; font-weight:bold;">&#x2B9E; Top</a><br>
 	</div>
 	

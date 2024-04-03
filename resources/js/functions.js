@@ -116,7 +116,7 @@ function ferr (val) {
 }
 
 // Convert numbers to an RTK SI style string notation
-function fnum2si (val, round=8) {
+function fnum2si (val, round=8, space=false) {
 
 	// Seperate value and mantissa
 	// seperate by degrees of 3: ie 1, 1*10^3, 1*10^6, etc.
@@ -124,44 +124,54 @@ function fnum2si (val, round=8) {
 	if (val == 0) { expon = 0; }
 	
 	// Calculate value with the degree of 3 taken into account
-	val = fnum(val*(10**(-1*expon*3)),round);
+	var val = fnum(val*(10**(-1*expon*3)),round);
 	
 	switch (expon) {
 		case -5: //femto
-			return val + "f";
+			val += "f";
 			break;
 		case -4: //pico
-			return val + "p";
+			val += "p";
 			break;
 		case -3: //nano
-			return val + "n";
+			val += "n";
 			break;
 		case -2: //micro
-			return val + "u";
+			val += "u";
 			break;
 		case -1: //milli
-			return val + "m";
+			val += "m";
 			break;
 		case 0: //no suffix
-			return val + "";
+			val += "";
 			break;
 		case 1: //kilo
-			return val + "k";
+			val += "k";
 			break;
 		case 2: //mega
-			return val + "M";
+			val += "M";
 			break;
 		case 3: //giga
-			return val + "G";
+			val += "G";
 			break;
 		case 4: //tera
-			return val + "T";
+			val += "T";
 			break;
 		default: //other
-			return val + "*10^" + (expon*3);
+			val += "*10^" + (expon*3);
 			break;
 	}
 	
+	// If space bool is true, insert space before si suffix
+	if (space == true) {
+		if (expon == 0) {
+			val += " ";
+		} else {
+			val = val.slice(0, -1) + " " + val.slice(-1);
+		}
+	}
+	
+	return val;
 }
 
 // Convert an RKM SI style string notation to number

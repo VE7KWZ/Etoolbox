@@ -4,12 +4,6 @@
 function standard_value() {
 	console.log("Standard E-Series Value");
 	
-	// Timer
-	console.time("Runtime");
-	startTime = performance.now();
-	
-	// Clear output box
-	document.getElementById("output").value = '';
 	
 	// Inputs
 	var val_arb = fsi2num(document.getElementById("target_value").value);
@@ -44,12 +38,7 @@ function standard_value() {
 	
 	console.log([val_out, err_out]);
 	
-	var ret = fstring("Value: {1}\nError: {2}", fnum2si(val_out), ferr(err_out));
-	
-	document.getElementById("output").value = ret;
-	
-	// Calculation Time
-	console.timeEnd("Runtime");
-	document.getElementById("time").innerHTML = fstring("Time: {1}ms (approx)", fnum(performance.now()-startTime, 4));
+	document.getElementById("out_val").value = fnum2si(val_out);
+	document.getElementById("out_err").value = ferr(err_out);
 	
 }

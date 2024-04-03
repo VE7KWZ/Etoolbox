@@ -45,14 +45,15 @@
 		<!-- CALCULATOR INPUT TABLE FORM -->
 		<form name="inputform" onkeydown="return event.key != 'Enter';">
 		<table class="intable">
-			
-			<!-- INPUT -->
 			<tr>
-				<td class="c1">
-					Tolerance
+				<td style="width:15%; text-align:right;">
+					Target Value
 				</td>
-				<td class="c2">
-					<select name="series" id="series">
+				<td style="width:24%;">
+					<input type="text" id="target_value" onchange="standard_value()" value="">	
+				</td>
+				<td style="width:18%;">
+					<select name="series" id="series" onchange="standard_value()">
 						<option value="3">E3 (40%)</option>
 						<option value="6">E6 (20%)</option>
 						<option value="12">E12 (10%)</option>
@@ -62,45 +63,29 @@
 						<option value="192">E192 (<0.5%)</option>
 					</select> 
 				</td>
-				<td class="c3">
+				<td>
+					<input type="button" style="width:80px; float:right;" onclick="this.form.reset()" value="Clear">
+					<input type="button" style="width:120px; margin-right:18px; float:right;" onclick="standard_value()" id="calc_button" value="Calculate">
 				</td>
 			</tr>
-			
-			<!-- INPUT -->
+		</table>
+		<br>
+		<table class="intable">
 			<tr>
-				<td class="c1">
-					Target Value
+				<td style="width:15%; text-align:right;">
+					Output
 				</td>
-				<td class="c2">
-					<input type="text" id="target_value" value="">	
+				<td style="width:24%;">
+					<input type="text" id="out_val" style="width:60%;"><span style="padding-left:14%">Error</span>
 				</td>
-				<td class="c3">
+				<td style="width:10%;">
+					<input type="text" id="out_err" value="">
 				</td>
-			</tr>
-			
-			<!-- CALCULATE BUTTON-->
-			<tr>
-				<td class="c1">
-					
-				</td>
-				<td class="c2">
-					<input type="button" style="width:100%;" onclick="standard_value()" id="calc_button" value="Calculate">
-				</td>
-				<td class="c3">
-					<input type="button" style="width:80px;" onclick="this.form.reset()" value="Clear">
+				<td>
 				</td>
 			</tr>
-			
 		</table>
 		
-		<br>
-		<span>Output</span>
-		<span style="font-size:12px; float:right;" id="time">Time: 0.0ms</span>
-		<br>
-		
-		<div class="justified">
-			<textarea id="output" rows=2 readonly></textarea>
-		</div>
 		
 		</form>
 		

@@ -15,10 +15,10 @@ function equivalent_solver () {
 	var component = Number(document.getElementById("component_type").value);	// Component Selection
 	var formula = document.getElementById("formula_input").value;				// Formula
 	var precision = document.getElementById("precision").value;					// Output Precision
-	var hide_stack = document.getElementById("hide_stack").checked;				// Hide Stack Ouput Bool
+	var hide_stack = !document.getElementById("show_stack").checked;			// Hide Stack Ouput Bool
 	
 	if (precision <= 0) {
-		precision = 6;
+		precision = 4;
 	}
 	
 	console.log(component);
@@ -133,7 +133,7 @@ function equivalent_solver () {
 	if (eval_stack.length != 1) {
 		result = "Syntax Error.";
 	} else {
-		result = fstring("Answer:\t{1}", eval_stack[0]);
+		result = fstring("Equivalent Value = {1}", eval_stack[0]);
 	}
 	
 	if (hide_stack == false) {
@@ -142,7 +142,7 @@ function equivalent_solver () {
 	}
 	
 	// Number of rows for output
-	document.getElementById("output").rows = result.split(/\r\n|\r|\n/).length-1;
+	document.getElementById("output").rows = result.split(/\r\n|\r|\n/).length;
 	
 	// Print result
 	document.getElementById("output").value = result;

@@ -49,8 +49,8 @@ function resonance_calc () {
 		Q_ser = (1/res)*Math.sqrt(ind/cap);
 		Q_par = res*Math.sqrt(cap/ind);
 		
-		series = fstring("Series\nQ: {1}\nZ: {2} \u2126", fnum(Q_ser,3), fnum2si(Zd_ser,3));
-		parallel = fstring("Parallel\nQ: {1}\nZ: {2} \u2126", fnum(Q_par,3), fnum2si(Zd_par,3));
+		series = fstring("Series\nQ: {1}\nZ: {2}\u2126", fnum(Q_ser,3), fnum2si(Zd_ser,3,true));
+		parallel = fstring("Parallel\nQ: {1}\nZ: {2}\u2126", fnum(Q_par,3), fnum2si(Zd_par,3,true));
 		
 		// OUTPUT Q AND Z
 		document.getElementById("zq_out_series").value = series;

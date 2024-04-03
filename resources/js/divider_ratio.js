@@ -13,10 +13,17 @@ function divider_ratio (){
 	
 	// Inputs
 	var calc_type = Number(document.getElementById("calc_type").value);			// Calculation Type (0 Divider/1 Ratio)
-	var ratio = Number(document.getElementById("target_ratio").value);			// Target Ratio
+	var ratio = document.getElementById("target_ratio").value;					// Target Ratio
 	var series = Number(document.getElementById("series").value);				// Tolerance
 	var num_outputs = Number(document.getElementById("num_outputs").value);		// Show More Combinations
 	var r2_value = fsi2num(document.getElementById("r2_value").value);			// Set R2 Value
+	
+	if (ratio.includes("/")) {
+		indx = ratio.indexOf("/");
+		ratio = Number(ratio.substring(0, indx))/Number(ratio.substring(indx+1, ratio.length));
+	} else {
+		ratio = Number(ratio);
+	}
 	
 	
 	var E = eseries(series);
@@ -71,7 +78,7 @@ function divider_ratio (){
 				switch (calc_type) {
 					case 0: // Divider
 						Ex = E[x]*(10**n);
-						rat = Ex / (Ex + Ey);
+						rat = Ey / (Ex + Ey);
 						err = rerr(rat, ratio);
 						abs_err = Math.abs(err);
 						
@@ -130,7 +137,7 @@ function divider_ratio (){
 	}
 	
 	// Number of rows for output
-	document.getElementById("output").rows = result.split(/\r\n|\r|\n/).length-1;
+	document.getElementById("output").rows = result.split(/\r\n|\r|\n/).length;
 	
 	// Print result
 	document.getElementById("output").value = result;

@@ -442,7 +442,7 @@ function combination_calc (){
 	
 	
 	// Number of rows for output
-	document.getElementById("output").rows = result.split(/\r\n|\r|\n/).length-1;
+	document.getElementById("output").rows = result.split(/\r\n|\r|\n/).length;
 	
 	// Print result
 	document.getElementById("output").value = result;

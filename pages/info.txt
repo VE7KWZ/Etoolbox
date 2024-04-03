@@ -1,0 +1,115 @@
+Equivalent Solver
+Info
+
+The equivalent value solver calculates the equivalent value of a resistor/capacitor/inductor network.
+
+>> Resistors & Inductors
+The equivalent value of resistors in series can be calculated by summing all the series resistor values together.
+Req = R1 + R2 + ... + Rn
+
+The equivalent value of resistors in parallel can be calculated by summing the inverse of all the parallel resistor values, and taking the inverse of the result.
+1/Req = 1/R1 + 1/R2 + ... + 1/Rn
+
+Like resistors, equivalent inductor values are calculated the same way.
+Series: Leq = L1 + L2 + ... + Ln
+Parallel: 1/Leq = 1/L1 + 1/L2 + ... + 1/Ln
+  
+
+>> Capacitors
+The equivalent value of capacitors in series can be calculated by summing the inverse of all the series capacitor values, and taking the inverse of the result.
+1/Ceq = 1/C1 + 1/C2 + ... + 1/Cn
+
+The equivalent value of capacitors in parallel can be calculated by summing all the parallel capacitor values together.
+Ceq = C1 + C2 + ... + Cn
+
+
+>> Calculator
+The calculator operates by taking the input expression and using the shunting yard algorithm, parsing it into values and operators, generating a
+Reverse Polish Notation expression, then obtaining the final result.
+
+>> Operators
+The operator for parallel combinations is the ascii pipe symbol, "|". Normally a double pipe would be used but a single pipe is used for simplicity.
+Additionally the forward slash "/" can be used as well. For series connections the ascii plus "+" symbol is used.
+
+>> Reverse Polish Notation (RPN)
+In Reverse Polish Notation, the operators follow their operands. This is also known as Postfix Notation. The notation does not need any parentheses for
+as long as each operator has a fixed number of operands. RPN is a stack-oriented method of calculating long expressions, so it was used in this calculator.
+
+>> Shunting Yard Algorithm
+https://en.wikipedia.org/wiki/Shunting_yard_algorithm#:~:text=In%20computer%20science%2C%20the%20shunting,abstract%20syntax%20tree%20(AST).
+
+
+
+
+Component Combination Calculator
+Info
+
+>> Use Case for Combinations
+When designing a circuit board, one may need to replace a resistor, capacitor, inductor to match a non-standard "arbitrary" value, 
+or the non-standard value may be needed as part of the original design. The calculator can calculate combinations that are series only, parallel only, 
+or both. In the case of a quick fix (bodge) of a resistor on a circuit board, one can use this calculator to find a parallel-only combination to achieve
+a smaller resistance by stacking an additional chip resistor on top an existing one.
+
+>> Calculator
+Given the input and select options, the calculator brute-forces all possible combinations and returns the lowest-error results. Because of the nature of 
+this calculator, the tolerance values do not exceed E24 (5%) as any component series above that will have standard velues fairly close to the target value.
+By default the 3-component solution is disabled as it increases the compuation duration significantly.
+
+>> Results
+The results provided (in order) are one single-component solution, 4 two-component solutions, and (if enabled) 4 three-component solutions.
+
+
+
+
+Closest Standard Value
+Info
+
+>> E-Series of Preferred Numbers
+The E series is a system of preferred values derived for use in electronic components such as capacitors, resistors, and inductors.
+These values were chosen such that when a component is manufactured it will end up in a range of roughly equally spaced values on a logarithmic scale.
+Each E series subdivides each decade magnitude into steps of 3, 6, 12, 24, 48, 96, 192 values.
+Subdivisions of E3 to E192 ensure the maximum error will be divided in the order of 40%, 20%, 10%, 5%, 2%, 1%, 0.5%. The E192 series is also used for 
+0.25% and 0.1% tolerance resistors.
+
+Historically, the E series is split into two major groupings:
+- E3, E6, E12, E24 are subsets of E24. Values in this group are rounded to 2 significant figures.
+- E48, E96, E192 are subsets of E192. Values in this group are rounded to 3 significant figures.
+
+More on the E-Series can be found on [wikipedia](https://en.wikipedia.org/wiki/E_series_of_preferred_numbers)
+
+
+
+
+Marking Decoder
+Info
+
+>> 3 & 4 Digit EIA Codes
+
+
+>> EIA-96 (Resistors)
+https://www.hobby-hour.com/electronics/eia96-smd-resistors.php
+
+>> EIA-198 (Capacitors)
+https://www.knowlescapacitors.com/getattachment/Products/Capacitors/AEC-Q200/Std-High-Voltage/Chip-Marking-System.pdf
+
+
+
+
+Resistor Divider Ratio Calculator
+Info
+
+(Rename index to R Divider Solver)
+
+>> Resistor Divider
+A voltage divider is a passive linear circuit that produces an output voltage (Vout) that is a fraction of its input voltage (Vin).
+Voltage dividers are used to make signal level adjustments, for active device and amplifier bias, and for measuring voltages.
+The formula and diagram for a voltage divider is below.
+
+
+>> Resistor Ratio
+
+
+
+>> Calculator
+Given an input ratio and additional options, this solver brute-forces all possible combinations and returns the lowest-error results.
+

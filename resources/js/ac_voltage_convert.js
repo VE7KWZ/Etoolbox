@@ -72,28 +72,30 @@ function volt_power() {
 			break;
 	}
 	
-	result = fstring("Vp = {1} V\nVpp = {2} V\nVrms = {3} V\nVavg = {4} V", 
-						fnum2si(Vp, 3), fnum2si(Vpp, 3),
-						fnum2si(Vrms, 3), fnum2si(Vavg, 3)
+	result = fstring("Vp = {1}V\nVpp = {2}V\nVrms = {3}V\nVavg = {4}V", 
+						fnum2si(Vp,3,true), fnum2si(Vpp,3,true),
+						fnum2si(Vrms,3,true), fnum2si(Vavg,3,true)
 						);
 	
-	if (Zo && unit >= 3) {
+	if (Zo || unit >= 3) {
 		P = (Vrms**2)/Zo;
 		dbm = 10*Math.log10(P*1000);
 		
-		result += fstring("\n\nZo = {1} Ohms\nP = {2} W\ndBm = {3}", 
-							fnum2si(Zo), fnum2si(P), fnum(dbm,4)
+		result += fstring("\n\nZo = {1}Ohms\nP = {2}W\ndBm = {3}", 
+							fnum2si(Zo,3,true), fnum2si(P,3,true), fnum(dbm,4)
 							);
 		
 		
 	}
+	
+	
 	
 	console.log([Vp, Vpp, Vrms, Vavg, P, dbm]);
 	
 	
 	
 	// Number of rows for output
-	document.getElementById("output").rows = result.split(/\r\n|\r|\n/).length-1;
+	document.getElementById("output").rows = result.split(/\r\n|\r|\n/).length;
 	
 	// Print result
 	document.getElementById("output").value = result;

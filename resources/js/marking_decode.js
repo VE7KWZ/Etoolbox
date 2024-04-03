@@ -63,7 +63,7 @@ function marking_decode() {
 				
 				mval = [0, 1, 2, 3, 4, 5, 1, -2, -1, -1, -2, -3];
 				
-				value = eseries(96)[Number(code[0] + code[1])] * (10 ** (mval["ABCDEFHRSXYZ".indexOf(code[2])] + 2));
+				value = eseries(96)[Number(code[0] + code[1])-1] * (10 ** (mval["ABCDEFHRSXYZ".indexOf(code[2])] + 2));
 				
 			}
 			
