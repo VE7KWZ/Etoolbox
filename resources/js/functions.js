@@ -3,6 +3,9 @@
 
 // ======================================================================================== MATH
 
+const sqrt3 = 1.73205080756888;	// Constant Sqrt(3)
+const sqrt2 = 1.41421356237310; // Constant Sqrt(2)
+
 // Linear interpolation function
 function lerp (x,x0,x1,y0,y1) {
 	return ((y1 - y0) / (x1-x0)) * (x - x0) + y0;

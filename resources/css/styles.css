@@ -50,6 +50,10 @@ input, select, textarea {
   font-size: 10.5pt;
 }
 
+input[type='radio'] {
+    accent-color: #A22;
+}
+
 input[type="text"] {
   border-radius: 0px;
   border: 1px solid #AAA;
