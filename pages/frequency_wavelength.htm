@@ -54,10 +54,10 @@
 				<td style="width:25%">
 					<input type="text" id="frequency" placeholder="?">
 				</td>
-				<td style="width:10%">
+				<td style="width:12%">
 					Hz
 				</td>
-				<td>
+				<td style="width:20%">
 				</td>
 			</tr>
 			
@@ -70,11 +70,12 @@
 					<input type="text" id="velocity" placeholder="?" style="flex-grow:0;">
 					<input type="button" style="width:25px; margin-left:6px;" onclick="document.getElementById('velocity').value=299792458;" value="c">
 				</td>
-				<td>
-					m/s
+				<td style="padding-right:0">
+					m/s<span style="float:right;">VF:</span>
 				</td>
-				<td>
-					VF: <input type="text" id="vf" value="1" style="width:115px">
+				<td style="display:flex; padding-right:0">
+					<input type="text" id="vf" value="1" style="flex-grow:0">
+          <input type="button" style="width:50px; margin-left:6px; font-size:11pt" onclick="v_factor()" value=" V&#x25B8;VF ">
 				</td>
 				<td>
 				</td>
@@ -92,7 +93,7 @@
 					m
 				</td>
 				<td>
-					<select id="wf" style="width:144px">
+					<select id="wf">
 						<option value="0">Full Wave</option>
 						<option value="1">Half Wave</option>
 						<option value="2">Quarter Wave</option>
@@ -108,12 +109,12 @@
 				<td>
 				</td>
 				<td>
-					<input type="button" style="width:100%;" onclick="calculate()" id="calc_button" value="Calculate">
+					<input type="button" style="width:100%;" onclick="freq_wavelength()" id="calc_button" value="Calculate">
 				</td>
 				<td>
 				</td>
 				<td>
-					<input type="button" style="width:144px;" onclick="this.form.reset()" value="Clear">
+					<input type="button" style="width:100%" onclick="this.form.reset()" value="Clear">
 				</td>
 				<td>
 				</td>
