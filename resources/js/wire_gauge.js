@@ -70,15 +70,16 @@ function wire_gauge (){
 	
 	
 	var result = "";
-	result += fstring("AWG : {1}\nCMIL: {2}\nDiam: {3} mm ({4} in)\nArea: {5} mm2 ({6} in2)\n",
-					fnum(awg,2), fnum(cmil,3), fnum(d_mm,6), fnum(d_in,6), fnum(a_mm,6), fnum(a_in,6)
+	result += fstring("AWG : {1}\nCMIL: {2}\nDiam: {3} mm ({4} in)\nArea: {5} mm2 ({6} in2)",
+					fnum(awg,2), fnum(cmil,3), fnum(d_mm,6,true), fnum(d_in,6,true), fnum(a_mm,6,true), fnum(a_in,6,true)
 					);
 	
-	result += "\nClosest AWG Values:\n";	
-	result += fstring("AWG : {1}\nCMIL: {2}\nDiam: {3} mm ({4} in)\nArea: {5} mm2 ({6} in2)\n",
-					fnum(c_awg,2), fnum(c_cmil,3), fnum(c_d_mm,6), fnum(c_d_in,6), fnum(c_a_mm,6), fnum(c_a_in,6)
-					);
-	
+	if (unit !== 2) {
+		result += "\n\nClosest AWG Value\n";
+		result += fstring("AWG : {1}\nCMIL: {2}\nDiam: {3} mm ({4} in)\nArea: {5} mm2 ({6} in2)\n",
+						fnum(c_awg,2), fnum(c_cmil,3), fnum(c_d_mm,6,true), fnum(c_d_in,6,true), fnum(c_a_mm,6,true), fnum(c_a_in,6,true)
+						);
+	}
 	
 	// Number of rows for output
 	document.getElementById("output").rows = result.split(/\r\n|\r|\n/).length;

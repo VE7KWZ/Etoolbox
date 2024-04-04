@@ -245,8 +245,12 @@ function fsi2num_arr(arr) {
 
 // Reduce floating point error creating large numbers by reducing precision to 8 decimal places
 // Removes padded/trailing zeros
-function fnum (num, digits=8) {
-	return parseFloat(num.toFixed(digits));
+function fnum (num, digits=8, toExp=false) {
+	if (toExp) {
+		return parseFloat(num.toExponential(digits));
+	} else { 
+		return parseFloat(num.toFixed(digits));
+	}
 }
 
 
