@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Etoolbox by Michael Bell</title>
-    
-  <!-- DEFAULT LINKS, STYLES, AND SCRIPTS -->
-	<meta name="etoolbox" charset="UTF-8" content="width=device-width, initial-scale=1">
-  
-	<link rel="icon" href="../resources/images/favicon.ico" />
+	<title>Etoolbox - Resistor Divider Ratio Calculator</title>
+	
+	<!-- DEFAULT LINKS, STYLES, AND SCRIPTS -->
+	<meta name="viewport" charset="UTF-8" content="width=device-width, initial-scale=1">
+	
+	<link rel="icon" href="../resources/images/favicon.ico">
 	<link rel="stylesheet" href="../resources/css/styles.css">
 	
 	<script type="text/javascript" src="../resources/js/functions.js"></script>
@@ -15,126 +15,122 @@
 	<!-- ADDITIONAL LINKS, STYLES, AND SCRIPTS -->
 	<script type="text/javascript" src="../resources/js/divider_ratio.js"></script>
 	
-	
 </head>
 
 <body>
 	<div id="backdiv">
 	
 	<!-- HEADER -->
-	<div class="header" id="top">
-		<span class="title" style="font-size: 17px; font-weight: bold;">Michael's <span style="color:#EE0000">E</span>toolbox</span>
+	<header>
+		<span class="title">Michael's <span id="title_e" style="color:#E00" onclick="clrshft('title_e');">E</span>toolbox</span>
 		<a target="_top" href="../index.htm">Index</a>
-	</div>
+	</header>
 	
 	
 	<!-- CALCULATOR -->
-	<div class="card" id="calc">
+	<section class="card" id="calc">
 		
 		<!-- TITLE AND SHORT DESCRIPTION -->
 		<h2 style="margin:0">Resistor Divider/Ratio Calculator</h2>
-		<a href="#info" style="font-size:0.95em; font-weight:bold;">&#x2B9E; Further Information</a><br>
+		<a href="#info" style="font-size:0.95em; font-weight:bold;">⮞ Further Information</a><br>
 		<p>
 			Calculate standard values to achieve a specific voltage divider ratio, or resistor ratio for op-amps.
 		</p>
 		
 		<!-- METRIC INPUT NOTE -->
-		<p style="color:#A00; margin: 32px 0 16px 0; font-size:13px; text-align:center">
-			[1] Metric (SI) suffixes such as p=pico, n=nano, u=micro, m=milli, k=kilo, M=mega, G=giga are valid.
+		<p style="color:#A00; margin: 2em 0 1em 0; font-size:0.85em; text-align:center">
+			[*] Metric SI unit prefixes such as p=pico, n=nano, u=micro, m=milli, k=kilo, M=mega are valid.
 		</p>
 		
 		<!-- CALCULATOR INPUT TABLE FORM -->
 		<form name="inputform" onkeydown="return event.key != 'Enter';">
-		<table class="intable">
+		<div class="formwrapper">
+    
+    
+			<div class="inputcontainer">
+				
+				<!-- SELECT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Calculation</span>
+					<div class="inputbox">
+						<select id="calc_type">
+							<option value="0" selected="selected">Resistor Divider --> R2/(R1+R2)</option>
+							<option value="1">Resistor Ratio --> R1/R2</option>
+						</select>
+					</div>
+				</div>
+				
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Target Ratio</span>
+					<div class="inputbox">
+						<input type="text" id="target_ratio" placeholder="0.## or #/# format">
+					</div>
+				</div>
+				
+				<!-- SELECT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Tolerance</span>
+					<div class="inputbox">
+						<select name="series" id="series">
+							<option value="3">E3 (40%)</option>
+							<option value="6">E6 (20%)</option>
+							<option value="12">E12 (10%)</option>
+							<option value="24" selected="selected">E24 (5%)</option>
+							<option value="48">E48 (2%)</option>
+							<option value="96">E96 (1%)</option>
+							<option value="192">E192 (<0.5%)</option>
+						</select>
+					</div>
+				</div>
+				
+				<!-- TEXT & SELECT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Set Resistor</span>
+					<div class="inputbox">
+						<select name="select2" style="width: 75%" autocomplete="off" id="set_r">
+							<option value="0" selected="selected">Set R2 as</option>
+							<option value="1">Set R1 as</option>
+						</select>
+						<input type="text" id="setr_val" placeholder="Enter Value">
+						<label for="setr_val">&Omega;<span style="color:#A00;">*</span></label>
+					</div>
+				</div>
+				
+				<!-- CHECKBOX & RADIO BUTTON OPTIONS -->
+				<div class="inputfield">
+					<span class="inputname">Options</span>
+					<div class="inputbox">
+						<div style="width: 100%; display: grid; grid-template-columns: auto;">
+							<label for="precision1" style="text-align: left; margin: 0 0.3em">
+							Number of Outputs
+							<input type="number" id="num_outputs" min="1" max="50" value="10" style="width:20%; padding: 0.2em; border: 1px solid #AAA">
+							</label>
+						</div>
+					</div>
+				</div>
+				
+				<!-- CALCULATE & CLEAR BUTTONS -->
+				<div class="justified" style="margin: 0.8em 0;">
+					<input type="button" style="width:min(300px,75%); margin-left: 0;" onclick="divider_ratio()" id="calc_button" value="Calculate">
+					<input type="button" style="width:min(150px,25%); margin-right: 0;" onclick="this.form.reset()" value="Clear">
+				</div>
+				
+			</div>
+		  
+      
+			<div style="display: flex; flex-grow: 1; min-width: 0; margin:1.2em 0 0.6em 0; border-bottom: 1px solid #AAA;">
+				<span style="margin: auto 0.6em auto 0; font-weight: 700;">Results</span>
+				<span style="font-size:0.75em; color: #999; margin: auto 0 0 auto;" id="time">Time: 0.0ms</span>
+			</div>
 			
-			<!-- INPUT -->
-			<tr>
-				<td class="c1">
-					Calculation
-				</td>
-				<td class="c2">
-					<select id="calc_type">
-						<option value="0" selected="selected">Resistor Divider --> R2/(R1+R2)</option>
-						<option value="1">Resistor Ratio --> R1/R2</option>
-					</select>
-				</td>
-				<td class="c3">
-					Number of Outputs&nbsp;
-					<input style="width:3em; font-family:monospace;" type="number" id="num_outputs" min="1" max="50" value="10">
-				</td>
-			</tr>
 			
-			<!-- INPUT -->
-			<tr>
-				<td class="c1">
-					Target Ratio
-				</td>
-				<td class="c2">
-					<input type="text" id="target_ratio">
-				</td>
-				<td class="c3">
-					<code>0.##</code> or <code>#/#</code> format
-				</td>
-			</tr>
-			
-			<!-- INPUT -->
-			<tr>
-				<td class="c1">
-					Tolerance
-				</td>
-				<td class="c2">
-					<select name="series" id="series">
-						<option value="3">E3 (40%)</option>
-						<option value="6">E6 (20%)</option>
-						<option value="12">E12 (10%)</option>
-						<option value="24" selected="selected">E24 (5%)</option>
-						<option value="48">E48 (2%)</option>
-						<option value="96">E96 (1%)</option>
-						<option value="192">E192 (<0.5%)</option>
-					</select>
-				</td>
-				<td class="c3">
-				</td>
-			</tr>
-			
-			<!-- INPUT -->
-			<tr>
-				<td class="c1">
-					Set R2 to
-				</td>
-				<td class="c2">
-					<input type="text" id="r2_value">
-				</td>
-				<td class="c3">
-					Leave blank if N/A <span style="color:#A00;">[1]</span>
-				</td>
-			</tr>
-			
-
-			<!-- CALCULATE BUTTON-->
-			<tr>
-				<td class="c1">
-					
-				</td>
-				<td class="c2">
-					<input type="button" style="width:100%;" onclick="divider_ratio()" id="calc_button" value="Calculate">
-				</td>
-				<td class="c3">
-					<input type="button" style="width:80px;" onclick="this.form.reset()" value="Clear">
-				</td>
-			</tr>
-			
-		</table>
-		
-		<br>
-		<span>Output</span>
-		<span style="font-size:12px; float:right;" id="time">Time: 0.0ms</span>
-		<br>
-		
-		<div class="justified">
-			<textarea id="output" rows=5 readonly></textarea>
+			<!-- OUTPUT TEXTFIELD -->
+			<div class="justified">
+				<textarea id="output" rows="5" readonly></textarea>
+			</div>
+      
 		</div>
-		
 		</form>
 		
 		
@@ -147,27 +143,27 @@
 			} );
 		</script>
 		
-	</div>
+	</section>
 	
 	
 	<!-- CALCULATION INFO CARD -->
-	<div class="card" id="info">
+	<section class="card" id="info">
 		Info
 		<br>
-		<a href="#top" style="font-size:0.95em; font-weight:bold;">&#x2B9E; Top</a><br>
-	</div>
+		<a href="#top" style="font-size:0.95em; font-weight:bold;">⮞ Top</a><br>
+	</section>
 	
 	
 	
 	<!-- FOOTER COPYRIGHT -->
-	<div class="footer">
-	<span style="font-size: 14px">Copyright &copy; <span id="year"></span> Michael Bell. All Rights Reserved.</span>
-	<script>
-		document.getElementById("year").innerHTML = new Date().getFullYear();
-	</script>
-	</div>
+	<footer>
+		<span style="font-size: 0.9em">Copyright © <span id="year">2024</span> Michael Bell. All Rights Reserved.</span>
+		<script>
+			document.getElementById("year").innerHTML = new Date().getFullYear();
+		</script>
+	</footer>
 	
 	</div>
-</body>
-
-</html>
+	
+	
+</body></html>

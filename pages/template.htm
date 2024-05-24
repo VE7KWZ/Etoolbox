@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Etoolbox by Michael Bell</title>
-    
-  <!-- DEFAULT LINKS, STYLES, AND SCRIPTS -->
-	<meta name="etoolbox" charset="UTF-8" content="width=device-width, initial-scale=1">
-  
-	<link rel="icon" href="../resources/images/favicon.ico" />
+	<title>Etoolbox - Site Template</title>
+	
+	<!-- DEFAULT LINKS, STYLES, AND SCRIPTS -->
+	<meta name="viewport" charset="UTF-8" content="width=device-width, initial-scale=1">
+	
+	<link rel="icon" href="../resources/images/favicon.ico">
 	<link rel="stylesheet" href="../resources/css/styles.css">
 	
 	<script type="text/javascript" src="../resources/js/functions.js"></script>
@@ -14,133 +14,162 @@
 	
 	<!-- ADDITIONAL LINKS, STYLES, AND SCRIPTS -->
 	<script type="text/javascript" src="../resources/js/calculator_script.js"></script>
-    
+	
 </head>
 
 <body>
 	<div id="backdiv">
 	
 	<!-- HEADER -->
-	<div class="header" id="top">
-		<span class="title" style="font-size: 17px; font-weight: bold;">Michael's <span style="color:#EE0000">E</span>toolbox</span>
+	<header>
+		<span class="title">Michael's <span id="title_e" style="color:#E00" onclick="clrshft('title_e');">E</span>toolbox</span>
 		<a target="_top" href="../index.htm">Index</a>
-	</div>
+	</header>
 	
 	
 	<!-- CALCULATOR -->
-	<div class="card" id="calc">
+	<section class="card" id="calc">
 		
 		<!-- TITLE AND SHORT DESCRIPTION -->
 		<h2 style="margin:0">Calculator Name</h2>
-		<a href="#info" style="font-size:0.95em; font-weight:bold;">&#x2B9E; Further Information</a><br>
+		<a href="#info" style="font-size:0.95em; font-weight:bold;">&#x2B17; Further Information</a><br>
 		<p>
 			Description
 		</p>
 		
 		<!-- METRIC INPUT NOTE -->
-		<p style="color:#A00; margin: 32px 0 16px 0; font-size:13px; text-align:center">
-			Metric (SI) suffixes such as p=pico, n=nano, u=micro, m=milli, k=kilo, M=mega, G=giga are valid.
+		<p style="color:#A00; margin: 2em 0 1em 0; font-size:0.85em; text-align:center">
+			[*] Metric SI unit prefixes such as p=pico, n=nano, u=micro, m=milli, k=kilo, M=mega are valid.
 		</p>
 		
 		<!-- CALCULATOR INPUT TABLE FORM -->
 		<form name="inputform" onkeydown="return event.key != 'Enter';">
-		<table class="intable">
-			
-			<!-- INPUT -->
-			<tr>
-				<td class="c1">
-					Label1
-				</td>
-				<td class="c2">
-					<input type="text" id="input1">
-				</td>
-				<td class="c3">
-					Description
-				</td>
-			</tr>
-			
-			<!-- INPUT -->
-			<tr>
-				<td class="c1">
-					Label2
-				</td>
-				<td class="c2">
-					<input type="text" id="input2">
-				</td>
-				<td class="c3">
-					<label for="check1">
-					<input type="checkbox" id="check1">Checkbox</label>
-				</td>
-			</tr>
-			
-			<!-- INPUT -->
-			<tr>
-				<td class="c1">
-					Label3
-				</td>
-				<td class="c2">
-					<select id="input3">
-					<optgroup label="Group A">
-						<option value="A1">A1</option>
-						<option value="A2">A2</option>
-					</optgroup>
-					<optgroup label="Group B">
-						<option value="B1">B1</option>
-						<option value="B2">B2</option>
-					</optgroup>
-					</select>
-				</td>
-				<td class="c3">
-					Description
-				</td>
-			</tr>
-			
-			<!-- INPUT -->
-			<tr>
-				<td class="c1">
-					<select id="input4">
-						<option value="A1">A1</option>
-						<option value="A2">A2</option>
-						<option value="B1">B1</option>
-						<option value="B2">B2</option>
-					</select>
-				</td>
-				<td class="c2">
-					<input type="text" id="input4">
-				</td>
-				<td class="c3">
-					Description
-				</td>
-			</tr>
-			
-			<!-- CALCULATE BUTTON-->
-			<tr>
-				<td class="c1">
+		<div class="formwrapper">
+    
+			<div class="inputcontainer">
+				
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Text Input</span>
+					<div class="inputbox">
+						<input type="text" id="input1" placeholder="Enter Value">
+						<label for="input1">Units</label>
+					</div>
+				</div>
+				
+				<!-- SELECT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Select Box</span>
+					<div class="inputbox">
+						<select name="select2" autocomplete="off" id="input2">
+							<option value="0">E3 (40%)</option>
+							<option value="1">E6 (20%)</option>
+							<option value="2">E12 (10%)</option>
+							<option value="3" selected="selected">E24 (5%)</option>
+						</select>
+					</div>
+				</div>
 					
-				</td>
-				<td class="c2">
-					<input type="button" style="width:100%;" onclick="calculate()" id="calc_button" value="Calculate">
-				</td>
-				<td class="c3">
-					<input type="button" style="width:80px;" onclick="this.form.reset()" value="Clear">
-				</td>
-			</tr>
+				<!-- TEXT & SELECT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Select Box + Text</span>
+					<div class="inputbox">
+						<select name="select2" style="width: 75%" autocomplete="off" id="select3">
+							<option value="0" selected="selected">Set R2 as</option>
+							<option value="1">Set R1 as</option>
+						</select>
+						<input type="text" id="input3" placeholder="Enter Value">
+						<label for="input3">&Omega;<span style="color:#A00;">*</span></label>
+					</div>
+				</div>
+				
+				<!-- TEXT & BUTTON -->
+				<div class="inputfield">
+					<span class="inputname">Text + Button</span>
+					<div class="inputbox">
+						<input type="text" id="input4" placeholder="Enter Value">
+						<label for="input4">m/s</label>
+						<input type="button" style="width: 2.8em; margin-left: 0.3em" id="input5" value="test">
+					</div>
+				</div>
+				
+				<!-- BUTTON & TEXT -->
+				<div class="inputfield">
+					<span class="inputname">Button + Text</span>
+					<div class="inputbox">
+						<input type="button" style="width:1.8em" id="input6" value="C">
+						<input type="text" id="input7" placeholder="Enter Value">
+						<label for="input7">units</label>
+					</div>
+				</div>
+				
+				
+				<!-- CHECKBOX & RADIO BUTTON OPTIONS -->
+				<div class="inputfield">
+					<span class="inputname">Options</span>
+					<div class="inputbox">
+						<div style="width: 100%; display: grid; grid-template-columns: auto;">
+							<label for="three_component" style="text-align: left;">
+							<input type="checkbox" id="three_component">
+							2 Component Solution (Slow)
+							</label>
+							
+							<label for="three_component2" style="text-align: left;">
+							<input type="checkbox" id="three_component2">
+							3 Component Solution (Slower)
+							</label>
+							
+							<label for="config0" style="text-align: left;">
+							<input type="radio" id="config0" name="cfg" checked="checked">
+							Wye Configuration
+							</label>
+							
+							<label for="config1" style="text-align: left;">
+							<input type="radio" id="config1" name="cfg">
+							Delta Configuration
+							</label>
+							
+							<label for="precision1" style="text-align: left; margin: 0 0.3em">
+							Output Precision
+							<input type="number" id="precision1" style="width:20%; padding: 0.2em; border: 1px solid #AAA">
+							</label>
+						</div>
+					</div>
+				</div>
+				
+				<!-- CALCULATE & CLEAR BUTTONS -->
+				<div class="justified" style="margin: 0.8em 0;">
+					<input type="button" style="width:min(300px,75%); margin-left: 0;" onclick="calculate()" id="calc_button" value="Calculate">
+					<input type="button" style="width:min(150px,25%); margin-right: 0;" onclick="this.form.reset()" value="Clear">
+				</div>
+				
+			</div>
+		  
+      
+			<div style="display: flex; flex-grow: 1; min-width: 0; margin:1.2em 0 0.6em 0; border-bottom: 1px solid #AAA;">
+				<span style="margin: auto 0.6em auto 0; font-weight: 700;">Results</span>
+				<span style="font-size:0.75em; color: #999; margin: auto 0 0 auto;" id="time">Time: 0.0ms</span>
+			</div>
 			
-		</table>
-		
-		<br>
-		<span>Output</span>
-		<span style="font-size:12px; float:right;" id="time">Time: 0.0ms</span>
-		<br>
-		
-		<div class="justified">
-			<textarea id="output" rows=10 readonly></textarea>
+			<!-- OUTPUT TEXTBOXES -->
+			<div class="inputfield">
+				<span class="inputname">Output Text</span>
+				<div class="inputbox">
+					<input type="text" id="output1" readonly>
+					<label for="output1">Units</label>
+				</div>
+			</div>
+
+			<!-- OUTPUT TEXTFIELD -->
+			<div class="justified">
+				<textarea id="output" rows="10" readonly>test</textarea>
+			</div>
+      
 		</div>
-		
 		</form>
 		
 		
-		<script>
+		<script type="text/javascript">
 			// Pressing enter anywhere on page will trigger the calculate button if it has the ID "calculate_button"
 			window.addEventListener( "keyup", (event) => {
 				if (event.key === "Enter") {
@@ -149,27 +178,27 @@
 			} );
 		</script>
 		
-	</div>
+	</section>
 	
 	
 	<!-- CALCULATION INFO CARD -->
-	<div class="card" id="info">
+	<section class="card" id="info">
 		Info
 		<br>
-		<a href="#top" style="font-size:0.95em; font-weight:bold;">&#x2B9E; Top</a><br>
-	</div>
+		<a href="#top" style="font-size:0.95em; font-weight:bold;">&#x2B17; Top</a><br>
+	</section>
 	
 	
 	
 	<!-- FOOTER COPYRIGHT -->
-	<div class="footer">
-	<span style="font-size: 14px">Copyright &copy; <span id="year"></span> Michael Bell. All Rights Reserved.</span>
-	<script>
-		document.getElementById("year").innerHTML = new Date().getFullYear();
-	</script>
-	</div>
+	<footer>
+		<span style="font-size: 0.9em">Copyright © <span id="year">2024</span> Michael Bell. All Rights Reserved.</span>
+		<script>
+			document.getElementById("year").innerHTML = new Date().getFullYear();
+		</script>
+	</footer>
 	
 	</div>
+	
 </body>
-
 </html>

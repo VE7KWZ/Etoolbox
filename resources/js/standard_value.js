@@ -38,7 +38,6 @@ function standard_value() {
 	
 	console.log([val_out, err_out]);
 	
-	document.getElementById("out_val").value = fnum2si(val_out);
-	document.getElementById("out_err").value = ferr(err_out);
+	document.getElementById("output").value = fstring("{1} \t({2})",fnum2si(val_out),ferr(err_out));
 	
 }

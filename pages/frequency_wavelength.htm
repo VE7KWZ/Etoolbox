@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Etoolbox by Michael Bell</title>
-    
-  <!-- DEFAULT LINKS, STYLES, AND SCRIPTS -->
-	<meta name="etoolbox" charset="UTF-8" content="width=device-width, initial-scale=1">
-  
-	<link rel="icon" href="../resources/images/favicon.ico" />
+	<title>Etoolbox - Wavelength Calculator</title>
+	
+	<!-- DEFAULT LINKS, STYLES, AND SCRIPTS -->
+	<meta name="viewport" charset="UTF-8" content="width=device-width, initial-scale=1">
+	
+	<link rel="icon" href="../resources/images/favicon.ico">
 	<link rel="stylesheet" href="../resources/css/styles.css">
 	
 	<script type="text/javascript" src="../resources/js/functions.js"></script>
@@ -14,119 +14,96 @@
 	
 	<!-- ADDITIONAL LINKS, STYLES, AND SCRIPTS -->
 	<script type="text/javascript" src="../resources/js/frequency_wavelength.js"></script>
-    
+	
 </head>
 
 <body>
 	<div id="backdiv">
 	
 	<!-- HEADER -->
-	<div class="header" id="top">
-		<span class="title" style="font-size: 17px; font-weight: bold;">Michael's <span style="color:#EE0000">E</span>toolbox</span>
+	<header>
+		<span class="title">Michael's <span id="title_e" style="color:#E00" onclick="clrshft('title_e');">E</span>toolbox</span>
 		<a target="_top" href="../index.htm">Index</a>
-	</div>
+	</header>
 	
 	
 	<!-- CALCULATOR -->
-	<div class="card" id="calc">
+	<section class="card" id="calc">
 		
 		<!-- TITLE AND SHORT DESCRIPTION -->
-		<h2 style="margin:0">Frequency-Wavelength Calculator</h2>
-		<a href="#info" style="font-size:0.95em; font-weight:bold;">&#x2B9E; Further Information</a><br>
+		<h2 style="margin:0">Wavelength Calculator</h2>
+		<a href="#info" style="font-size:0.95em; font-weight:bold;">&#x2B17; Further Information</a><br>
 		<p>
-			Calculate missing component between frequency, wavelength, and velocity given two inputs.
+			Calculate missing component between frequency, wavelength, and velocity given two inputs. 
+			Velocity factor can be used, or solved for by inputting a velocity (close to the speed of light)
+			then pressing the [V->VF] button.
 		</p>
 		
 		<!-- METRIC INPUT NOTE -->
-		<p style="color:#A00; margin: 32px 0 16px 0; font-size:13px; text-align:center">
-			Metric (SI) suffixes such as p=pico, n=nano, u=micro, m=milli, k=kilo, M=mega, G=giga are valid.
+		<p style="color:#A00; margin: 2em 0 1em 0; font-size:0.85em; text-align:center">
+			[*] Metric SI unit prefixes such as p=pico, n=nano, u=micro, m=milli, k=kilo, M=mega are valid.
 		</p>
 		
 		<!-- CALCULATOR INPUT TABLE FORM -->
 		<form name="inputform" onkeydown="return event.key != 'Enter';">
-		<table class="intable">
-			
-			<!-- INPUT -->
-			<tr>
-				<td style="width:20%; text-align:right">
-					Frequency
-				</td>
-				<td style="width:25%">
-					<input type="text" id="frequency" placeholder="?">
-				</td>
-				<td style="width:12%">
-					Hz
-				</td>
-				<td style="width:20%">
-				</td>
-			</tr>
-			
-			<!-- INPUT -->
-			<tr>
-				<td style="width:20%; text-align:right">
-					Velocity
-				</td>
-				<td style="display:flex; padding-right:0">
-					<input type="text" id="velocity" placeholder="?" style="flex-grow:0;">
-					<input type="button" style="width:25px; margin-left:6px;" onclick="document.getElementById('velocity').value=299792458;" value="c">
-				</td>
-				<td style="padding-right:0">
-					m/s<span style="float:right;">VF:</span>
-				</td>
-				<td style="display:flex; padding-right:0">
-					<input type="text" id="vf" value="1" style="flex-grow:0">
-          <input type="button" style="width:50px; margin-left:6px; font-size:11pt" onclick="v_factor()" value=" V&#x25B8;VF ">
-				</td>
-				<td>
-				</td>
-			</tr>
-			
-			<!-- INPUT -->
-			<tr>
-				<td style="width:20%; text-align:right">
-					Wavelength
-				</td>
-				<td>
-					<input type="text" id="wavelength" placeholder="?">
-				</td>
-				<td>
-					m
-				</td>
-				<td>
-					<select id="wf">
-						<option value="0">Full Wave</option>
-						<option value="1">Half Wave</option>
-						<option value="2">Quarter Wave</option>
-					</select>
-				</td>
-				<td>
-				</td>
-			</tr>
-			
-			
-			<!-- CALCULATE BUTTON -->
-			<tr>
-				<td>
-				</td>
-				<td>
-					<input type="button" style="width:100%;" onclick="freq_wavelength()" id="calc_button" value="Calculate">
-				</td>
-				<td>
-				</td>
-				<td>
-					<input type="button" style="width:100%" onclick="this.form.reset()" value="Clear">
-				</td>
-				<td>
-				</td>
-			</tr>
-			
-		</table>
-		<br>
-		
+		<div class="formwrapper">
+    
+			<div class="inputcontainer">
+				
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Frequency</span>
+					<div class="inputbox">
+						<input type="text" id="frequency" placeholder="Enter Value">
+						<label for="frequency">Hz<span style="color:#A00;">*</span></label>
+					</div>
+				</div>
+				
+				<!-- BUTTON & TEXT -->
+				<div class="inputfield">
+					<span class="inputname">Velocity</span>
+					<div class="inputbox">
+						<input type="button" style="width:1.8em" id="c_button" value="C" onclick="document.getElementById('velocity').value = 299792458">
+						<input type="text" id="velocity" placeholder="Enter Value">
+						<label for="velocity">m/s</label>
+					</div>
+				</div>
+				
+				<!-- BUTTON & TEXT -->
+				<div class="inputfield">
+					<span class="inputname">Velocity Factor</span>
+					<div class="inputbox">
+						<input type="text" id="velo_f" placeholder="Enter Value">
+						<input type="button" style="width:4.5em" id="vf_button" onclick="v_factor();" value="V > VF">
+					</div>
+				</div>
+				
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Wavelength</span>
+					<div class="inputbox">
+						<input type="text" id="wavelength" placeholder="Enter Value">
+						<label for="wavelength">m<span style="color:#A00;">*</span></label>
+						<select name="select2" style="direction: rtl; width: 9.5em; margin-left: 0.6em" autocomplete="off" id="wl_f">
+							<option value="0" selected="selected">Full</option>
+							<option value="1">Half</option>
+							<option value="2">Quarter</option>
+						</select>
+					</div>
+				</div>
+				
+				<!-- CALCULATE & CLEAR BUTTONS -->
+				<div class="justified" style="margin-top: 0.8em;">
+					<input type="button" style="width:min(300px,75%);" onclick="freq_wave();" id="calc_button" value="Calculate">
+					<input type="button" style="width:min(150px,25%)" onclick="this.form.reset()" value="Clear">
+				</div>
+				
+			</div>
+      
+		</div>
 		</form>
 		
-		<br>
-		<script>
+		<script type="text/javascript">
 			// Pressing enter anywhere on page will trigger the calculate button if it has the ID "calculate_button"
 			window.addEventListener( "keyup", (event) => {
 				if (event.key === "Enter") {
@@ -135,27 +112,26 @@
 			} );
 		</script>
 		
-	</div>
+	</section>
 	
 	
 	<!-- CALCULATION INFO CARD -->
-	<div class="card" id="info">
+	<section class="card" id="info">
 		Info
 		<br>
-		<a href="#top" style="font-size:0.95em; font-weight:bold;">&#x2B9E; Top</a><br>
-	</div>
+		<a href="#top" style="font-size:0.95em; font-weight:bold;">&#x2B17; Top</a><br>
+	</section>
 	
 	
 	
 	<!-- FOOTER COPYRIGHT -->
-	<div class="footer">
-	<span style="font-size: 14px">Copyright &copy; <span id="year"></span> Michael Bell. All Rights Reserved.</span>
-	<script>
-		document.getElementById("year").innerHTML = new Date().getFullYear();
-	</script>
-	</div>
+	<footer>
+		<span style="font-size: 0.9em">Copyright © <span id="year">2024</span> Michael Bell. All Rights Reserved.</span>
+		<script>
+			document.getElementById("year").innerHTML = new Date().getFullYear();
+		</script>
+	</footer>
 	
 	</div>
-</body>
-
-</html>
+	
+</body></html>

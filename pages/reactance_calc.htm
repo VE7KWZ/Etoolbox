@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Etoolbox by Michael Bell</title>
-    
-  <!-- DEFAULT LINKS, STYLES, AND SCRIPTS -->
-	<meta name="etoolbox" charset="UTF-8" content="width=device-width, initial-scale=1">
-  
-	<link rel="icon" href="../resources/images/favicon.ico" />
+	<title>Etoolbox - Reactance Calculator</title>
+	
+	<!-- DEFAULT LINKS, STYLES, AND SCRIPTS -->
+	<meta name="viewport" charset="UTF-8" content="width=device-width, initial-scale=1">
+	
+	<link rel="icon" href="../resources/images/favicon.ico">
 	<link rel="stylesheet" href="../resources/css/styles.css">
 	
 	<script type="text/javascript" src="../resources/js/functions.js"></script>
@@ -14,131 +14,107 @@
 	
 	<!-- ADDITIONAL LINKS, STYLES, AND SCRIPTS -->
 	<script type="text/javascript" src="../resources/js/reactance_calc.js"></script>
-    
 	
 </head>
 
-<body onload="c_in()">
+<body onload="comp_slct()">
 	<div id="backdiv">
 	
 	<!-- HEADER -->
-	<div class="header" id="top">
-		<span class="title" style="font-size: 17px; font-weight: bold;">Michael's <span style="color:#EE0000">E</span>toolbox</span>
+	<header>
+		<span class="title">Michael's <span id="title_e" style="color:#E00" onclick="clrshft('title_e');">E</span>toolbox</span>
 		<a target="_top" href="../index.htm">Index</a>
-	</div>
+	</header>
 	
 	
-	<!-- REACTANCE CALCULATOR -->
-	<div class="card" id="calc1">
+	<!-- CALCULATOR -->
+	<section class="card" id="calc">
 		
 		<!-- TITLE AND SHORT DESCRIPTION -->
 		<h2 style="margin:0">Reactance Calculator</h2>
-		<a href="#info" style="font-size:0.95em; font-weight:bold;">&#x2B9E; Further Information</a><br>
+		<a href="#info" style="font-size:0.95em; font-weight:bold;">&#x2B17; Further Information</a><br>
 		<p>
 			Given a capacitance or inductance and reactance, calculates frequency. 
 			Given frequency and capacitance or inductance, calculates reactance.
 		</p>
 		
 		<!-- METRIC INPUT NOTE -->
-		<p style="color:#A00; margin: 24px 0 16px 0; font-size:13px; text-align:center">
-			Metric (SI) suffixes such as p=pico, n=nano, u=micro, m=milli, k=kilo, M=mega, G=giga are valid.
+		<p style="color:#A00; margin: 2em 0 1em 0; font-size:0.85em; text-align:center">
+			[*] Metric SI unit prefixes such as p=pico, n=nano, u=micro, m=milli, k=kilo, M=mega are valid.
 		</p>
 		
 		<!-- CALCULATOR INPUT TABLE FORM -->
 		<form name="inputform" onkeydown="return event.key != 'Enter';">
-		<table class="intable">
-			
-			<!-- INPUT -->
-			<tr>
-				<td style="width:20%; text-align:right;">
-					<select id="component" autocomplete="off" style="direction:rtl; width:80%" onchange="c_in()">
-						<option value="0">Capacitance</option>
-						<option value="1">Inductance</option>
-					</select>
-				</td>
-				<td style="width:15%">
-					<input type="text" id="comp_value" placeholder="?">
-				</td>
-				<td id="c_in" style="width:15%">
-				</td>
-				<td>
-				</td>
-			</tr>
-			<tr>
-				<td style="text-align:right;">
-					Frequency
-				</td>
-				<td>
-					<input type="text" id="frequency" placeholder="?">
-				</td>
-				<td>
-					Hz
-				</td>
-				<td>
+		<div class="formwrapper">
+    
+			<div class="inputcontainer">
+				
+				<!-- RADIO BUTTON OPTIONS -->
+				<div class="inputfield" style="margin-bottom: 0.6em;">
+					<label for="config0" style="text-align: left; font-size: 1em; padding: 0.3em 0; margin-right: 1.2em;">
+					<input type="radio" id="config0" name="comp" checked="checked" onchange="comp_slct();">
+					Capacitive (X<sub>C</sub>)
+					</label>
 					
-				</td>
-			</tr>
-			<tr>
-				<td style="text-align:right;">
-					Reactance
-				</td>
-				<td>
-					<input type="text" id="reactance" placeholder="?">
-				</td>
-				<td>
-					&#x2126;
-				</td>
-				<td>
-					<!-- CALCULATE BUTTON -->
-					<div style="display:flex; justify-content:right;">
-						<input type="button" style="width:60%; margin-right: 10px" onclick="reactance_calc()" id="calc_button" value="Calculate">
-						<input type="button" style="width:30%;" onclick="this.form.reset(); c_in()" value="Clear">
+					<label for="config1" style="text-align: left; font-size: 1em; padding: 0.3em 0;">
+					<input type="radio" id="config1" name="comp" onchange="comp_slct();">
+					Inductive (X<sub>L</sub>)
+					</label>
+				</div>
+				
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname" id="c_label">Capacitance</span>
+					<div class="inputbox">
+						<input type="text" id="component" placeholder="Enter Value" onkeyup="comp_chg();">
+						<label for="component" id="c_unit">F<span style="color:#A00;">*</span></label>
 					</div>
-				</td>
-			</tr>
+				</div>
+				
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Frequency</span>
+					<div class="inputbox">
+						<input type="text" id="frequency" placeholder="Enter Value" onkeyup="freq_chg();">
+						<label for="frequency">Hz<span style="color:#A00;">*</span></label>
+					</div>
+				</div>
+				
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Reactance</span>
+					<div class="inputbox">
+						<input type="text" id="reactance" placeholder="Enter Value" onkeyup="reac_chg();">
+						<label for="reactance">&Omega;<span style="color:#A00;">*</span></label>
+					</div>
+				</div>
+				
+			</div>
 			
-			<script>
-				function c_in() {
-					var comp = Number(document.getElementById("component").value);
-					document.getElementById("c_in").innerHTML = "F";
-					if (comp === 1) { document.getElementById("c_in").innerHTML = "H"; }
-				}
-			</script>
-			
-		</table>
+		</div>
 		
 		</form>
 		
-		<script>
-			// Pressing enter anywhere on page will trigger the calculate button if it has the ID "calculate_button"
-			window.addEventListener( "keyup", (event) => {
-				if (event.key === "Enter") {
-					document.getElementById("calc_button").click() 
-				} 
-			} );
-		</script>
-		
-	</div>
+	</section>
 	
 	
 	<!-- CALCULATION INFO CARD -->
-	<div class="card" id="info">
+	<section class="card" id="info">
 		Info
 		<br>
-		<a href="#top" style="font-size:0.95em; font-weight:bold;">&#x2B9E; Top</a><br>
-	</div>
+		<a href="#top" style="font-size:0.95em; font-weight:bold;">&#x2B17; Top</a><br>
+	</section>
 	
 	
 	
 	<!-- FOOTER COPYRIGHT -->
-	<div class="footer">
-	<span style="font-size: 14px">Copyright &copy; <span id="year"></span> Michael Bell. All Rights Reserved.</span>
-	<script>
-		document.getElementById("year").innerHTML = new Date().getFullYear();
-	</script>
-	</div>
+	<footer>
+		<span style="font-size: 0.9em">Copyright © <span id="year">2024</span> Michael Bell. All Rights Reserved.</span>
+		<script>
+			document.getElementById("year").innerHTML = new Date().getFullYear();
+		</script>
+	</footer>
 	
 	</div>
-</body>
-
-</html>
+	
+</body></html>

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Etoolbox by Michael Bell</title>
-    
-  <!-- DEFAULT LINKS, STYLES, AND SCRIPTS -->
-	<meta name="etoolbox" charset="UTF-8" content="width=device-width, initial-scale=1">
-  
-	<link rel="icon" href="../resources/images/favicon.ico" />
+	<title>Etoolbox - SMD R&C Chip Marking Decoder</title>
+	
+	<!-- DEFAULT LINKS, STYLES, AND SCRIPTS -->
+	<meta name="viewport" charset="UTF-8" content="width=device-width, initial-scale=1">
+	
+	<link rel="icon" href="../resources/images/favicon.ico">
 	<link rel="stylesheet" href="../resources/css/styles.css">
 	
 	<script type="text/javascript" src="../resources/js/functions.js"></script>
@@ -14,87 +14,72 @@
 	
 	<!-- ADDITIONAL LINKS, STYLES, AND SCRIPTS -->
 	<script type="text/javascript" src="../resources/js/marking_decode.js"></script>
-    
+	
 </head>
 
 <body>
 	<div id="backdiv">
 	
 	<!-- HEADER -->
-	<div class="header" id="top">
-		<span class="title" style="font-size: 17px; font-weight: bold;">Michael's <span style="color:#EE0000">E</span>toolbox</span>
+	<header>
+		<span class="title">Michael's <span id="title_e" style="color:#E00" onclick="clrshft('title_e');">E</span>toolbox</span>
 		<a target="_top" href="../index.htm">Index</a>
-	</div>
+	</header>
 	
 	
 	<!-- CALCULATOR -->
-	<div class="card" id="calc">
+	<section class="card" id="calc">
 		
 		<!-- TITLE AND SHORT DESCRIPTION -->
-		<h2 style="margin:0">Component Marking Decoder</h2>
-		<a href="#info" style="font-size:0.95em; font-weight:bold;">&#x2B9E; Further Information</a><br>
+		<h2 style="margin:0">SMD Resistor/Capacitor Marking Decoder</h2>
+		<a href="#info" style="font-size:0.95em; font-weight:bold;">&#x2B17; Further Information</a><br>
 		<p>
 			Decode the 3 or 4 digit markings on SMD resistors, SMD capacitors and some ceramic capacitors.<br>
 			This tool identifies and decodes 3 and 4 digit EIA codes for resistors and capacitors as well as
 			EIA-96 codes for resistors and EIA-198 codes for capacitors.
 		</p>
 		
-		
 		<!-- CALCULATOR INPUT TABLE FORM -->
 		<form name="inputform" onkeydown="return event.key != 'Enter';">
-		<table class="intable">
+		<div class="formwrapper">
+    
+			<div class="inputcontainer">
+				
+				<!-- SELECT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Component</span>
+					<div class="inputbox">
+						<select name="select" autocomplete="off" id="select" onchange="marking_decode()">
+							<option value="0" selected="selected">SMD Resistor</option>
+							<option value="1">SMD Capacitor</option>
+						</select>
+					</div>
+				</div>
+				
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Code</span>
+					<div class="inputbox">
+						<input type="text" id="input_val" placeholder="Letters Case Sensitive" onkeyup="marking_decode()">
+					</div>
+				</div>
+				
+			</div>
+		  
+      
+			<div style="display: flex; flex-grow: 1; min-width: 0; margin:0.6em 0 0.6em 0; border-bottom: 1px solid #AAA;">
+			</div>
 			
-			<!-- INPUT -->
-			<tr>
-				<td class="c1">
-					Component
-				</td>
-				<td class="c2">
-					<select id="select">
-						<option value="0" selected="selected">SMD Resistor</option>
-						<option value="1">SMD Capacitor</option>
-					</select>
-				</td>
-				<td class="c3">
-				</td>
-			</tr>
+			<!-- OUTPUT TEXTBOXES -->
+			<div class="inputfield">
+				<span class="inputname">Output Text</span>
+				<div class="inputbox">
+					<input type="text" id="output" style="margin:0" readonly>
+					<label for="output" id="outputlabel">Units</label>
+				</div>
+			</div>
 			
-			<!-- INPUT -->
-			<tr>
-				<td class="c1">
-					Code
-				</td>
-				<td class="c2">
-					<input type="text" id="input_val" value="">
-				</td>
-				<td class="c3">
-					Letter inputs are case sensitive
-				</td>
-			</tr>
-			
-			<!-- CALCULATE BUTTON-->
-			<tr>
-				<td class="c1">
-				</td>
-				<td class="c2">
-					<input type="button" style="width:100%;" onclick="marking_decode()" id="calc_button" value="Calculate">
-				</td>
-				<td class="c3">
-					<input type="button" style="width:80px;" onclick="this.form.reset()" value="Clear">
-				</td>
-			</tr>
-			
-		</table>
-		
-		<br>
-		<span>Output</span>
-		<span style="font-size:12px; float:right;" id="time">Time: 0.0ms</span>
-		<br>
-		
-		<div class="justified">
-			<textarea id="output" rows=2 readonly></textarea>
 		</div>
-		
 		</form>
 		
 		
@@ -107,27 +92,27 @@
 			} );
 		</script>
 		
-	</div>
+	</section>
 	
 	
 	<!-- CALCULATION INFO CARD -->
-	<div class="card" id="info">
+	<section class="card" id="info">
 		Info
 		<br>
-		<a href="#top" style="font-size:0.95em; font-weight:bold;">&#x2B9E; Top</a><br>
-	</div>
+		<a href="#top" style="font-size:0.95em; font-weight:bold;">&#x2B17; Top</a><br>
+	</section>
 	
 	
 	
 	<!-- FOOTER COPYRIGHT -->
-	<div class="footer">
-	<span style="font-size: 14px">Copyright &copy; <span id="year"></span> Michael Bell. All Rights Reserved.</span>
-	<script>
-		document.getElementById("year").innerHTML = new Date().getFullYear();
-	</script>
-	</div>
+	<footer>
+		<span style="font-size: 0.9em">Copyright © <span id="year">2024</span> Michael Bell. All Rights Reserved.</span>
+		<script>
+			document.getElementById("year").innerHTML = new Date().getFullYear();
+		</script>
+	</footer>
 	
 	</div>
-</body>
-
-</html>
+	
+	
+</body></html>

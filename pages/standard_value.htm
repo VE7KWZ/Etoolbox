@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Etoolbox by Michael Bell</title>
-    
-  <!-- DEFAULT LINKS, STYLES, AND SCRIPTS -->
-	<meta name="etoolbox" charset="UTF-8" content="width=device-width, initial-scale=1">
-  
-	<link rel="icon" href="../resources/images/favicon.ico" />
+	<title>Etoolbox - Standard Value Calculator</title>
+	
+	<!-- DEFAULT LINKS, STYLES, AND SCRIPTS -->
+	<meta name="viewport" charset="UTF-8" content="width=device-width, initial-scale=1">
+	
+	<link rel="icon" href="../resources/images/favicon.ico">
 	<link rel="stylesheet" href="../resources/css/styles.css">
 	
 	<script type="text/javascript" src="../resources/js/functions.js"></script>
@@ -14,96 +14,87 @@
 	
 	<!-- ADDITIONAL LINKS, STYLES, AND SCRIPTS -->
 	<script type="text/javascript" src="../resources/js/standard_value.js"></script>
-    
+	
 </head>
 
 <body>
 	<div id="backdiv">
 	
 	<!-- HEADER -->
-	<div class="header" id="top">
-		<span class="title" style="font-size: 17px; font-weight: bold;">Michael's <span style="color:#EE0000">E</span>toolbox</span>
+	<header>
+		<span class="title">Michael's <span id="title_e" style="color:#E00" onclick="clrshft('title_e');">E</span>toolbox</span>
 		<a target="_top" href="../index.htm">Index</a>
-	</div>
+	</header>
 	
 	
 	<!-- CALCULATOR -->
-	<div class="card" id="calc">
+	<section class="card" id="calc">
 		
 		<!-- TITLE AND SHORT DESCRIPTION -->
-		<h2 style="margin:0">Standard E-Series Value</h2>
-		<a href="#info" style="font-size:0.95em; font-weight:bold;">&#x2B9E; Further Information</a><br>
+		<h2 style="margin:0">Closest Standard E-Series Value</h2>
+		<a href="#info" style="font-size:0.95em; font-weight:bold;">⮞ Further Information</a><br>
 		<p>
-			This tool will calculates the closest standard value for a given nonstandard value.
+			Calculates the closest standard value for a given nonstandard value.
 		</p>
 		
 		<!-- METRIC INPUT NOTE -->
-		<p style="color:#A00; margin: 32px 0 16px 0; font-size:13px; text-align:center">
-			Metric (SI) suffixes such as p=pico, n=nano, u=micro, m=milli, k=kilo, M=mega, G=giga are valid.
+		<p style="color:#A00; margin: 2em 0 1em 0; font-size:0.85em; text-align:center">
+			[*] Metric SI unit prefixes such as p=pico, n=nano, u=micro, m=milli, k=kilo, M=mega are valid.
 		</p>
 		
 		<!-- CALCULATOR INPUT TABLE FORM -->
 		<form name="inputform" onkeydown="return event.key != 'Enter';">
-		<table class="intable">
-			<tr>
-				<td style="width:15%; text-align:right;">
-					Target Value
-				</td>
-				<td style="width:24%;">
-					<input type="text" id="target_value" onchange="standard_value()" value="">	
-				</td>
-				<td style="width:18%;">
-					<select name="series" id="series" onchange="standard_value()">
-						<option value="3">E3 (40%)</option>
-						<option value="6">E6 (20%)</option>
-						<option value="12">E12 (10%)</option>
-						<option value="24" selected="selected">E24 (5%)</option>
-						<option value="48">E48 (2%)</option>
-						<option value="96">E96 (1%)</option>
-						<option value="192">E192 (<0.5%)</option>
-					</select> 
-				</td>
-				<td>
-					<input type="button" style="width:80px; float:right;" onclick="this.form.reset()" value="Clear">
-					<input type="button" style="width:120px; margin-right:18px; float:right;" onclick="standard_value()" id="calc_button" value="Calculate">
-				</td>
-			</tr>
-		</table>
-		<br>
-		<table class="intable">
-			<tr>
-				<td style="width:15%; text-align:right;">
-					Output
-				</td>
-				<td style="width:24%;">
-					<input type="text" id="out_val" style="width:60%;" readonly><span style="padding-left:14%">Error</span>
-				</td>
-				<td style="width:10%;">
-					<input type="text" id="out_err" value="" readonly>
-				</td>
-				<td>
-				</td>
-			</tr>
-		</table>
-		
-		
+		<div class="formwrapper">
+    
+    
+			<div class="inputcontainer">
+				
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Non-standard Value</span>
+					<div class="inputbox">
+						<input type="text" id="target_value" placeholder="Enter Value" onkeyup="standard_value()">
+						<label for="target_value">&Omega;/F/H<span style="color:#A00;">*</span></label>
+					</div>
+				</div>
+				
+				<!-- SELECT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Series (Tolerance)</span>
+					<div class="inputbox">
+						<select name="series" id="series" autocomplete="off" onchange="standard_value()">
+							<option value="3">E3 (40%)</option>
+							<option value="6">E6 (20%)</option>
+							<option value="12">E12 (10%)</option>
+							<option value="24">E24 (5%)</option>
+							<option value="48">E48 (2%)</option>
+							<option value="96" selected="selected">E96 (1%)</option>
+							<option value="192">E192 (<0.5%)</option>
+						</select> 
+					</div>
+				</div>
+				
+			</div>
+			
+			<div style="display: flex; flex-grow: 1; min-width: 0; margin:0.6em 0 0.6em 0; border-bottom: 1px solid #AAA;">
+			</div>
+			
+			<!-- OUTPUT TEXTBOX -->
+			<div class="inputfield">
+				<span class="inputname">Result: Value (Error)</span>
+				<div class="inputbox">
+					<input type="text" id="output" style="margin:0" readonly>
+				</div>
+			</div>
+      
+		</div>
 		</form>
 		
-		
-		<script>
-			// Pressing enter anywhere on page will trigger the calculate button if it has the ID "calculate_button"
-			window.addEventListener( "keyup", (event) => {
-				if (event.key === "Enter") {
-					document.getElementById("calc_button").click() 
-				} 
-			} );
-		</script>
-		
-	</div>
+	</section>
 	
 	
 	<!-- CALCULATION INFO CARD -->
-	<div class="card" id="info">
+	<section class="card" id="info">
 		<span style="font-weight:bold">E-Series of Preferred Numbers</span><br>
 		The E series is a system of preferred values derived for use in electronic components such as capacitors, resistors, and inductors.
 		These values were chosen such that when a component is manufactured it will end up in a range of roughly equally spaced values on a logarithmic scale.
@@ -117,21 +108,21 @@
 			<li>E48, E96, E192 are subsets of E192. Values in this group are rounded to 3 significant figures.</li>
 		</ul>
 		More on the E-Series can be found on <a href="https://en.wikipedia.org/wiki/E_series_of_preferred_numbers">&#x2B9E; Wikipedia</a>
-		<br><br><br>
-		<a href="#top" style="font-size:0.95em; font-weight:bold;">&#x2B9E; Top</a><br>
-	</div>
+		<br><br>
+		<a href="#top" style="font-size:0.95em; font-weight:bold;">⮞ Top</a><br>
+	</section>
 	
 	
 	
 	<!-- FOOTER COPYRIGHT -->
-	<div class="footer">
-	<span style="font-size: 14px">Copyright &copy; <span id="year"></span> Michael Bell. All Rights Reserved.</span>
-	<script>
-		document.getElementById("year").innerHTML = new Date().getFullYear();
-	</script>
-	</div>
+	<footer>
+		<span style="font-size: 0.9em">Copyright © <span id="year">2024</span> Michael Bell. All Rights Reserved.</span>
+		<script>
+			document.getElementById("year").innerHTML = new Date().getFullYear();
+		</script>
+	</footer>
 	
 	</div>
-</body>
-
-</html>
+	
+	
+</body></html>

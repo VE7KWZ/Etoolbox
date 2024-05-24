@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Etoolbox - Skin Depth Calculator</title>
+	
+	<!-- DEFAULT LINKS, STYLES, AND SCRIPTS -->
+	<meta name="viewport" charset="UTF-8" content="width=device-width, initial-scale=1">
+	
+	<link rel="icon" href="../resources/images/favicon.ico">
+	<link rel="stylesheet" href="../resources/css/styles.css">
+	
+	<script type="text/javascript" src="../resources/js/functions.js"></script>
+	
+	
+	<!-- ADDITIONAL LINKS, STYLES, AND SCRIPTS -->
+	<!-- CALCULATION SCRIPT -->
+	<script type="text/javascript">
+		function skindepth() {
+			var f = fsi2num(document.getElementById("frequency").value);
+			var rho = Number(document.getElementById("resistivity").value);
+			var mu_r = Number(document.getElementById("permeability").value);
+			var mu_o = 4*pi*1e-7;
+			
+			document.getElementById("output").value = fnum2si(Math.sqrt(rho/(f*pi*mu_r*mu_o)), 4);
+		}
+	</script>
+	
+</head>
+
+<body>
+	<div id="backdiv">
+	
+	<!-- HEADER -->
+	<header>
+		<span class="title">Michael's <span id="title_e" style="color:#E00" onclick="clrshft('title_e');">E</span>toolbox</span>
+		<a target="_top" href="../index.htm">Index</a>
+	</header>
+	
+	
+	<!-- CALCULATOR -->
+	<section class="card" id="calc">
+		
+		<!-- TITLE AND SHORT DESCRIPTION -->
+		<h2 style="margin:0">Skin Depth Calculator</h2>
+		<a href="#info" style="font-size:0.95em; font-weight:bold;">&#x2B17; Further Information</a><br>
+		<p>
+			Calculate the skin depth of current at a given frequency in the desired material.
+		</p>
+		
+		<!-- METRIC INPUT NOTE -->
+		<p style="color:#A00; margin: 2em 0 1em 0; font-size:0.85em; text-align:center">
+			[*] Metric SI unit prefixes such as p=pico, n=nano, u=micro, m=milli, k=kilo, M=mega are valid.
+		</p>
+		
+		<!-- CALCULATOR INPUT TABLE FORM -->
+		<form name="inputform" onkeydown="return event.key != 'Enter';">
+		<div class="formwrapper">
+		
+			<div class="inputcontainer">
+				
+				<!-- SELECT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Material</span>
+					<div class="inputbox">
+						<select autocomplete="off" id="material" onchange="matchange()">
+							<option value="0" selected="selected">Custom</option>
+							<option value="1">Copper</option>
+							<option value="2">Aluminum</option>
+							<option value="3">Nickel</option>
+							<option value="4">Silver</option>
+							<option value="5">Gold</option>
+						</select>
+					</div>
+				</div>
+				
+				<script type="text/javascript">
+					function matchange() {
+						var a = Number(document.getElementById("material").value);
+						document.getElementById("resistivity").disabled = (a > 0);
+						document.getElementById("permeability").disabled = (a > 0);
+						switch (a) {
+							case 0:	// Custom
+								document.getElementById("resistivity").value = "";
+								document.getElementById("permeability").value = "";
+								break;
+							case 1:	// Copper
+								document.getElementById("resistivity").value = 1.678e-8;
+								document.getElementById("permeability").value = 0.999991;
+								break;
+							case 2:	// Aluminum
+								document.getElementById("resistivity").value = 2.6548e-8;
+								document.getElementById("permeability").value = 1.00002;
+								break;
+							case 3:	// Nickel
+								document.getElementById("resistivity").value = 6.84e-8;
+								document.getElementById("permeability").value = 600;
+								break;
+							case 4:	// Silver
+								document.getElementById("resistivity").value = 1.586e-8;
+								document.getElementById("permeability").value = 0.9998;
+								break;
+							case 5:	// Gold
+								document.getElementById("resistivity").value = 2.24e-8;
+								document.getElementById("permeability").value = 1;
+								break;
+						}
+					}
+				</script>
+				
+				
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Resistivity (&rho;)</span>
+					<div class="inputbox">
+						<input type="text" id="resistivity" placeholder="Enter Value">
+						<label for="resistivity">&Omega;m<span style="color:#A00;">*</span></label>
+					</div>
+				</div>
+				
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Rel. Permeability (&mu;<sub>o</sub>)</span>
+					<div class="inputbox">
+						<input type="text" id="permeability" placeholder="Enter Value">
+					</div>
+				</div>
+				
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Frequency</span>
+					<div class="inputbox">
+						<input type="text" id="frequency" placeholder="Enter Value">
+						<label for="frequency">Hz<span style="color:#A00;">*</span></label>
+					</div>
+				</div>
+				
+				<!-- CALCULATE & CLEAR BUTTONS -->
+				<div class="justified" style="margin: 0.8em 0;">
+					<input type="button" style="width:min(300px,75%);" onclick="skindepth()" id="calc_button" value="Calculate">
+					<input type="button" style="width:min(150px,25%)" onclick="this.form.reset()" value="Clear">
+				</div>
+				
+				<!-- OUTPUT TEXTBOXES -->
+				<div class="inputfield">
+					<span class="inputname">Skin Depth (&delta;)</span>
+					<div class="inputbox">
+						<input type="text" style="margin: 0" id="output" readonly>
+						<label for="output">m</label>
+					</div>
+				</div>
+				
+			</div>
+			
+		</div>
+		</form>
+		
+		
+		<script type="text/javascript">
+			// Pressing enter anywhere on page will trigger the calculate button if it has the ID "calculate_button"
+			window.addEventListener( "keyup", (event) => {
+				if (event.key === "Enter") {
+					document.getElementById("calc_button").click() 
+				} 
+			} );
+		</script>
+		
+	</section>
+	
+	
+	<!-- CALCULATION INFO CARD -->
+	<section class="card" id="info">
+		Info
+		<br>
+		<a href="#top" style="font-size:0.95em; font-weight:bold;">&#x2B17; Top</a><br>
+	</section>
+	
+	
+	
+	<!-- FOOTER COPYRIGHT -->
+	<footer>
+		<span style="font-size: 0.9em">Copyright © <span id="year">2024</span> Michael Bell. All Rights Reserved.</span>
+		<script>
+			document.getElementById("year").innerHTML = new Date().getFullYear();
+		</script>
+	</footer>
+	
+	</div>
+	
+</body></html>

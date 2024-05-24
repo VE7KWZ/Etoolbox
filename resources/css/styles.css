@@ -1,247 +1,392 @@
 /* MAX HEIGHT */
 @media screen and (max-height: 300px) {
-  body { overflow: auto; }
+	body { overflow: auto; }
 }
 
 /* MAKE ELEMENTS NOT PRINT WITH CTRL+P */
 @media print {
-  .noprint, .noprint * { display: none !important; } 
-  body, body * { box-shadow: none !important; }
-  body {  padding: 24px !important; }
-  input[type="button"] { display: none !important; }
-  input[type="checkbox"] { appearance: checkbox !important; }
-  .card { margin: 0 !important; }
-  #backdiv { padding: 0px !important; } 
-  .header a { display: none !important; }
+	.noprint, .noprint * { display: none !important; } 
+	body, body * { box-shadow: none !important; }
+	body { padding: 1.5rem !important; }
+	input[type="button"] { display: none !important; }
+	input[type="checkbox"] { appearance: checkbox !important; }
+	.card { margin: 0 !important; }
+	#backdiv { padding: 0 !important; } 
+	.header a { display: none !important; }
 }
-
 
 /* BODY STYLING */
 body {
-  font-family: Arial;
-  font-size: 12pt;
-  background-image: url('../images/background.jpg');
-  max-width: 800px;
-  min-width: 600px;
-  margin: 0 auto;
-  padding: 0;
+	font-family: "Arial";
+	font-size: 17px;
+	background-image: url('../images/background.jpg');
+	max-width: 850px;
+	min-width: 350px;
+	margin: 0 auto;
+	padding: 0;
 }
 
 #backdiv {
-  display: block;
-  max-width: inherit; 
-  min-width: inherit;
-  height: 100%;
-  padding: 15px;
-  background-color: rgba(0,0,0,0.22);
-  box-shadow: 0 0px 30px 0 rgba(0, 0, 0, 0.25);
-  transition: box-shadow 0.5s;
+	display: block;
+	max-width: inherit; 
+	min-width: inherit;
+	width: 100%;
+	padding: 0;
+	background-color: rgba(0, 0, 0, 0.22);
+	box-shadow: 0 0 2rem 0 rgba(0, 0, 0, 0.3);
+	transition: box-shadow 0.5s;
 }
 
 #backdiv:hover {
-  box-shadow: 0 0px 30px 0 rgba(0, 0, 0, 0.33);
+	box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.33);
 }
-
-input, select, textarea {
-  -ms-box-sizing: content-box;
-  -moz-box-sizing: content-box;
-  -webkit-box-sizing: content-box;
-  box-sizing: content-box;
-  font-size: 10.5pt;
-}
-
-input[type='radio'] {
-    accent-color: #A22;
-}
-
-input[type="text"] {
-  border-radius: 0px;
-  border: 1px solid #AAA;
-  color: black;
-  padding: 2px;
-  transition: border 0.25s;
-}
-
-input[type="text"]:hover {
-  border: 1px solid #A55;
-  transition: border 0.25s;
-}
-
-input[type="checkbox"] {
-  appearance: none;
-  accent-color: #A22;
-  vertical-align: middle;
-  width: 1em;
-  height: 1em;
-  background-color: #fff;
-  margin-right: 6px;
-  padding: 0px;
-  border: 1px solid #AAA;
-  transition: border 0.25s;
-  transition: background-color 0.25s;
-}
-
-input[type="checkbox"]:hover {
-  border: 1px solid #811;
-  background-color: #FDD;
-}
-
-input[type="checkbox"]:checked {
-  background-color: #A22;
-}
-
-input[type="checkbox"]:checked:hover {
-  border: 1px solid #811;
-  background-color: #C44;
-}
-
-input[type="button"] {
-  background-color: #333;
-  border: 1px solid black;
-  color: white;
-  margin: 0;
-  padding: 2px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  transition: background-color 0.25s;
-}
-
-input[type="button"]:hover {
-  background-color: #A22;
-}
-
-input[type="button"]:active {
-  background-color: #522;
-}
-
-select {
-  border-radius: 0px;
-  border: 1px solid #AAA;
-  background-color: #FFF;
-  padding: 1.5px 2px;
-  color: black;
-  transition: color 0.25s;
-}
-
-select:hover {
-  border: 1px solid #A55;
-  transition: border 0.25s;
-}
-
-textarea {
-  display: block;
-  border-radius: 0px;
-  border: 1px solid #AAA;
-  padding: 2px;
-  width: 100%;
-  transition: border 0.25s;
-}
-
-textarea:hover {
-  border: 1px solid #A55;
-}
-
-a {
-  color: black;
-  text-decoration: none;
-  transition: color 0.35s;
-}
-
-a:hover {
-  color: #A22;
-}
-
 
 /* HEADER */
-.header {
-  overflow: hidden;
-  background-color: #333;
-  display: block;
-  color: #f2f2f2;
-  text-align: center;
-  text-decoration: none;
+header {
+	display: flex;
+	overflow: hidden;
+	width: inherit;
+	justify-content: space-between;
+	color: #f2f2f2;
+	font-size: 1.2em;
+	text-align: center;
+	text-decoration: none;
+	background-color: #333;
 }
 
-.header span.title {
-  padding: 9px 16px;
-  color: #FFF;
-  float: left;
+header span.title {
+	float: left;
+	color: #FFF;
+	font-size: inherit;
+	font-weight: bold;
+	padding: 0.45em 1em;
 }
 
-.header a {
-  float: right;
-  color: #FFF;
-  text-decoration: none;
-  padding: 10px 16px;
-  transition: background-color 0.35s;
+header a {
+	float: right;
+	color: #FFF;
+	font-size: 0.9em;
+	padding: 0.5em 1em;
+	text-decoration: none;
+	border-left: 3px solid rgba(255, 255, 255, 0.22);
+	transition: background-color 0.35s;
 }
 
-.header a:hover {
-  background-color: #A22;
-  transition: background-color 0.2s;
+
+header a:hover {
+	color: #FFF;
+	background-color: #A22;
+	transition: background-color 0.2s;
 }
 
-.header a:active {
-  background-color: #922;
+header a:active {
+	background-color: #922;
 }
-
 
 
 /* BODY CARDS */
 .card {
-  background-color: white;
-  padding: 20px;
-  margin-top: 20px;
+	background-color: white;
+	padding: 1.2em;
+	margin: 1.2em 1.2em;
 }
 
 
+/* CALC FIELD LAYOUT */
+.formwrapper {
+  box-sizing: border-box;
+  margin: 0 auto;
+  max-width: 565px;
+  padding: 1em;
+  border: 1px solid #AAA;
+  border-radius: 0.1em;
+  box-shadow: 0 0 0.75em 0 rgba(0, 0, 0, 0.25);
+}
 
-/* INPUT TABLE */
-.intable {
+.inputcontainer {
   width: 100%;
+  margin: 0 auto;
+  display: flex-end;
 }
 
-.intable input:not([type="checkbox"]), select {
-  width: 100%;
-  margin: 0px;
+.inputfield {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	overflow: hidden;
+	width: 100%;
+	min-width: 0;
+	margin: 0.25em 0;
 }
 
-.calculate { width: 100%; }
-
-.intable td {
-  padding: 2px 6px;
+.inputname {
+	padding: 0.35em 0.7em 0.35em 0;
+	white-space: nowrap;
+	color: #555;
+	font-weight: 550;
+	font-size: 0.95em;
+	vertical-align: middle;
+	width: 40%;
 }
 
-.intable td.c1 { width: 16%; text-align: right; padding-left:0;}
-.intable td.c1 > select { text-align: right; direction: rtl; }
-.intable td.c2 { width: 44%; }
-.intable td.c3 { width: 40%; }
+.inputbox {
+	box-sizing: border-box;
+	border: 1px solid #AAA;
+	display: flex;
+	flex-grow: 1;
+	min-width: 0;
+	width: 55%;
+	margin-top: 0;
+}
 
+.inputbox label {
+	padding: 0.35rem;
+	text-align: right;
+	vertical-align: middle;
+	white-space: nowrap;
+}
+
+.inputbox input[type="text"], input[type="button"], select {
+	flex-grow: 1;
+	width: 100%;
+	min-width: 0;
+}
+
+.inputbox textarea {
+	border: 1px solid rgba(0, 0, 0, 0);
+}
+
+.inputbox input[type="button"] {
+	margin: 0;
+}
 
 /* OUTPUT TEXTAREA */
 #output {
-  padding: 8px;
-  font-size: 11pt;
-  margin: 5px auto 0 auto;
-  resize: none;
-  width: 100%;
+	font-size: 1rem;
+	margin: 0.25em auto 0 auto;
+	resize: none;
+	width: 100%;
 }
 
 div.justified {
-  display: flex;
-  justify-content: center;
+	display: flex;
+	justify-content: center;
 }
-
-
 
 /* FOOTER */
-.footer {
-  display: block;
-  background-color: #333;
-  color: white;
-  text-align: center;
-  padding: 10px;
-  margin-top: 20px;
+footer {
+	display: block;
+	background-color: #333;
+	color: white;
+	text-align: center;
+	padding: 0.6rem;
+	margin-top: 1.2em;
 }
+
+a {
+	color: black;
+	text-decoration: none;
+	transition: color 0.35s;
+}
+
+a:hover {
+	color: #A22;
+}
+
+
+input, select, textarea, label {
+	-ms-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	-webkit-box-sizing: content-box;
+	box-sizing: content-box;
+	background-color: rgba(0, 0, 0, 0);
+	border-radius: 0;
+	font-size: 0.92em;
+	transition: border 0.25s;
+}
+
+input { padding: 0.25rem; }
+
+input[type='radio'] {
+	vertical-align: middle;
+	width: 1.1em;
+	height: 1.1em;
+	margin: auto 0.3em;
+	accent-color: #A22;
+}
+
+input[type="text"] {
+	border: 1px solid rgba(0, 0, 0, 0);
+	color: black;
+}
+
+input[type="number"] {
+	border: 1px solid rgba(0, 0, 0, 0);
+	color: black;
+	outline: none;
+}
+
+input[type="checkbox"] {
+	vertical-align: middle;
+	width: 1.1em;
+	height: 1.1em;
+	background-color: #fff;
+	margin: auto 0.3em;
+	accent-color: #A22;
+}
+
+input[type="button"] {
+	background-color: #333;
+	border: 1px solid black;
+	color: white;
+	margin: 0.25em;
+	text-align: center;
+	font-weight: bold;
+	display: inline-block;
+	transition: background-color 0.25s;
+}
+
+select {
+	padding: 0.25rem;
+	border: 1px solid rgba(0, 0, 0, 0);
+	background-color: #FFF;
+	color: black;
+}
+
+textarea {
+	display: block;
+	border: 1px solid #AAA;
+	width: 100%;
+	padding: 0.5rem;
+	outline: none;
+}
+
+input[type="text"]:hover, input[type="number"]:hover {
+	border: 1px solid #A55;
+}
+
+input[type="button"]:hover {
+	background-color: #A22;
+}
+
+input[type="button"]:active {
+	background-color: #522;
+}
+
+textarea:hover, select:hover {
+	border: 1px solid #A55;
+}
+
+textarea:active {
+	border: 1px solid #A55;
+}
+
+
+/*      ====== MEDIA QUERIES ======      */
+
+@media only screen and (max-width: 770px) {
+	body {
+		font-size: 18px;
+	}
+	
+	footer {
+		padding: 0.6em;
+		margin-top: 0.3em;
+	}
+	
+	.card {
+		padding: 1.2em;
+		margin: 0.9em 0.6em;
+	}
+	
+	.formwrapper {
+		margin: 0 auto;
+	}
+	
+	.inputcontainer {
+		width: 100%;
+	}
+  
+	.inputfield {
+		margin: 0.35em 0;
+	}
+	
+}
+
+@media only screen and (max-width: 565px) {
+	.formwrapper {
+		margin: 0 -0.9em;
+	}
+}
+
+@media only screen and (max-width: 450px) { 
+	
+	body {
+		font-size: 19px;
+	}
+	
+	header {
+		align-items: stretch;
+		flex-flow: column wrap;
+	}
+	
+	header span.title {
+		color: #FFF;
+		font-size: inherit;
+		font-weight: bold;
+		width: 100%;
+		font-size: 1.2em;
+		padding: 0.4em 0;
+	}
+
+	header a {
+		width: 100%;
+		padding: 0.15em 0;
+		font-size: 0.88em;
+		border-left: 0;
+		border-top: 3px solid rgba(255, 255, 255, 0.22);
+	}
+	
+	footer {
+		padding: 0.6em;
+		margin-top: 0.6em;
+	}
+	
+	.formwrapper {
+		padding: 1em;
+		margin: 0 -0.9em;
+	}
+  
+	.card {
+		padding: 0.9em;
+		margin: 0.6em 0;
+	}
+	
+	.inputfield {
+		flex-direction: column;
+		margin: 0.6em 0;
+	}
+	
+	.inputbox {
+		margin-top: 0.25em;
+		max-width: 100%;
+		width: 100%;
+	}
+	
+	.inputname {
+		width: 100%;
+		padding: 0;
+	}
+	
+	input { 
+		padding: 0.35rem;
+	}
+	
+} 
+
+/* https://css-tricks.com/snippets/css/a-guide-to-flexbox/ */
+
+
+
+
+

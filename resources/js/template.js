@@ -1,9 +1,6 @@
-// **********************************************************************************************************
-// Title [template.htm]
-// **********************************************************************************************************
-function combination_calc (){
-	console.log("Component Combination Calculator");
-	
+// requires functions.js
+
+function template_calc (){
 	// Timer
 	console.time("Runtime");
 	startTime = performance.now();

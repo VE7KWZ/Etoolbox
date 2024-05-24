@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Etoolbox by Michael Bell</title>
-    
-  <!-- DEFAULT LINKS, STYLES, AND SCRIPTS -->
-	<meta name="etoolbox" charset="UTF-8" content="width=device-width, initial-scale=1">
-  
-	<link rel="icon" href="../resources/images/favicon.ico" />
+	<title>Etoolbox - LC Resonance Calculator</title>
+	
+	<!-- DEFAULT LINKS, STYLES, AND SCRIPTS -->
+	<meta name="viewport" charset="UTF-8" content="width=device-width, initial-scale=1">
+	
+	<link rel="icon" href="../resources/images/favicon.ico">
 	<link rel="stylesheet" href="../resources/css/styles.css">
 	
 	<script type="text/javascript" src="../resources/js/functions.js"></script>
@@ -14,31 +14,6 @@
 	
 	<!-- ADDITIONAL LINKS, STYLES, AND SCRIPTS -->
 	<script type="text/javascript" src="../resources/js/resonance_calc.js"></script>
-    
-	<style>
-		#zq_out_series {
-			width: 41%;
-			margin: 0;
-			padding-left: 1px;
-			overflow: hidden;
-			resize: none;
-			font-size: 12pt;
-			border-right: 0;
-			outline: none;
-		}
-		
-		#zq_out_parallel {
-			width: 41%;
-			margin: 0;
-			padding-left: 1px;
-			overflow: hidden;
-			resize: none;
-			font-size: 12pt;
-			border-left: 0;
-			outline: none;
-		}
-	</style>
-	
 	
 </head>
 
@@ -46,18 +21,18 @@
 	<div id="backdiv">
 	
 	<!-- HEADER -->
-	<div class="header" id="top">
-		<span class="title" style="font-size: 17px; font-weight: bold;">Michael's <span style="color:#EE0000">E</span>toolbox</span>
+	<header>
+		<span class="title">Michael's <span id="title_e" style="color:#E00" onclick="clrshft('title_e');">E</span>toolbox</span>
 		<a target="_top" href="../index.htm">Index</a>
-	</div>
+	</header>
 	
 	
-	<!-- RESONANCE CALCULATOR -->
-	<div class="card" id="calc2">
+	<!-- CALCULATOR -->
+	<section class="card" id="calc">
 		
 		<!-- TITLE AND SHORT DESCRIPTION -->
-		<h2 style="margin:0">Resonance Calculator</h2>
-		<a href="#info" style="font-size:0.95em; font-weight:bold;">&#x2B9E; Further Information</a><br>
+		<h2 style="margin:0">LC Resonance Calculator</h2>
+		<a href="#info" style="font-size:0.95em; font-weight:bold;">&#x2B17; Further Information</a><br>
 		<p>
 			Given capacitance and inductance, calculates the resonant frequency of an RLC network. 
 			Given either inductance or capacitance and frequency, calculates the missing value.
@@ -65,84 +40,75 @@
 		</p>
 		
 		<!-- METRIC INPUT NOTE -->
-		<p style="color:#A00; margin: 24px 0 16px 0; font-size:13px; text-align:center">
-			Metric (SI) suffixes such as p=pico, n=nano, u=micro, m=milli, k=kilo, M=mega, G=giga are valid.
+		<p style="color:#A00; margin: 2em 0 1em 0; font-size:0.85em; text-align:center">
+			[*] Metric SI unit prefixes such as p=pico, n=nano, u=micro, m=milli, k=kilo, M=mega are valid.
 		</p>
 		
 		<!-- CALCULATOR INPUT TABLE FORM -->
 		<form name="inputform" onkeydown="return event.key != 'Enter';">
-		<table class="intable">
-			
-			<!-- INPUT -->
-			<tr>
-				<td style="width:20%; text-align:right;">
-					Capacitance
-				</td>
-				<td style="width:15%">
-					<input type="text" tabindex="1" id="capacitance" placeholder="?">
-				</td>
-				<td style="width:5%">
-					F
-				</td>
-				<td style="width:15%; text-align:right;">
-					Resistance
-				</td>
-				<td style="width:15%">
-					<input type="text" tabindex="4" id="resistance" placeholder="?">
-				</td>
-				<td>
-					&#x2126;
-				</td>
-			</tr>
-			
-			<!-- INPUT -->
-			<tr>
-				<td style="width:20%; text-align:right;">
-					Inductance
-				</td>
-				<td style="width:15%">
-					<input type="text" tabindex="2" id="inductance" placeholder="?">
-				</td>
-				<td style="width:5%">
-					H
-				</td>
-				<td style="width:15%; text-align:right;" rowspan=2>
-					Q Factor &<br>Dynamic Z
-				</td>
-				<td colspan=2 rowspan=2>
-					<div style="display:flex;">
-					<textarea id="zq_out_series" rows=3 tabindex="-1" readonly></textarea>
-					<textarea id="zq_out_parallel" rows=3 tabindex="-1" readonly></textarea>
+		<div class="formwrapper">
+    
+			<div class="inputcontainer">
+				
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Capacitance</span>
+					<div class="inputbox">
+						<input type="text" id="cap" placeholder="Enter Value">
+						<label for="cap">F<span style="color:#A00;">*</span></label>
 					</div>
-				</td>
-			</tr>
+				</div>
 			
-			<!-- INPUT -->
-			<tr>
-				<td style="width:20%; text-align:right;">
-					Frequency
-				</td>
-				<td style="width:15%">
-					<input type="text" tabindex="3" id="frequency" placeholder="?">
-				</td>
-				<td style="width:5%">
-					Hz
-				</td>
-			</tr>
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Inductance</span>
+					<div class="inputbox">
+						<input type="text" id="ind" placeholder="Enter Value">
+						<label for="ind">H<span style="color:#A00;">*</span></label>
+					</div>
+				</div>
 			
-		</table>
-		
-		<br>
-		
-		<!-- CALCULATE BUTTON -->
-		<div style="display:flex; justify-content:right;">
-			<input type="button" style="width:30%; margin-right: 10px" onclick="resonance_calc()" id="calc_button" value="Calculate">
-			<input type="button" style="width:15%;" onclick="this.form.reset()" value="Clear">
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Frequency</span>
+					<div class="inputbox">
+						<input type="text" id="freq" placeholder="Enter Value">
+						<label for="freq">Hz<span style="color:#A00;">*</span></label>
+					</div>
+				</div>
+			
+				<div style="display: flex; flex-grow: 1; min-width: 0; margin:0.6em 0 0.6em 0; border-bottom: 1px solid #AAA;">
+				</div>
+			
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Resistance</span>
+					<div class="inputbox">
+						<input type="text" id="res" placeholder="Enter Value" onkeyup="res_chg();">
+						<label for="res">&Omega;<span style="color:#A00;">*</span></label>
+					</div>
+				</div>
+			
+				<!-- OUTPUT TEXTFIELD -->
+				<div class="inputfield">
+					<span class="inputname" style="white-space: normal;">Q-Factor / Dynamic Impedance</span>
+					<div class="inputbox">
+						<textarea id="qf_imped" rows="7" style="resize: none; margin: 0;" readonly></textarea>
+					</div>
+				</div>
+				
+			</div>
+			
+			<!-- CALCULATE & CLEAR BUTTONS -->
+			<div class="justified" style="margin: 0.8em 0;">
+				<input type="button" style="width:min(300px,75%);" onclick="res_freq_calc();" id="calc_button" value="Calculate">
+				<input type="button" style="width:min(150px,25%)" onclick="this.form.reset()" value="Clear">
+		    </div>
+			
 		</div>
-		
 		</form>
 		
-		<script>
+		<script type="text/javascript">
 			// Pressing enter anywhere on page will trigger the calculate button if it has the ID "calculate_button"
 			window.addEventListener( "keyup", (event) => {
 				if (event.key === "Enter") {
@@ -151,27 +117,26 @@
 			} );
 		</script>
 		
-	</div>
+	</section>
 	
 	
 	<!-- CALCULATION INFO CARD -->
-	<div class="card" id="info">
+	<section class="card" id="info">
 		Info
 		<br>
-		<a href="#top" style="font-size:0.95em; font-weight:bold;">&#x2B9E; Top</a><br>
-	</div>
+		<a href="#top" style="font-size:0.95em; font-weight:bold;">&#x2B17; Top</a><br>
+	</section>
 	
 	
 	
 	<!-- FOOTER COPYRIGHT -->
-	<div class="footer">
-	<span style="font-size: 14px">Copyright &copy; <span id="year"></span> Michael Bell. All Rights Reserved.</span>
-	<script>
-		document.getElementById("year").innerHTML = new Date().getFullYear();
-	</script>
-	</div>
+	<footer>
+		<span style="font-size: 0.9em">Copyright © <span id="year">2024</span> Michael Bell. All Rights Reserved.</span>
+		<script>
+			document.getElementById("year").innerHTML = new Date().getFullYear();
+		</script>
+	</footer>
 	
 	</div>
-</body>
-
-</html>
+	
+</body></html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Etoolbox -Temperature Unit Converter</title>
+	
+	<!-- DEFAULT LINKS, STYLES, AND SCRIPTS -->
+	<meta name="viewport" charset="UTF-8" content="width=device-width, initial-scale=1">
+	
+	<link rel="icon" href="../resources/images/favicon.ico">
+	<link rel="stylesheet" href="../resources/css/styles.css">
+	
+	<script type="text/javascript" src="../resources/js/functions.js"></script>
+	
+	
+	<!-- ADDITIONAL LINKS, STYLES, AND SCRIPTS -->
+	<script type="text/javascript" src="../resources/js/calculator_script.js"></script>
+	
+</head>
+
+<body>
+	<div id="backdiv">
+	
+	<!-- HEADER -->
+	<header>
+		<span class="title">Michael's <span id="title_e" style="color:#E00" onclick="clrshft('title_e');">E</span>toolbox</span>
+		<a target="_top" href="../index.htm">Index</a>
+	</header>
+	
+	
+	<!-- CALCULATOR -->
+	<section class="card" id="calc">
+		
+		<!-- TITLE AND SHORT DESCRIPTION -->
+		<h2 style="margin:0">Temperature Unit Converter</h2>
+		<a href="#info" style="font-size:0.95em; font-weight:bold;">&#x2B17; Further Information</a><br>
+		<p>
+			Convert between degrees celsius, degrees fahrenheit, kelvin, and rankine.
+		</p>
+		
+		<!-- CALCULATOR INPUT TABLE FORM -->
+		<form name="inputform" onkeydown="return event.key != 'Enter';">
+		<div class="formwrapper">
+		
+		
+			<div class="inputcontainer">
+			
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Celsius</span>
+					<div class="inputbox">
+						<input type="text" id="degc" placeholder="Enter Value" onkeyup="fkr()">
+						<label for="degc">&deg;C</label>
+					</div>
+				</div>
+				
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Fahrenheit</span>
+					<div class="inputbox">
+						<input type="text" id="degf" placeholder="Enter Value" onkeyup="ckr()">
+						<label for="degf">&deg;F</label>
+					</div>
+				</div>
+				
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Kelvin</span>
+					<div class="inputbox">
+						<input type="text" id="kelv" placeholder="Enter Value" onkeyup="cfr()">
+						<label for="kelv">K</label>
+					</div>
+				</div>
+				
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Rankine</span>
+					<div class="inputbox">
+						<input type="text" id="rank" placeholder="Enter Value" onkeyup="cfk()">
+						<label for="rank">&deg;R</label>
+					</div>
+				</div>
+				
+			</div>
+			
+			<script type="text/javascript">
+				function fkr() {	// Celsius >> to >> Fahrenheit, Kelvin, Rankine
+					if (document.getElementById("degc").value == "") { clr(); return; };
+					var degc = Number(document.getElementById("degc").value);
+					document.getElementById("degf").value = (degc*9/5)+32;
+					document.getElementById("kelv").value = degc+273.15;
+					document.getElementById("rank").value = (degc*9/5)+491.67;
+				}
+				function ckr() {	// Fahrenheit >> to >> Celsius, Kelvin, Rankine
+					if (document.getElementById("degf").value == "") { clr(); return; };
+					var degf = Number(document.getElementById("degf").value);
+					document.getElementById("degc").value = (degf-32)*5/9;
+					document.getElementById("kelv").value = (degf+459.67)*5/9;
+					document.getElementById("rank").value = degf+459.67;
+				}
+				function cfr() {	// Kelvin >> to >> Celsius, Fahrenheit, Rankine
+					if (document.getElementById("kelv").value == "") { clr(); return; };
+					var kelv = Number(document.getElementById("kelv").value);
+					document.getElementById("degc").value = kelv-273.15;
+					document.getElementById("degf").value = (kelv*9/5)-459.67;
+					document.getElementById("rank").value = kelv*9/5;
+				}
+				function cfk() {	// Rankine >> to >> Celsius, Fahrenheit, Kelvin
+					if (document.getElementById("rank").value == "") { clr(); return; };
+					var rank = Number(document.getElementById("rank").value);
+					document.getElementById("degc").value = (rank-491.67)*5/9;
+					document.getElementById("degf").value = rank-459.67;
+					document.getElementById("kelv").value = rank*5/9;
+				}				
+				function clr() {
+					document.getElementById("degc").value = "";
+					document.getElementById("degf").value = "";
+					document.getElementById("kelv").value = "";
+					document.getElementById("rank").value = "";
+				}
+			</script>
+			
+		</div>
+		</form>
+		
+	</section>
+	
+	
+	<!-- CALCULATION INFO CARD -->
+	<section class="card" id="info">
+		Info
+		<br>
+		<a href="#top" style="font-size:0.95em; font-weight:bold;">&#x2B17; Top</a><br>
+	</section>
+	
+	
+	
+	<!-- FOOTER COPYRIGHT -->
+	<footer>
+		<span style="font-size: 0.9em">Copyright © <span id="year">2024</span> Michael Bell. All Rights Reserved.</span>
+		<script>
+			document.getElementById("year").innerHTML = new Date().getFullYear();
+		</script>
+	</footer>
+	
+	</div>
+	
+</body></html>

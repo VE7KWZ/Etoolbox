@@ -27,9 +27,9 @@ function three_phase () {
 			// If voltage and current provided
 			if (v_phase !== 0 && i_phase !== 0) s = 3*v_phase*i_phase;
 			
-			if (p !== 0 && q !== 0) s = Math.sqrt((p*p)+(q*q));	// If Q and P provided
 			if (p !== 0 && s !== 0) q = Math.sqrt((s*s)-(p*p));	// If S and P provided
 			if (q !== 0 && s !== 0) p = Math.sqrt((s*s)-(q*q));	// If S and Q provided
+			if (p !== 0 && q !== 0) s = Math.sqrt((p*p)+(q*q));	// If Q and P provided
 			
 			if (p !== 0 && s !== 0) {
 				pf = p/s;
@@ -47,9 +47,9 @@ function three_phase () {
 			// If voltage and current provided
 			if (v_phase !== 0 && i_phase !== 0) s = 3*v_phase*i_phase;
 			
-			if (p !== 0 && q !== 0) s = Math.sqrt((p*p)+(q*q));	// If Q and P provided
 			if (p !== 0 && s !== 0) q = Math.sqrt((s*s)-(p*p));	// If S and P provided
 			if (q !== 0 && s !== 0) p = Math.sqrt((s*s)-(q*q));	// If S and Q provided
+			if (p !== 0 && q !== 0) s = Math.sqrt((p*p)+(q*q));	// If Q and P provided
 			
 			if (p !== 0 && s !== 0) {
 				pf = p/s;

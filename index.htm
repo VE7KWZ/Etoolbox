@@ -1,28 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Etoolbox by Michael Bell</title>
+	<title>Etoolbox by Michael Bell</title>
     
-  <!-- DEFAULT LINKS, STYLES, AND SCRIPTS -->
-	<meta name="etoolbox" charset="UTF-8" content="width=device-width, initial-scale=1">
+	<!-- DEFAULT LINKS, STYLES, AND SCRIPTS -->
+	<meta name="viewport" charset="UTF-8" content="width=device-width, initial-scale=1">
   
 	<link rel="icon" href="./resources/images/favicon.ico" />
 	<link rel="stylesheet" href="./resources/css/styles.css">
     
+	<script type="text/javascript" src="./resources/js/functions.js"></script>
 	
 	<style>
-		#index_container { 
+		.index_container { 
 			width: 100%;
-			display: flex;
-			flex-direction: row;
-			align-items: stretch;
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
 		}
 		
-		.index_column { width: 100%; }
-		.index_column a { padding: 8px 0; }
+		.index_column { 
+			width: 100%;
+		}
+		
+		.index_column a {
+			display: block;
+			box-sizing: border-box;
+			padding: 0.25em;
+			margin: 0.35em 0.25em;
+			border: 1px solid #AAA;
+			color: #000;
+			text-align: center;
+			transition: border 0.35s;
+			transition: background 0.35s;
+			transition: color 0.35s;
+		}
+		
+		.index_column a:hover {
+			border: 1px solid #A22;
+			background-color: #EEE;
+			color: #A22;
+		}
+		
+		.index_column a:active {
+			background-color: #EDD;
+		}
+		
 		
 		.section_title {
-			margin: 0 0 10px 0;
+			display: block;
+			box-sizing: border-box;
+			margin: 1.2em 0 0.6em 0;
+			text-align: center;
 			color: #A22;
 			text-decoration: underline;
 		}
@@ -30,20 +58,22 @@
 		#sections {
 			width:100%;
 			float: left;
-			display: flex;
+			display: grid;
+			grid-template-columns: repeat(5, 1fr);
 			justify-content: center;
-			overflow: auto;
+			overflow: none;
 			margin: 15px 0 20px 0;
 		}
 		
 		#sections a {
-			float: left;
-			flex-grow: 1;
-			padding: 6px 10px;
+			padding: 0.3em 0.4em;
+			margin: 0.3em;
 			color: black;
 			text-align: center;
 			text-decoration: none;
-			border-bottom: 3px solid #333;
+			box-sizing: border-box;
+			border-top: 2px solid #333;
+			border-bottom: 2px solid #333;
 			transition: border 0.35s;
 			transition: background 0.35s;
 			transition: color 0.35s;
@@ -51,13 +81,47 @@
 		
 		#sections a:hover {
 			color: white;
-			border-bottom: 3px solid #A22;
+			border-top: 2px solid #A22;
+			border-bottom: 2px solid #A22;
 			background-color: #333;
 			transition: background 0.35s;
 		}
 		
 		#sections a:active {
 			background-color: #222;
+		}
+    
+		@media only screen and (max-width: 770px) { 
+			/* for 10 inches tablet screens */
+			.index_container {
+				grid-template-columns: repeat(2, 1fr);
+			}
+      
+			.index_column a {
+				padding: 0.4em;
+				margin: 0.5em 0.4em;
+			}
+      
+			#sections {
+				grid-template-columns: repeat(3, 1fr);
+			}
+      
+		}
+    
+		@media only screen and (max-width: 450px) { 
+			/* for 10 inches tablet screens */
+			.index_container {
+				grid-template-columns: repeat(1, 1fr);
+			}
+      
+			.index_column a {
+				padding: 0.45em;
+				margin: 0.5em 0.4em;
+			}
+      
+			#sections {
+				grid-template-columns: repeat(2, 1fr);
+			}
 		}
 	</style>
 	
@@ -67,72 +131,83 @@
 	<div id="backdiv">
 	
 	<!-- HEADER -->
-	<div class="header" id="top">
-		<span class="title" style="font-size: 17px; font-weight: bold;">Michael's <span style="color:#EE0000">E</span>toolbox</span>
-	</div>
+	<header id="top">
+		<span class="title">Michael's <span id="title_e" style="color:#E00" onclick="clrshft('title_e');">E</span>toolbox</span>
+	</header>
 	
 	
 	<!-- CALCULATOR -->
-	<div class="card">
+	<section class="card">
 		
 		<!-- TITLE -->
 		<h2 style="margin:0; text-align:center;">Index</h2>
 		
-    <!-- NAVIGATION -->
+		<!-- NAVIGATION -->
 		<div id="sections">
-			<a href="#general">General</a>
+			<a href="#components">Components</a>
 			<a href="#analog">Analog</a>
+			<a href="#other">Other</a>
+			<a href="#miscellaneous">Miscellaneous</a>
 		</div>
 		
-		
 		<!-- INDEX COLUMNS -->
-		<div id="index_container">
+		<div class="index_container">
 			<div class="index_column">
-				<h4 id="general" class="section_title">General</h4>
+				<h4 id="components" class="section_title">Components</h4>
 				
-				<a target="_top" href="./pages/equivalent_solver.htm">&#x2B9E; Equivalent Solver</a><br>
-				<a target="_top" href="./pages/combination_calculator.htm">&#x2B9E; Component Combinations</a><br>
-				<a target="_top" href="./pages/standard_value.htm">&#x2B9E; Closest Standard Value</a><br>
-				<a target="_top" href="./pages/marking_decode.htm">&#x2B9E; Marking Decoder</a><br>
-				<a target="_top" href="./pages/divider_calculator.htm">&#x2B9E; Resistor Divider Solver</a><br>
-				<a target="_top" href="./pages/wye_delta_network.htm">&#x2B9E; Delta-Wye Resistor Networks</a><br>
+				<a target="_top" href="./pages/equivalent_solver.htm">Equivalent Solver</a>
+				<a target="_top" href="./pages/combination_calculator.htm">Component Combinations</a>
+				<a target="_top" href="./pages/standard_value.htm">Closest Standard Value</a>
+				<a target="_top" href="./pages/marking_decode.htm">Marking Decoder</a>
+				<a target="_top" href="./pages/divider_calculator.htm">Resistor Ratio Solver</a>
+				<a target="_top" href="./pages/wye_delta_network.htm">Delta-Wye Resistor Networks</a>
 				
 			</div>
 			<div class="index_column">
 				<h4 id="analog" class="section_title">Analog</h4>
 				
-				<a target="_top" href="./pages/ohms_law.htm">&#x2B9E; Ohms Law Calculator</a><br>
-				<a target="_top" href="./pages/three_phase.htm">&#x2B9E; Three Phase Calculator</a><br>
-				<a target="_top" href="./pages/ac_voltage_convert.htm">&#x2B9E; AC/RF Voltage Conversion</a><br>
-				<a target="_top" href="./pages/reactance_calc.htm">&#x2B9E; Reactance Calculator</a><br>
-				<a target="_top" href="./pages/resonance_calc.htm">&#x2B9E; Resonance Calculator</a><br>
-				<a target="_top" href="./pages/frequency_wavelength.htm">&#x2B9E; Frequency-Wavelength Conversion</a><br>
-				<a target="_top" href="./pages/riaa_filter.htm">&#x2B9E; RIAA Filter Calculator</a><br>
+				<a target="_top" href="./pages/ohms_law.htm">Ohms Law Calculator</a>
+				<a target="_top" href="./pages/three_phase.htm">Three Phase Calculator</a>
+				<a target="_top" href="./pages/ac_voltage_convert.htm">AC/RF Voltage Conversion</a>
+				<a target="_top" href="./pages/reactance_calc.htm">Reactance Calculator</a>
+				<a target="_top" href="./pages/resonance_calc.htm">Resonance Calculator</a>
+				<a target="_top" href="./pages/resistor_divider.htm">Resistor Divider Solver</a>
+				<a target="_top" href="./pages/resistor_atten.htm">Resistor Attenuator Calculator</a>
+				<a target="_top" href="./pages/frequency_wavelength.htm">Wavelength Conversion</a>
+				<a target="_top" href="./pages/skin_depth.htm">Skin Depth Calculator</a>
 				
 			</div>
 			<div class="index_column">
-				<h4 id="" class="section_title">Placeholder</h4>
+				<h4 id="other" class="section_title">Other</h4>
+        
+				<a target="_top" href="./pages/length_convert.htm">Length Conversion</a>
+				<a target="_top" href="./pages/temp_convert.htm">Temperature Unit Conversion</a>
+				<a target="_top" href="./pages/wire_gauge.htm">Wire Gauge Calculator</a>
 				
-				<a target="_top" href="./pages/wire_gauge.htm">&#x2B9E; Wire Gauge Calculator</a><br>
+			</div>
+			<div class="index_column">
+				<h4 id="miscellaneous" class="section_title">Miscellaneous</h4>
+				
+				<a target="_top" href="./pages/riaa_filter.htm">RIAA Filter Calculator</a>
+				<a target="_top" href="./pages/template.htm">template</a>
 				
 			</div>
 		</div>
-		
-    
-	</div>
+	
+	</section>
 	
 	
 	<!-- OTHER CARD -->
-	<div class="card">
+	<section class="card">
 		<a href="#top" style="font-size:0.95em; font-weight:bold;">&#x2B9E; Top</a><br>
-	</div>
+	</section>
 	
 	
 	<!-- FOOTER COPYRIGHT -->
-	<div class="footer">
-	<span style="font-size: 14px">Copyright &copy; <span id="year"></span> Michael Bell. All Rights Reserved.</span>
-	<script>document.getElementById("year").innerHTML = new Date().getFullYear();</script>
-	</div>
+	<footer>
+		<span style="font-size: 14px">Copyright &copy; <span id="year"></span> Michael Bell. All Rights Reserved.</span>
+		<script>document.getElementById("year").innerHTML = new Date().getFullYear();</script>
+	</footer>
 	
 	</div>
 </body>

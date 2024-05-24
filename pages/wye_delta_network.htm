@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Etoolbox by Michael Bell</title>
-    
-  <!-- DEFAULT LINKS, STYLES, AND SCRIPTS -->
-	<meta name="etoolbox" charset="UTF-8" content="width=device-width, initial-scale=1">
-  
-	<link rel="icon" href="../resources/images/favicon.ico" />
+	<title>Etoolbox - Wye Delta Resistor Network Calculator</title>
+	
+	<!-- DEFAULT LINKS, STYLES, AND SCRIPTS -->
+	<meta name="viewport" charset="UTF-8" content="width=device-width, initial-scale=1">
+	
+	<link rel="icon" href="../resources/images/favicon.ico">
 	<link rel="stylesheet" href="../resources/css/styles.css">
 	
 	<script type="text/javascript" src="../resources/js/functions.js"></script>
@@ -14,132 +14,177 @@
 	
 	<!-- ADDITIONAL LINKS, STYLES, AND SCRIPTS -->
 	<script type="text/javascript" src="../resources/js/wye_delta_network.js"></script>
-    
+	
+	<style>
+		@media only screen and (max-width: 450px) { 
+			.inputname {
+				direction:ltr !important;
+			}
+		}
+	</style>
+	
 </head>
 
 <body>
 	<div id="backdiv">
 	
 	<!-- HEADER -->
-	<div class="header" id="top">
-		<span class="title" style="font-size: 17px; font-weight: bold;">Michael's <span style="color:#EE0000">E</span>toolbox</span>
+	<header>
+		<span class="title">Michael's <span id="title_e" style="color:#E00" onclick="clrshft('title_e');">E</span>toolbox</span>
 		<a target="_top" href="../index.htm">Index</a>
-	</div>
+	</header>
 	
 	
 	<!-- CALCULATOR -->
-	<div class="card" id="calc">
+	<section class="card" id="calc">
 		
 		<!-- TITLE AND SHORT DESCRIPTION -->
 		<h2 style="margin:0">Wye-Delta Resistor Network Conversions</h2>
-		<a href="#info" style="font-size:0.95em; font-weight:bold;">&#x2B9E; Further Information</a><br>
+		<a href="#info" style="font-size:0.95em; font-weight:bold;">&#x2B17; Further Information</a><br>
 		<p>
 			Convert between Wye (Tee) and Delta (Pi) resistor networks.
 		</p>
 		
 		<!-- METRIC INPUT NOTE -->
-		<p style="color:#A00; margin: 32px 0 16px 0; font-size:13px; text-align:center">
-			Metric (SI) suffixes such as p=pico, n=nano, u=micro, m=milli, k=kilo, M=mega, G=giga are valid.
+		<p style="color:#A00; margin: 2em 0 1em 0; font-size:0.85em; text-align:center">
+			[*] Metric SI unit prefixes such as p=pico, n=nano, u=micro, m=milli, k=kilo, M=mega are valid.
 		</p>
 		
 		<!-- CALCULATOR INPUT TABLE FORM -->
 		<form name="inputform" onkeydown="return event.key != 'Enter';">
-		
-		<div class="justified">
-			<label for="config0" style="margin-right:24pt"><input type="radio" id="config0" name="config" onchange="cfg_update()" checked="checked">Delta to Wye Network</label>
-			<label for="config1"><input type="radio" id="config1" name="config" onchange="cfg_update()">Wye to Delta Network</label>
-		</div><br>
-		
-		<table class="intable">
+		<div class="formwrapper">
+    
+			<div class="inputcontainer">
+				
+				<!-- RADIO BUTTONS -->
+				<div class="inputfield" style="margin-bottom: 0.6em;">
+					<label for="config0" style="text-align: left; font-size: 1em; padding: 0.3em 0; margin-right: 1.2em;">
+						<input type="radio" id="config0" name="config" onchange="cfg_update(); yd_network()" checked="checked">
+						Delta to Wye Network
+					</label>
+					<label for="config1" style="text-align: left; font-size: 1em; padding: 0.3em 0;">
+						<input type="radio" id="config1" name="config" onchange="cfg_update(); yd_network()">
+						Wye to Delta Network
+					</label>
+				</div>
+				
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname" style="direction:rtl" id="Lin1">R<sub>AB</sub></span>
+					<div class="inputbox">
+						<input type="text" id="rin1" placeholder="Enter Value" onkeyup="yd_network()">
+						<label for="rin1">&Omega;<span style="color:#A00;">*</span></label>
+					</div>
+				</div>
+				
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname" style="direction:rtl" id="Lin2">R<sub>BC</sub></span>
+					<div class="inputbox">
+						<input type="text" id="rin2" placeholder="Enter Value" onkeyup="yd_network()">
+						<label for="rin2">&Omega;<span style="color:#A00;">*</span></label>
+					</div>
+				</div>
+				
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname" style="direction:rtl" id="Lin3">R<sub>AC</sub></span>
+					<div class="inputbox">
+						<input type="text" id="rin3" placeholder="Enter Value" onkeyup="yd_network()">
+						<label for="rin3">&Omega;<span style="color:#A00;">*</span></label>
+					</div>
+				</div>
+				
+			</div>
 			
-			<!-- INPUT -->
-			<tr>
-				<td style="width:15%; text-align:right">
-					<span id="Lin1">R<sub>AB</sub></span>
-				</td>
-				<td style="width:20%">
-					<input type="text" id="rin1" tabindex="1" placeholder="?">
-				</td>
-				<td style="width:5%">
-					&#x2126;
-				</td>
-				<td style="width:15%; text-align:right">
-					<span id="Lout1">R<sub>A</sub></span>
-				</td>
-				<td style="width:20%">
+			<div style="display: flex; flex-grow: 1; min-width: 0; margin:0.6em 0 0.6em 0; border-bottom: 1px solid #AAA;">
+			</div>
+			
+			<!-- OUTPUT TEXTBOX -->
+			<div class="inputfield">
+				<span class="inputname" id="Lout1" style="direction:rtl">R<sub>A</sub></span>
+				<div class="inputbox">
 					<input type="text" id="rout1" readonly>
-				</td>
-				<td>
-					&#x2126;
-				</td>
-			</tr>
+					<label for="rout1">&Omega;<span style="color:#A00;">*</span></label>
+				</div>
+			</div>
 			
-			<!-- INPUT -->
-			<tr>
-				<td style="width:15%; text-align:right">
-					<span id="Lin2">R<sub>BC</sub></span>
-				</td>
-				<td style="width:20%">
-					<input type="text" id="rin2" tabindex="2" placeholder="?">
-				</td>
-				<td style="width:5%">
-					&#x2126;
-				</td>
-				<td style="width:15%; text-align:right">
-					<span id="Lout2">R<sub>B</sub></span>
-				</td>
-				<td style="width:20%">
+			<!-- OUTPUT TEXTBOX -->
+			<div class="inputfield">
+				<span class="inputname" id="Lout2" style="direction:rtl">R<sub>B</sub></span>
+				<div class="inputbox">
 					<input type="text" id="rout2" readonly>
-				</td>
-				<td>
-					&#x2126;
-				</td>
-			</tr>
+					<label for="rout2">&Omega;<span style="color:#A00;">*</span></label>
+				</div>
+			</div>
 			
-			<!-- INPUT -->
-			<tr>
-				<td style="width:15%; text-align:right">
-					<span id="Lin3">R<sub>AC</sub></span>
-				</td>
-				<td style="width:20%">
-					<input type="text" id="rin3" tabindex="3" placeholder="?">
-				</td>
-				<td style="width:5%">
-					&#x2126;
-				</td>
-				<td style="width:15%; text-align:right">
-					<span id="Lout3">R<sub>C</sub></span>
-				</td>
-				<td style="width:20%">
+			<!-- OUTPUT TEXTBOX -->
+			<div class="inputfield">
+				<span class="inputname" id="Lout3" style="direction:rtl">R<sub>C</sub></span>
+				<div class="inputbox">
 					<input type="text" id="rout3" readonly>
-				</td>
-				<td>
-					&#x2126;
-				</td>
-			</tr>
+					<label for="rout3">&Omega;<span style="color:#A00;">*</span></label>
+				</div>
+			</div>
 			
-			<!-- INPUT -->
-			<tr>
-				<td></td>
-				<td style="padding-top:12px">
-					<input type="button" style="width:100%;" onclick="yd_network()" id="calc_button" value="Calculate">
-				</td>
-				<td></td>
-				<td></td>
-				<td style="padding-top:12px">
-					<input type="button" style="width:100%;" onclick="this.form.reset()" value="Clear">
-				</td>
-				<td></td>
-			</tr>
+			<div style="display: flex; flex-grow: 1; min-width: 0; margin:0.6em 0 0.6em 0; border-bottom: 1px solid #AAA;">
+			</div>
 			
-		</table>		
+			<div class="inputfield" style="width:100%; justify-content: space-evenly; margin:0; padding:0">
+				<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="210" height="200"><!-- Wye -->
+				<defs/><g transform="scale(1,1) translate(-156,-280)"><path fill="none" stroke="#000000" paint-order="fill stroke markers" d=" M 240 336 L 253 349" stroke-linecap="round" stroke-miterlimit="10" stroke-width="3" stroke-dasharray=""/>
+				<path fill="none" stroke="#000000" paint-order="fill stroke markers" d=" M 275 371 L 288 384" stroke-linecap="round" stroke-miterlimit="10" stroke-width="3" stroke-dasharray=""/>
+				<g transform="matrix(0.7071067811865476,0.7071067811865476,-0.7071067811865476,0.7071067811865476,253,349)">
+				<path fill="none" stroke="#000000" paint-order="fill stroke markers" d=" M 0 0 L 1.9445436482630056 6 L 5.833630944789017 -6 L 9.722718241315029 6 L 13.61180553784104 -6 L 17.50089283436705 6 L 21.38998013089306 -6 L 25.279067427419072 6 L 29.168154723945083 -6 L 31.11269837220809 0" stroke-linecap="round" stroke-miterlimit="10" stroke-width="3" stroke-dasharray=""/>
+				</g><path fill="none" stroke="#000000" paint-order="fill stroke markers" d=" M 288 384 L 301 371" stroke-linecap="round" stroke-miterlimit="10" stroke-width="3" stroke-dasharray=""/>
+				<path fill="none" stroke="#000000" paint-order="fill stroke markers" d=" M 323 349 L 336 336" stroke-linecap="round" stroke-miterlimit="10" stroke-width="3" stroke-dasharray=""/>
+				<g transform="matrix(0.7071067811865476,-0.7071067811865476,0.7071067811865476,0.7071067811865476,301,371)">
+				<path fill="none" stroke="#000000" paint-order="fill stroke markers" d=" M 0 0 L 1.9445436482630056 6 L 5.833630944789017 -6 L 9.722718241315029 6 L 13.61180553784104 -6 L 17.50089283436705 6 L 21.38998013089306 -6 L 25.279067427419072 6 L 29.168154723945083 -6 L 31.11269837220809 0" stroke-linecap="round" stroke-miterlimit="10" stroke-width="3" stroke-dasharray=""/>
+				</g><path fill="none" stroke="#000000" paint-order="fill stroke markers" d=" M 288 384 L 288 400" stroke-linecap="round" stroke-miterlimit="10" stroke-width="3" stroke-dasharray=""/>
+				<path fill="none" stroke="#000000" paint-order="fill stroke markers" d=" M 288 432 L 288 448" stroke-linecap="round" stroke-miterlimit="10" stroke-width="3" stroke-dasharray=""/>
+				<g transform="matrix(0,1,-1,0,288,400)"><path fill="none" stroke="#000000" paint-order="fill stroke markers" d=" M 0 0 L 2 6 L 6 -6 L 10 6 L 14 -6 L 18 6 L 22 -6 L 26 6 L 30 -6 L 32 0" stroke-linecap="round" stroke-miterlimit="10" stroke-width="3" stroke-dasharray=""/>
+				</g><g><text fill="#000000" stroke="none" font-family="sans-serif" font-size="16px" font-style="normal" font-weight="normal" text-decoration="normal" x="226" y="330" text-anchor="start" dominant-baseline="alphabetic">A</text>
+				</g><g><text fill="#000000" stroke="none" font-family="sans-serif" font-size="16px" font-style="normal" font-weight="normal" text-decoration="normal" x="340" y="332" text-anchor="start" dominant-baseline="alphabetic">C</text>
+				</g><g><text fill="#000000" stroke="none" font-family="sans-serif" font-size="16px" font-style="normal" font-weight="normal" text-decoration="normal" x="283" y="467" text-anchor="start" dominant-baseline="alphabetic">B</text>
+				</g><g><text fill="#000000" stroke="none" font-family="sans-serif" font-size="16px" font-style="normal" font-weight="normal" text-decoration="normal" x="230" y="376" text-anchor="start" dominant-baseline="alphabetic">R</text>
+				</g><g><text fill="#000000" stroke="none" font-family="sans-serif" font-size="14px" font-style="normal" font-weight="normal" text-decoration="normal" x="244" y="382" text-anchor="start" dominant-baseline="alphabetic">A</text>
+				</g><g><text fill="#000000" stroke="none" font-family="sans-serif" font-size="16px" font-style="normal" font-weight="normal" text-decoration="normal" x="323" y="378" text-anchor="start" dominant-baseline="alphabetic">R</text>
+				</g><g><text fill="#000000" stroke="none" font-family="sans-serif" font-size="14px" font-style="normal" font-weight="normal" text-decoration="normal" x="337" y="384" text-anchor="start" dominant-baseline="alphabetic">C</text>
+				</g><g><text fill="#000000" stroke="none" font-family="sans-serif" font-size="16px" font-style="normal" font-weight="normal" text-decoration="normal" x="303" y="424" text-anchor="start" dominant-baseline="alphabetic">R</text>
+				</g><g><text fill="#000000" stroke="none" font-family="sans-serif" font-size="14px" font-style="normal" font-weight="normal" text-decoration="normal" x="317" y="430" text-anchor="start" dominant-baseline="alphabetic">B</text>
+				</g><path fill="#000000" stroke="none" paint-order="stroke fill markers" d=" M 243 336 A 3 3 0 1 1 242.99999999995774 335.99998407846124 Z"/>
+				<path fill="#000000" stroke="none" paint-order="stroke fill markers" d=" M 291 384 A 3 3 0 1 1 290.99999999995777 383.99998407846124 Z"/>
+				<path fill="#000000" stroke="none" paint-order="stroke fill markers" d=" M 339 336 A 3 3 0 1 1 338.99999999995777 335.99998407846124 Z"/>
+				<path fill="#000000" stroke="none" paint-order="stroke fill markers" d=" M 291 448 A 3 3 0 1 1 290.99999999995777 447.99998407846124 Z"/>
+				</g></svg>
+				
+				<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="210" height="200"> <!-- Delta -->
+				<defs/><g transform="scale(1,1) translate(-152,-103)">
+				<path fill="none" stroke="#000000" paint-order="fill stroke markers" d=" M 240 176 L 272 176" stroke-linecap="round" stroke-miterlimit="10" stroke-width="3" stroke-dasharray=""/>
+				<path fill="none" stroke="#000000" paint-order="fill stroke markers" d=" M 304 176 L 336 176" stroke-linecap="round" stroke-miterlimit="10" stroke-width="3" stroke-dasharray=""/>
+				<g transform="matrix(1,0,0,1,272,176)"><path fill="none" stroke="#000000" paint-order="fill stroke markers" d=" M 0 0 L 2 6 L 6 -6 L 10 6 L 14 -6 L 18 6 L 22 -6 L 26 6 L 30 -6 L 32 0" stroke-linecap="round" stroke-miterlimit="10" stroke-width="3" stroke-dasharray=""/>
+				</g><path fill="none" stroke="#000000" paint-order="fill stroke markers" d=" M 336 176 L 320 202" stroke-linecap="round" stroke-miterlimit="10" stroke-width="3" stroke-dasharray=""/>
+				<path fill="none" stroke="#000000" paint-order="fill stroke markers" d=" M 304 230 L 288 256" stroke-linecap="round" stroke-miterlimit="10" stroke-width="3" stroke-dasharray=""/>
+				<g transform="matrix(-0.49613893835683387,0.8682431421244593,-0.8682431421244593,-0.49613893835683387,320,202)">
+				<path fill="none" stroke="#000000" paint-order="fill stroke markers" d=" M 0 0 L 2.0155644370746373 6 L 6.046693311223912 -6 L 10.077822185373186 6 L 14.108951059522461 -6 L 18.140079933671736 6 L 22.17120880782101 -6 L 26.202337681970285 6 L 30.23346655611956 -6 L 32.2490309931942 0" stroke-linecap="round" stroke-miterlimit="10" stroke-width="3" stroke-dasharray=""/>
+				</g><path fill="none" stroke="#000000" paint-order="fill stroke markers" d=" M 288 256 L 272 230" stroke-linecap="round" stroke-miterlimit="10" stroke-width="3" stroke-dasharray=""/>
+				<path fill="none" stroke="#000000" paint-order="fill stroke markers" d=" M 256 202 L 240 176" stroke-linecap="round" stroke-miterlimit="10" stroke-width="3" stroke-dasharray=""/>
+				<g transform="matrix(-0.49613893835683387,-0.8682431421244593,0.8682431421244593,-0.49613893835683387,272,230)"><path fill="none" stroke="#000000" paint-order="fill stroke markers" d=" M 0 0 L 2.0155644370746373 6 L 6.046693311223912 -6 L 10.077822185373186 6 L 14.108951059522461 -6 L 18.140079933671736 6 L 22.17120880782101 -6 L 26.202337681970285 6 L 30.23346655611956 -6 L 32.2490309931942 0" stroke-linecap="round" stroke-miterlimit="10" stroke-width="3" stroke-dasharray=""/>
+				</g><g><text fill="#000000" stroke="none" font-family="sans-serif" font-size="16px" font-style="normal" font-weight="normal" text-decoration="normal" x="326" y="232" text-anchor="start" dominant-baseline="alphabetic">R</text>
+				</g><g><text fill="#000000" stroke="none" font-family="sans-serif" font-size="14px" font-style="normal" font-weight="normal" text-decoration="normal" x="340" y="238" text-anchor="start" dominant-baseline="alphabetic">BC</text>
+				</g><g><text fill="#000000" stroke="none" font-family="sans-serif" font-size="16px" font-style="normal" font-weight="normal" text-decoration="normal" x="271" y="153" text-anchor="start" dominant-baseline="alphabetic">R</text>
+				</g><g><text fill="#000000" stroke="none" font-family="sans-serif" font-size="14px" font-style="normal" font-weight="normal" text-decoration="normal" x="285" y="159" text-anchor="start" dominant-baseline="alphabetic">AC</text>
+				</g><g><text fill="#000000" stroke="none" font-family="sans-serif" font-size="16px" font-style="normal" font-weight="normal" text-decoration="normal" x="222" y="232" text-anchor="start" dominant-baseline="alphabetic">R</text>
+				</g><g><text fill="#000000" stroke="none" font-family="sans-serif" font-size="14px" font-style="normal" font-weight="normal" text-decoration="normal" x="236" y="238" text-anchor="start" dominant-baseline="alphabetic">AB</text>
+				</g><g><text fill="#000000" stroke="none" font-family="sans-serif" font-size="16px" font-style="normal" font-weight="normal" text-decoration="normal" x="222" y="169" text-anchor="start" dominant-baseline="alphabetic">A</text>
+				</g><g><text fill="#000000" stroke="none" font-family="sans-serif" font-size="16px" font-style="normal" font-weight="normal" text-decoration="normal" x="342" y="169" text-anchor="start" dominant-baseline="alphabetic">C</text>
+				</g><g><text fill="#000000" stroke="none" font-family="sans-serif" font-size="16px" font-style="normal" font-weight="normal" text-decoration="normal" x="282" y="277" text-anchor="start" dominant-baseline="alphabetic">B</text>
+				</g></g></svg>
+			</div>
+			
+		</div>
 		</form>
 		
-		<br><br>
-		<div class="justified">
-			<img src="../resources/images/wye_delta_network.png">
-		</div>
-		<br>
 		
 		<script>
 			// Pressing enter anywhere on page will trigger the calculate button if it has the ID "calculate_button"
@@ -160,7 +205,6 @@
 					document.getElementById("Lout2").innerHTML = `R<sub>B</sub>`;
 					document.getElementById("Lout3").innerHTML = `R<sub>C</sub>`;
 				}
-			
 				if (document.getElementById("config1").checked) {
 					document.getElementById("Lin1").innerHTML = `R<sub>A</sub>`;
 					document.getElementById("Lin2").innerHTML = `R<sub>B</sub>`;
@@ -173,25 +217,26 @@
 			}
 		</script>
 		
-	</div>
+	</section>
 	
 	
 	<!-- CALCULATION INFO CARD -->
-	<div class="card" id="info">
-		<a href="#top" style="font-size:0.95em; font-weight:bold;">&#x2B9E; Top</a><br>
-	</div>
+	<section class="card" id="info">
+		<br>
+		<a href="#top" style="font-size:0.95em; font-weight:bold;">&#x2B17; Top</a><br>
+	</section>
 	
 	
 	
 	<!-- FOOTER COPYRIGHT -->
-	<div class="footer">
-	<span style="font-size: 14px">Copyright &copy; <span id="year"></span> Michael Bell. All Rights Reserved.</span>
-	<script>
-		document.getElementById("year").innerHTML = new Date().getFullYear();
-	</script>
-	</div>
+	<footer>
+		<span style="font-size: 0.9em">Copyright © <span id="year">2024</span> Michael Bell. All Rights Reserved.</span>
+		<script>
+			document.getElementById("year").innerHTML = new Date().getFullYear();
+		</script>
+	</footer>
 	
 	</div>
-</body>
-
-</html>
+	
+	
+</body></html>

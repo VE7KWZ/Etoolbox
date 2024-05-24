@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Etoolbox by Michael Bell</title>
-    
-  <!-- DEFAULT LINKS, STYLES, AND SCRIPTS -->
-	<meta name="etoolbox" charset="UTF-8" content="width=device-width, initial-scale=1">
-  
-	<link rel="icon" href="../resources/images/favicon.ico" />
+	<title>Etoolbox - AC Voltage Conversion Calculator</title>
+	
+	<!-- DEFAULT LINKS, STYLES, AND SCRIPTS -->
+	<meta name="viewport" charset="UTF-8" content="width=device-width, initial-scale=1">
+	
+	<link rel="icon" href="../resources/images/favicon.ico">
 	<link rel="stylesheet" href="../resources/css/styles.css">
 	
 	<script type="text/javascript" src="../resources/js/functions.js"></script>
@@ -14,128 +14,154 @@
 	
 	<!-- ADDITIONAL LINKS, STYLES, AND SCRIPTS -->
 	<script type="text/javascript" src="../resources/js/ac_voltage_convert.js"></script>
-    
+	
 </head>
 
-<body>
+<body onload="imped()">
 	<div id="backdiv">
 	
 	<!-- HEADER -->
-	<div class="header" id="top">
-		<span class="title" style="font-size: 17px; font-weight: bold;">Michael's <span style="color:#EE0000">E</span>toolbox</span>
+	<header>
+		<span class="title">Michael's <span id="title_e" style="color:#E00" onclick="clrshft('title_e');">E</span>toolbox</span>
 		<a target="_top" href="../index.htm">Index</a>
-	</div>
+	</header>
 	
 	
 	<!-- CALCULATOR -->
-	<div class="card" id="calc">
+	<section class="card" id="calc">
 		
 		<!-- TITLE AND SHORT DESCRIPTION -->
 		<h2 style="margin:0">AC Voltage Conversion Calculator</h2>
-		<a href="#info" style="font-size:0.95em; font-weight:bold;">&#x2B9E; Further Information</a><br>
+		<a href="#info" style="font-size:0.95em; font-weight:bold;">&#x2B17; Further Information</a><br>
 		<p>
-			Description
+			Convert between volts peak, volts peak-to-peak, volts RMS, and volts average. Additionally, by
+			entering a system impedance, dBm and Watts can be calculated.
 		</p>
 		
 		<!-- METRIC INPUT NOTE -->
-		<p style="color:#A00; margin: 32px 0 16px 0; font-size:13px; text-align:center">
-			Metric (SI) suffixes such as p=pico, n=nano, u=micro, m=milli, k=kilo, M=mega, G=giga are valid.
+		<p style="color:#A00; margin: 2em 0 1em 0; font-size:0.85em; text-align:center">
+			[*] Metric SI unit prefixes such as p=pico, n=nano, u=micro, m=milli, k=kilo, M=mega are valid.
 		</p>
 		
 		<!-- CALCULATOR INPUT TABLE FORM -->
 		<form name="inputform" onkeydown="return event.key != 'Enter';">
-		<table class="intable">
+		<div class="formwrapper">
+    
+			<div class="inputcontainer">
+				
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Volts Peak</span>
+					<div class="inputbox">
+						<input type="text" id="vp" placeholder="Enter Value" onkeyup="v_p()">
+						<label for="vp">V<sub>P</sub><span style="color:#A00;">*</span></label>
+					</div>
+				</div>
 			
-			<!-- INPUT -->
-			<tr>
-				<td class="c1">
-					Input Value
-				</td>
-				<td class="c2">
-					<input type="text" id="value_in">
-				</td>
-				<td class="c3">
-					<select id="input_type" style="width: 200px;">
-						<option value="0">Vp (peak)</option>
-						<option value="1">Vpp (peak-to-peak)</option>
-						<option value="2">Vrms (root mean square)</option>
-						<option value="3">Vavg (average)</option>
-						<option value="4">P (power watts)</option>
-						<option value="5">dBm (decibel milliwatts)</option>
-					</select>
-				</td>
-			</tr>
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Volts Peak to Peak</span>
+					<div class="inputbox">
+						<input type="text" id="vpp" placeholder="Enter Value" onkeyup="v_pp()">
+						<label for="vpp">V<sub>PP</sub><span style="color:#A00;">*</span></label>
+					</div>
+				</div>
+        
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Volts RMS</span>
+					<div class="inputbox">
+						<input type="text" id="vrms" placeholder="Enter Value" onkeyup="v_rms()"> 
+						<label for="vrms">V<sub>RMS</sub><span style="color:#A00;">*</span></label>
+					</div>
+				</div>
+        
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Volts Average (sine)</span>
+					<div class="inputbox">
+						<input type="text" id="vavg" placeholder="Enter Value" onkeyup="v_avg()">
+						<label for="vavg">V<sub>AVG</sub><span style="color:#A00;">*</span></label>
+					</div>
+				</div>
+        
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">dBV</span>
+					<div class="inputbox">
+						<input type="text" id="dbv" placeholder="Enter Value" onkeyup="f_dbv()">
+						<label for="dbv">dBV</label>
+					</div>
+				</div>
+        
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">dBu</span>
+					<div class="inputbox">
+						<input type="text" id="dbu" placeholder="Enter Value" onkeyup="f_dbu()">
+						<label for="dbu">dBu</label>
+					</div>
+				</div>
+        
+				<div style="display: flex; flex-grow: 1; min-width: 0; margin:0.6em 0; border-bottom: 1px solid #AAA;">
+				</div>
+        
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Impedance</span>
+					<div class="inputbox">
+						<input type="text" id="z" placeholder="Enter Value" onkeyup="imped()">
+						<label for="z">&Omega;<span style="color:#A00;">*</span></label>
+					</div>
+				</div>
+        
+				<div style="display: flex; flex-grow: 1; min-width: 0; margin:0.6em 0; border-bottom: 1px solid #AAA;">
+				</div>
+        
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">dBm</span>
+					<div class="inputbox">
+						<input type="text" id="dbm" placeholder="Enter Value" onkeyup="f_dbm()">
+						<label for="dbm">dBm</label>
+					</div>
+				</div>
+        
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Power</span>
+					<div class="inputbox">
+						<input type="text" id="pow" placeholder="Enter Value" onkeyup="powr()">
+						<label for="pow">W<span style="color:#A00;">*</span></label>
+					</div>
+				</div>
+				
+			</div>
 			
-			<!-- INPUT -->
-			<tr>
-				<td class="c1">
-					Impedance
-				</td>
-				<td class="c2">
-					<input type="text" id="impedance_in">
-				</td>
-				<td class="c3">
-					Ohms (Optional)
-				</td>
-			</tr>
-			
-			
-			<!-- CALCULATE BUTTON-->
-			<tr>
-				<td class="c1">
-					
-				</td>
-				<td class="c2">
-					<input type="button" style="width:100%;" onclick="volt_power()" id="calc_button" value="Calculate">
-				</td>
-				<td class="c3">
-					<input type="button" style="width:80px;" onclick="this.form.reset()" value="Clear">
-				</td>
-			</tr>
-			
-		</table>
-		
-		<br>
-		<span>Output</span>
-		<br>
-		
-		<div class="justified">
-			<textarea id="output" rows=3 readonly></textarea>
 		</div>
-		
 		</form>
 		
-		
-		<script>
-			// Pressing enter anywhere on page will trigger the calculate button if it has the ID "calculate_button"
-			window.addEventListener( "keyup", (event) => {
-				if (event.key === "Enter") {
-					document.getElementById("calc_button").click() 
-				} 
-			} );
-		</script>
-		
-	</div>
+	</section>
 	
 	
 	<!-- CALCULATION INFO CARD -->
-	<div class="card" id="info">
+	<section class="card" id="info">
 		Info
 		<br>
-		<a href="#top" style="font-size:0.95em; font-weight:bold;">&#x2B9E; Top</a><br>
-	</div>
+		<a href="#top" style="font-size:0.95em; font-weight:bold;">&#x2B17; Top</a><br>
+	</section>
 	
 	
 	
 	<!-- FOOTER COPYRIGHT -->
-	<div class="footer">
-	<span style="font-size: 14px">Copyright &copy; <span id="year"></span> Michael Bell. All Rights Reserved.</span>
-	<script>
-		document.getElementById("year").innerHTML = new Date().getFullYear();
-	</script>
-	</div>
+	<footer>
+		<span style="font-size: 0.9em">Copyright © <span id="year">2024</span> Michael Bell. All Rights Reserved.</span>
+		<script>
+			document.getElementById("year").innerHTML = new Date().getFullYear();
+		</script>
+	</footer>
 	
 	</div>
-</body>
-
-</html>
+	
+	
+</body></html>

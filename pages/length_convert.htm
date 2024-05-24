@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Etoolbox - Ohms Law Calculator</title>
+	<title>Etoolbox - Length Conversion Calculator</title>
 	
 	<!-- DEFAULT LINKS, STYLES, AND SCRIPTS -->
 	<meta name="viewport" charset="UTF-8" content="width=device-width, initial-scale=1">
@@ -13,7 +13,7 @@
 	
 	
 	<!-- ADDITIONAL LINKS, STYLES, AND SCRIPTS -->
-	<script type="text/javascript" src="../resources/js/ohms_law.js"></script>
+	<script type="text/javascript" src="../resources/js/length_convert.js"></script>
 	
 </head>
 
@@ -31,10 +31,11 @@
 	<section class="card" id="calc">
 		
 		<!-- TITLE AND SHORT DESCRIPTION -->
-		<h2 style="margin:0">Ohms Law Calculator</h2>
+		<h2 style="margin:0">Length Conversion Calculator</h2>
 		<a href="#info" style="font-size:0.95em; font-weight:bold;">&#x2B17; Further Information</a><br>
 		<p>
-			Given two of the four inputs are provided, this calculator will solve for the remaining values.
+			Converts between meters, feet, and inches. Includes an imperial formatted 
+			output in ft, inches, and fractional inches down to 1/64th.
 		</p>
 		
 		<!-- METRIC INPUT NOTE -->
@@ -45,49 +46,61 @@
 		<!-- CALCULATOR INPUT TABLE FORM -->
 		<form name="inputform" onkeydown="return event.key != 'Enter';">
 		<div class="formwrapper">
-    
+		
 			<div class="inputcontainer">
 				
 				<!-- TEXT INPUT -->
 				<div class="inputfield">
-					<span class="inputname">Potential</span>
+					<span class="inputname">Meters</span>
 					<div class="inputbox">
-						<input type="text" id="volt" placeholder="Enter Value" onkeyup="ohms_law_v()">
-						<label for="volt">V<span style="color:#A00;">*</span></label>
+						<input type="text" id="meter" placeholder="Enter Value" onkeyup="f_metr();">
+						<label for="input1">m<span style="color:#A00;">*</span></label>
 					</div>
 				</div>
 				
 				<!-- TEXT INPUT -->
 				<div class="inputfield">
-					<span class="inputname">Current</span>
+					<span class="inputname">Inches</span>
 					<div class="inputbox">
-						<input type="text" id="amp" placeholder="Enter Value" onkeyup="ohms_law_i()">
-						<label for="amp">A<span style="color:#A00;">*</span></label>
+						<input type="text" id="inch" placeholder="Enter Value" onkeyup="f_inch();">
+						<label for="input1">in</label>
 					</div>
 				</div>
 				
 				<!-- TEXT INPUT -->
 				<div class="inputfield">
-					<span class="inputname">Resistance</span>
+					<span class="inputname">Feet</span>
 					<div class="inputbox">
-						<input type="text" id="ohm" placeholder="Enter Value" onkeyup="ohms_law_r()">
-						<label for="ohm">&Omega;<span style="color:#A00;">*</span></label>
+						<input type="text" id="feet" placeholder="Enter Value" onkeyup="f_feet();">
+						<label for="input1">ft</label>
 					</div>
+				</div>
+				
+				<div style="display: flex; flex-grow: 1; min-width: 0; margin:0.6em 0; border-bottom: 1px solid #AAA;">
 				</div>
 				
 				<!-- TEXT INPUT -->
 				<div class="inputfield">
-					<span class="inputname">Power</span>
+					<span class="inputname">Resulting ft and in</span>
 					<div class="inputbox">
-						<input type="text" id="watt" placeholder="Enter Value" onkeyup="ohms_law_p()">
-						<label for="watt">W<span style="color:#A00;">*</span></label>
+						<input type="text" id="ftin" readonly>
 					</div>
-				</div>
+				</div>				
 				
 			</div>
 			
 		</div>
 		</form>
+		
+		
+		<script type="text/javascript">
+			// Pressing enter anywhere on page will trigger the calculate button if it has the ID "calculate_button"
+			window.addEventListener( "keyup", (event) => {
+				if (event.key === "Enter") {
+					document.getElementById("calc_button").click() 
+				} 
+			} );
+		</script>
 		
 	</section>
 	
@@ -111,5 +124,5 @@
 	
 	</div>
 	
-	
-</body></html>
+</body>
+</html>

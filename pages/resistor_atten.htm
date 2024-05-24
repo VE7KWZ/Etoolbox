@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Etoolbox - Ohms Law Calculator</title>
+	<title>Etoolbox - Resistor Attenuator Calculator</title>
 	
 	<!-- DEFAULT LINKS, STYLES, AND SCRIPTS -->
 	<meta name="viewport" charset="UTF-8" content="width=device-width, initial-scale=1">
@@ -13,7 +13,7 @@
 	
 	
 	<!-- ADDITIONAL LINKS, STYLES, AND SCRIPTS -->
-	<script type="text/javascript" src="../resources/js/ohms_law.js"></script>
+	<script type="text/javascript" src="../resources/js/resistor_atten.js"></script>
 	
 </head>
 
@@ -31,10 +31,11 @@
 	<section class="card" id="calc">
 		
 		<!-- TITLE AND SHORT DESCRIPTION -->
-		<h2 style="margin:0">Ohms Law Calculator</h2>
+		<h2 style="margin:0">Resistor Attenuator Calculator</h2>
 		<a href="#info" style="font-size:0.95em; font-weight:bold;">&#x2B17; Further Information</a><br>
 		<p>
-			Given two of the four inputs are provided, this calculator will solve for the remaining values.
+			Calculates resistor values for different attenuator topologies to achieve a desired level of attenuation. 
+			Supports PI attenuators, Tee attenuators, and Bridged Tee attenuators.
 		</p>
 		
 		<!-- METRIC INPUT NOTE -->
@@ -45,49 +46,57 @@
 		<!-- CALCULATOR INPUT TABLE FORM -->
 		<form name="inputform" onkeydown="return event.key != 'Enter';">
 		<div class="formwrapper">
-    
+		
+		
 			<div class="inputcontainer">
-				
+			
 				<!-- TEXT INPUT -->
 				<div class="inputfield">
-					<span class="inputname">Potential</span>
+					<span class="inputname">Attenuation</span>
 					<div class="inputbox">
-						<input type="text" id="volt" placeholder="Enter Value" onkeyup="ohms_law_v()">
-						<label for="volt">V<span style="color:#A00;">*</span></label>
+						<input type="text" id="atten" placeholder="Enter Value">
+						<label for="atten">dB</label>
 					</div>
 				</div>
 				
 				<!-- TEXT INPUT -->
 				<div class="inputfield">
-					<span class="inputname">Current</span>
+					<span class="inputname">Impedance (Z<sub>o</sub>)</span>
 					<div class="inputbox">
-						<input type="text" id="amp" placeholder="Enter Value" onkeyup="ohms_law_i()">
-						<label for="amp">A<span style="color:#A00;">*</span></label>
+						<input type="text" id="impedance" placeholder="Enter Value" Value="50">
+						<label for="impedance">&Omega;<span style="color:#A00;">*</span></label>
 					</div>
 				</div>
-				
-				<!-- TEXT INPUT -->
-				<div class="inputfield">
-					<span class="inputname">Resistance</span>
-					<div class="inputbox">
-						<input type="text" id="ohm" placeholder="Enter Value" onkeyup="ohms_law_r()">
-						<label for="ohm">&Omega;<span style="color:#A00;">*</span></label>
-					</div>
+								
+				<!-- CALCULATE & CLEAR BUTTONS -->
+				<div class="justified" style="margin: 0.8em 0;">
+					<input type="button" style="width:min(300px,75%);" onclick="r_attenuator()" id="calc_button" value="Calculate">
+					<input type="button" style="width:min(150px,25%)" onclick="this.form.reset()" value="Clear">
 				</div>
 				
-				<!-- TEXT INPUT -->
-				<div class="inputfield">
-					<span class="inputname">Power</span>
-					<div class="inputbox">
-						<input type="text" id="watt" placeholder="Enter Value" onkeyup="ohms_law_p()">
-						<label for="watt">W<span style="color:#A00;">*</span></label>
-					</div>
-				</div>
-				
+			</div>
+					
+			<div style="display: flex; flex-grow: 1; min-width: 0; margin:1.2em 0 0.6em 0; border-bottom: 1px solid #AAA;">
+				<span style="margin: auto 0.6em auto 0; font-weight: 700;">Results</span>
+			</div>
+			
+			<!-- OUTPUT TEXTFIELD -->
+			<div class="justified">
+				<textarea id="output" rows="5" readonly></textarea>
 			</div>
 			
 		</div>
 		</form>
+		
+		
+		<script type="text/javascript">
+			// Pressing enter anywhere on page will trigger the calculate button if it has the ID "calculate_button"
+			window.addEventListener( "keyup", (event) => {
+				if (event.key === "Enter") {
+					document.getElementById("calc_button").click() 
+				} 
+			} );
+		</script>
 		
 	</section>
 	
@@ -111,5 +120,5 @@
 	
 	</div>
 	
-	
-</body></html>
+</body>
+</html>

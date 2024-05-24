@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Etoolbox by Michael Bell</title>
-    
-  <!-- DEFAULT LINKS, STYLES, AND SCRIPTS -->
-	<meta name="etoolbox" charset="UTF-8" content="width=device-width, initial-scale=1">
-  
-	<link rel="icon" href="../resources/images/favicon.ico" />
+	<title>Etoolbox - Wire Gauge Calculator</title>
+	
+	<!-- DEFAULT LINKS, STYLES, AND SCRIPTS -->
+	<meta name="viewport" charset="UTF-8" content="width=device-width, initial-scale=1">
+	
+	<link rel="icon" href="../resources/images/favicon.ico">
 	<link rel="stylesheet" href="../resources/css/styles.css">
 	
 	<script type="text/javascript" src="../resources/js/functions.js"></script>
@@ -14,100 +14,123 @@
 	
 	<!-- ADDITIONAL LINKS, STYLES, AND SCRIPTS -->
 	<script type="text/javascript" src="../resources/js/wire_gauge.js"></script>
-    
+	
 </head>
 
 <body>
 	<div id="backdiv">
 	
 	<!-- HEADER -->
-	<div class="header" id="top">
-		<span class="title" style="font-size: 17px; font-weight: bold;">Michael's <span style="color:#EE0000">E</span>toolbox</span>
+	<header>
+		<span class="title">Michael's <span id="title_e" style="color:#E00" onclick="clrshft('title_e');">E</span>toolbox</span>
 		<a target="_top" href="../index.htm">Index</a>
-	</div>
+	</header>
 	
 	
 	<!-- CALCULATOR -->
-	<div class="card" id="calc">
+	<section class="card" id="calc">
 		
 		<!-- TITLE AND SHORT DESCRIPTION -->
 		<h2 style="margin:0">Wire Gauge Calculator</h2>
-		<a href="#info" style="font-size:0.95em; font-weight:bold;">&#x2B9E; Further Information</a><br>
+		<a href="#info" style="font-size:0.95em; font-weight:bold;">&#x2B17; Further Information</a><br>
 		<p>
-			Given Diameter, AWG, or CMIL input, calculate the output diameter, area, gauge, and cmils, and provide closest AWG values to calculated values.
+			Given one of the Wire Diameter, Area, AWG, or CMIL inputs, calculate all remaining values. 
+			Click the "Closest Standard AWG" button to find the nearest AWG to the current value.
 		</p>
+		
+		<br>
 		
 		<!-- CALCULATOR INPUT TABLE FORM -->
 		<form name="inputform" onkeydown="return event.key != 'Enter';">
-		<table class="intable">
+		<div class="formwrapper">
+    
+			<div class="inputcontainer">
+					
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">AWG</span>
+					<div class="inputbox">
+						<input type="text" id="awg" placeholder="Enter Value" onkeyup="f_awg()">
+						<label for="cmil">AWG</label>
+					</div>
+				</div>
 			
-			<!-- INPUT -->
-			<tr>
-				<td style="width:10%; text-align:right">
-					Input
-				</td>
-				<td style="width:20%">
-					<input type="text" id="input_value">
-				</td>
-				<td style="width:20%">
-					<select id="unit">
-						<option value="0">Diameter (mm)</option>
-						<option value="1">Diameter (inch)</option>
-						<option value="2">AWG</option>
-						<option value="3">CMIL</option>
-					</select>
-				</td>
-				<td style="width:30%; padding-left:24pt">
-					<input type="button" style="width:100%;" onclick="wire_gauge()" id="calc_button" value="Calculate">
-				</td>
-				<td>
-					<input type="button" style="width:80%" onclick="this.form.reset()" value="Clear">
-				</td>
-			</tr>
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Circular Mils</span>
+					<div class="inputbox">
+						<input type="text" id="cmil" placeholder="Enter Value" onkeyup="f_cmil()">
+						<label for="cmil">CMILS</label>
+					</div>
+				</div>
 			
-		</table>
-		
-		<br>
-		<span>Output</span>
-		<br>
-		
-		<div class="justified">
-			<textarea id="output" rows=4 readonly></textarea>
+			
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Diameter (mm)</span>
+					<div class="inputbox">
+						<input type="text" id="dmm" placeholder="Enter Value" onkeyup="f_dmm()">
+						<label for="dmm">mm</label>
+					</div>
+				</div>
+			
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Area (mm<sup>2</sup>)</span>
+					<div class="inputbox">
+						<input type="text" id="amm" placeholder="Enter Value" onkeyup="f_amm()">
+						<label for="amm">mm<sup>2</sup></label>
+					</div>
+				</div>
+			
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Diameter (in)</span>
+					<div class="inputbox">
+						<input type="text" id="din" placeholder="Enter Value" onkeyup="f_din()">
+						<label for="din">in</label>
+					</div>
+				</div>
+			
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Area (in<sup>2</sup>)</span>
+					<div class="inputbox">
+						<input type="text" id="ain" placeholder="Enter Value" onkeyup="f_ain()">
+						<label for="ain">in<sup>2</sup></label>
+					</div>
+				</div>
+			
+				<!-- CALCULATE & CLEAR BUTTONS -->
+				<div class="justified" style="margin-top: 0.8em;">
+					<input type="button" onclick="closestawg()" id="std_awg_button" value="Closest Standard AWG">
+				</div>
+				
+			</div>
 		</div>
-		
 		</form>
 		
-		
-		<script>
-			// Pressing enter anywhere on page will trigger the calculate button if it has the ID "calculate_button"
-			window.addEventListener( "keyup", (event) => {
-				if (event.key === "Enter") {
-					document.getElementById("calc_button").click() 
-				} 
-			} );
-		</script>
-		
-	</div>
+	</section>
 	
 	
 	<!-- CALCULATION INFO CARD -->
-	<div class="card" id="info">
+	<section class="card" id="info">
 		Info
 		<br>
-		<a href="#top" style="font-size:0.95em; font-weight:bold;">&#x2B9E; Top</a><br>
-	</div>
-	
+		<a href="#top" style="font-size:0.95em; font-weight:bold;">&#x2B17; Top</a><br>
+	</section>
 	
 	
 	<!-- FOOTER COPYRIGHT -->
-	<div class="footer">
-	<span style="font-size: 14px">Copyright &copy; <span id="year"></span> Michael Bell. All Rights Reserved.</span>
-	<script>
-		document.getElementById("year").innerHTML = new Date().getFullYear();
-	</script>
-	</div>
+	<footer>
+		<span style="font-size: 0.9em">Copyright © <span id="year">2024</span> Michael Bell. All Rights Reserved.</span>
+		<script>
+			document.getElementById("year").innerHTML = new Date().getFullYear();
+		</script>
+	</footer>
 	
 	</div>
+	
 </body>
 
 </html>

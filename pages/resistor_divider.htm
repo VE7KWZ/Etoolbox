@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Etoolbox - Resistor Divider Calculator</title>
+	
+	<!-- DEFAULT LINKS, STYLES, AND SCRIPTS -->
+	<meta name="viewport" charset="UTF-8" content="width=device-width, initial-scale=1">
+	
+	<link rel="icon" href="../resources/images/favicon.ico">
+	<link rel="stylesheet" href="../resources/css/styles.css">
+	
+	<script type="text/javascript" src="../resources/js/functions.js"></script>
+	
+	
+	<!-- ADDITIONAL LINKS, STYLES, AND SCRIPTS -->
+	<script type="text/javascript" src="../resources/js/res_divider.js"></script>
+	
+</head>
+
+<body>
+	<div id="backdiv">
+	
+	<!-- HEADER -->
+	<header>
+		<span class="title">Michael's <span id="title_e" style="color:#E00" onclick="clrshft('title_e');">E</span>toolbox</span>
+		<a target="_top" href="../index.htm">Index</a>
+	</header>
+	
+	
+	<!-- CALCULATOR -->
+	<section class="card" id="calc">
+		
+		<!-- TITLE AND SHORT DESCRIPTION -->
+		<h2 style="margin:0">Resistor Divider Calculator</h2>
+		<a href="#info" style="font-size:0.95em; font-weight:bold;">&#x2B17; Further Information</a><br>
+		<p>
+			Calculates resistors required to acqire listed tap voltages. Tap voltages are comma 
+			seperated, and have no limit on the number of taps.
+		</p>
+		
+		<!-- METRIC INPUT NOTE -->
+		<p style="color:#A00; margin: 2em 0 1em 0; font-size:0.85em; text-align:center">
+			[*] Metric SI unit prefixes such as p=pico, n=nano, u=micro, m=milli, k=kilo, M=mega are valid.
+		</p>
+		
+		<!-- CALCULATOR INPUT TABLE FORM -->
+		<form name="inputform" onkeydown="return event.key != 'Enter';">
+		<div class="formwrapper">
+    
+    
+      <div class="inputcontainer">
+      
+		    <!-- TEXT INPUT -->
+		    <div class="inputfield">
+		    	<span class="inputname">Positive Voltage</span>
+		    	<div class="inputbox">
+		    		<input type="text" id="vpos" placeholder="Enter Value">
+		    		<label for="vpos">V<span style="color:#A00;">*</span></label>
+		    	</div>
+		    </div>
+        
+			<!-- TEXT INPUT -->
+		    <div class="inputfield">
+		    	<span class="inputname">Negative Voltage</span>
+		    	<div class="inputbox">
+		    		<input type="text" id="vneg" placeholder="Enter Value" value="0">
+		    		<label for="vneg">V<span style="color:#A00;">*</span></label>
+		    	</div>
+		    </div>
+        
+			<!-- TEXT INPUT -->
+		    <div class="inputfield">
+		    	<span class="inputname">Tap Voltages</span>
+		    	<div class="inputbox">
+		    		<input type="text" id="vtap" placeholder="Enter CSV Values #,#,#">
+		    		<label for="vtap">V<span style="color:#A00;">*</span></label>
+		    	</div>
+		    </div>
+        
+			<!-- SELECT INPUT -->
+		    <div class="inputfield">
+		    	<span class="inputname">Resistor Tolerance</span>
+		    	<div class="inputbox">
+		    		<select name="select2" autocomplete="off" id="series">
+						<option value="3">E3 (40%)</option>
+						<option value="6">E6 (20%)</option>
+						<option value="12">E12 (10%)</option>
+						<option value="24">E24 (5%)</option>
+						<option value="48">E48 (2%)</option>
+						<option value="96" selected="selected">E96 (1%)</option>
+						<option value="192">E192 (&lt;0.5%)</option>
+					</select>
+		    	</div>
+		    </div>
+		    
+			<!-- TEXT INPUT -->
+		    <div class="inputfield">
+		    	<span class="inputname">Total Resistance</span>
+		    	<div class="inputbox">
+		    		<input type="text" id="rtot" placeholder="Enter Value" value="100000">
+		    		<label for="rtot">&Omega;<span style="color:#A00;">*</span></label>
+		    	</div>
+		    </div>
+        
+			<!-- CHECKBOX & RADIO BUTTON OPTIONS -->
+		    <div class="inputfield">
+		    	<span class="inputname">Options</span>
+		    	<div class="inputbox">
+					<label for="precision" style="text-align: left; margin: 0 0.3em">
+					Output Precision
+					<input type="number" id="precision" min=1 max=12 value=3 style="width:20%; border: 1px solid #AAA">
+					</label>
+		    	</div>
+		    </div>
+        
+			<!-- CALCULATE & CLEAR BUTTONS -->
+			<div class="justified" style="margin: 0.8em 0;">
+				<input type="button" style="width:min(300px,75%);" onclick="resistor_divider()" id="calc_button" value="Calculate">
+				<input type="button" style="width:min(150px,25%)" onclick="this.form.reset()" value="Clear">
+		    </div>
+        
+			</div>
+		  
+      
+			<div style="display: flex; flex-grow: 1; min-width: 0; margin:1.2em 0 0.6em 0; border-bottom: 1px solid #AAA;">
+			<span style="margin: auto 0.6em auto 0; font-weight: 700;">Results</span>
+			<span style="font-size:0.75em; color: #999; margin: auto 0 0 auto;" id="time">Time: 0.0ms</span>
+			</div>
+        
+			<!-- OUTPUT TEXTFIELD -->
+			<div class="justified">
+				<textarea id="output" rows="5" readonly></textarea>
+			</div>
+      
+		</div>
+		</form>
+		
+		
+		<script type="text/javascript">
+			// Pressing enter anywhere on page will trigger the calculate button if it has the ID "calculate_button"
+			window.addEventListener( "keyup", (event) => {
+				if (event.key === "Enter") {
+					document.getElementById("calc_button").click() 
+				} 
+			} );
+		</script>
+		
+	</section>
+	
+	
+	<!-- CALCULATION INFO CARD -->
+	<section class="card" id="info">
+		Info
+		<br>
+		<a href="#top" style="font-size:0.95em; font-weight:bold;">&#x2B17; Top</a><br>
+	</section>
+	
+	
+	
+	<!-- FOOTER COPYRIGHT -->
+	<footer>
+		<span style="font-size: 0.9em">Copyright © <span id="year">2024</span> Michael Bell. All Rights Reserved.</span>
+		<script>
+			document.getElementById("year").innerHTML = new Date().getFullYear();
+		</script>
+	</footer>
+	
+	</div>
+	
+</body></html>

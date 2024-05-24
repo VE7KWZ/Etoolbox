@@ -16,7 +16,8 @@ function divider_ratio (){
 	var ratio = document.getElementById("target_ratio").value;					// Target Ratio
 	var series = Number(document.getElementById("series").value);				// Tolerance
 	var num_outputs = Number(document.getElementById("num_outputs").value);		// Show More Combinations
-	var r2_value = fsi2num(document.getElementById("r2_value").value);			// Set R2 Value
+	var setr = Number(document.getElementById("set_r").value);					// Set 0:R2 or 1:R1 option
+	var setr_val = fsi2num(document.getElementById("setr_val").value);			// Set R2 Value
 	
 	if (ratio.includes("/")) {
 		indx = ratio.indexOf("/");
@@ -45,39 +46,49 @@ function divider_ratio (){
 	var mult = 100;	 // Base value multiplier
 	
 	// If R2 value provided, get base value and degree
-	if (!(r2_value == "" || r2_value == null)) {
-		var r2_degree = Math.floor(Math.log10(r2_value));
-		var r2_base = r2_value / (10**r2_degree);
-		mult = 10**r2_degree;
+	if (!(setr_val == "" || setr_val == null)) {
+		var setr_degree = Math.floor(Math.log10(setr_val));
+		var setr_base = setr_val / (10**setr_degree);
+		mult = 10**setr_degree;
 	}
 	
 	console.log([ratio, degree]);
-	console.log([r2_base, r2_degree, mult]);
+	console.log([setr_base, setr_degree, mult]);
 	
 	
 	var abs_max_err = 10;
 	var lengthset = 0;
 	var output = [];
 	
+	var xlen = E.length;
+	if (setr == 1 && !(setr_val == "" || setr_val == null))
+		xlen = 1;
+	
 	var ylen = E.length;
-	if (!(r2_value == "" || r2_value == null)) {
+	if (setr == 0 && !(setr_val == "" || setr_val == null))
 		ylen = 1;
-	}
+
 	
 	// Main Calculation
 	for (n = degree-2; n < degree+2; n++) {
-		for (x = 0; x < E.length; x++) {
+		for (x = 0; x < xlen; x++) {
+			
+			if (xlen == 1) {
+				Ex = setr_base;
+			} else {
+				Ex = E[x]*(10**n);
+			}
+			
 			for (y = 0; y < ylen; y++) {
 				
-				if (r2_value) {
-					Ey = r2_base;
+				if (ylen == 1) {
+					Ey = setr_base;
 				} else {
-					Ey = E[y];
+					Ey = E[y]*(10**n);
 				}
 				
 				switch (calc_type) {
 					case 0: // Divider
-						Ex = E[x]*(10**n);
 						rat = Ey / (Ex + Ey);
 						err = rerr(rat, ratio);
 						abs_err = Math.abs(err);
@@ -89,7 +100,6 @@ function divider_ratio (){
 						break;
 						
 					case 1:	// Ratio
-						Ex = E[x]*(10**n);
 						rat = Ex / Ey;
 						err = rerr(rat, ratio);
 						abs_err = Math.abs(err);

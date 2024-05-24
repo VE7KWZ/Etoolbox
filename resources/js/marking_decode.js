@@ -4,10 +4,6 @@
 function marking_decode() {
 	console.log("Component Marking Decoder");
 	
-	// Timer
-	console.time("Runtime");
-	startTime = performance.now();
-	
 	// Clear output box
 	document.getElementById("output").value = '';
 	
@@ -28,7 +24,6 @@ function marking_decode() {
 	// Declare Variables
 	var value; var type; var tolerance = "";
 	
-	console.log(slct);
 	
 	// Resistor or Capacitor code select
 	switch (slct) {
@@ -117,22 +112,18 @@ function marking_decode() {
 		
 	}
 	
-	console.log( [type, fnum2si(value), tolerance] );
+	var result = fnum2si(value,8,true);
 	
-	var result = fstring("Type:\t{1}\nValue:\t{2}", type, fnum2si(value));
+	if (slct == 0)
+		result += "\u03A9"; // omega
+	if (slct == 1)
+		result += "F";
 	
-	if (tolerance != "") {
-		result += fstring("\nTol:\t{1}", tolerance);
-	}
-	
-	// Number of rows for the output textarea
-	document.getElementById("output").rows = result.split(/\r\n|\r|\n/).length;
+	if (tolerance != "")
+		result += fstring(" ({1})", tolerance);
 	
 	// Print result
 	document.getElementById("output").value = result;
-	
-	// Calculation Time
-	console.timeEnd("Runtime");
-	document.getElementById("time").innerHTML = fstring("Time: {1}ms (approx)", fnum(performance.now()-startTime, 4));
+	document.getElementById("outputlabel").innerHTML = type;
 	
 }

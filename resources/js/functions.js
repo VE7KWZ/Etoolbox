@@ -1,10 +1,9 @@
 // Functions written by Michael Bell
-
-
 // ======================================================================================== MATH
 
 const sqrt3 = 1.73205080756888;	// Constant Sqrt(3)
 const sqrt2 = 1.41421356237310; // Constant Sqrt(2)
+const pi = 3.14159265358979;	// PI
 
 // Linear interpolation function
 function lerp (x,x0,x1,y0,y1) {
@@ -86,8 +85,6 @@ function closest_eseries(val_arb, series){
 	
 	return [val_out, err_out];
 }
-
-
 
 
 
@@ -242,6 +239,26 @@ function fsi2num_arr(arr) {
 	return arr;
 }
 
+// Convert numbers to engineering format
+function fnum2eng(val, round=8) {
+
+	// Seperate value and mantissa
+	// seperate by degrees of 3: ie 1, 1*10^3, 1*10^6, etc.
+	var expon = Math.floor(Math.floor(Math.log10(val))/3);
+	if (val == 0) { expon = 0; }
+	
+	// Calculate value with the degree of 3 taken into account
+	var val = fnum(val*(10**(-1*expon*3)),round);
+	
+	if (expon != 0) {
+		val += "E";
+		if (expon > 0) val += "+";
+		val += (expon*3);
+	}
+	
+	return val;
+}
+
 
 // Reduce floating point error creating large numbers by reducing precision to 8 decimal places
 // Removes padded/trailing zeros
@@ -329,4 +346,27 @@ function eseries (series) {
 			break;
 	}
 	
+}
+
+// Text color shuffle
+function clrshft(id_str) {
+	const toRGBArray = rgbStr => rgbStr.match(/\d+/g).map(Number);
+	//document.getElementById(id_str).setAttribute("onclick", "");
+	document.getElementById(id_str).setAttribute("onmouseout", "clrshft('" + id_str + "');");
+	document.getElementById(id_str).style.transition = "color 0.1s";
+	var clr = toRGBArray(document.getElementById(id_str).style.color);
+	
+	var tmp = clr[2];
+	clr[2] = clr[1];
+	clr[1] = clr[0];
+	clr[0] = tmp;
+	
+	if (clr[0] < 256) clr[0] = clr[0] + 16*(0.5+Math.random()*1.5);
+	if (clr[1] < 256) clr[1] = clr[1] + 16*(0.5+Math.random()*1.5);
+	if (clr[2] < 256) clr[2] = clr[2] + 16*(0.5+Math.random()*1.5);
+	if (clr[0] > 240) clr[0] = 32+64*(0.5+Math.random()*1.5);
+	if (clr[1] > 240) clr[1] = 32+64*(0.5+Math.random()*1.5);
+	if (clr[2] > 240) clr[2] = 32+64*(0.5+Math.random()*1.5);
+	
+	document.getElementById(id_str).style.color = "rgb("+ clr[0] + "," + clr[1] + "," + clr[2] + ")";
 }

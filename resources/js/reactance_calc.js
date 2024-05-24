@@ -1,49 +1,129 @@
-// **********************************************************************************************************
-// Reactance Calculator [reactance_calc.htm]
-// **********************************************************************************************************
+// functions.js required
 
-function reactance_calc () {
-	console.log("Reactance Calculator");
+const sig_figs = 3;
+
+function comp_chg() {
+	console.log("c");
+	// component changes
+	var component = document.getElementById("component").value;
+	var frequency = document.getElementById("frequency").value;
+	var reactance = document.getElementById("reactance").value;
 	
-	var component = Number(document.getElementById("component").value);		// Component Inductor/Capacitor
-	var comp_value = fsi2num(document.getElementById("comp_value").value);	// Component Value
-	var frequency = fsi2num(document.getElementById("frequency").value);		// Frequency
-	var reactance = fsi2num(document.getElementById("reactance").value);		// Component reactance
+	var comp = fsi2num(component);
+	var freq = fsi2num(frequency);
+	var reac = fsi2num(reactance);
 	
-	var opt = 0;
-	if (comp_value <= 0 && frequency <= 0 && reactance <= 0) { opt = 0; }
-	if (comp_value > 0 && frequency > 0 && reactance <= 0)   { opt = 1; } // Component and Frequency Provided
-	if (comp_value <= 0 && frequency > 0 && reactance > 0)   { opt = 2; } // Reactance and Frequency Provided
-	if (comp_value > 0 && frequency <= 0 && reactance > 0)   { opt = 3; } // Component and Reactance Provided
+	// Blank if box cleared
+	if (component == "") { document.getElementById("component").value = ""; return; }
 	
-	console.log([opt, component]);
-	
-	switch(opt) {
-		case 0:
-			// No Inputs
-			break;
-		case 1:
-			// Calculate Reactance
-			if (component == 0) { reactance = 1/(2*Math.PI*frequency*comp_value); }
-			if (component == 1) { reactance = 2*Math.PI*frequency*comp_value; }
-			
-			document.getElementById("reactance").value = fnum2si(reactance, 3);
-			break;
-		case 2:
-			// Calculate Component Value
-			if (component == 0) { comp_value = 1/(2*Math.PI*frequency*reactance); }
-			if (component == 1) { comp_value = reactance/(2*Math.PI*frequency); }
-			
-			document.getElementById("comp_value").value = fnum2si(comp_value, 3);
-			break;
-		case 3:
-			// Calculate Frequency
-			if (component == 0) { frequency = 1/(2*Math.PI*reactance*comp_value); }
-			if (component == 1) { frequency = reactance/(2*Math.PI*comp_value); }
-			
-			document.getElementById("frequency").value = fnum2si(frequency, 3);
-			break;
+	// Calculate Reactance (Component and Frequency Provided)
+	if (frequency != "" && document.getElementById("config0").checked) {	// frequency provided (capacitive)
+		document.getElementById("reactance").value = fnum2si(1/(2*pi*freq*comp), sig_figs); 
+		return; 
 	}
 	
+	if (frequency != "" && document.getElementById("config1").checked) {	// frequency provided (inductive)
+		document.getElementById("reactance").value = fnum2si(2*pi*freq*comp, sig_figs); 
+		return;
+	}
 	
+	// Calculate Frequency (Component and Reactance Provided)
+	if (reactance != "" && document.getElementById("config0").checked) {	// reactance provided (capacitive)
+		document.getElementById("frequency").value = fnum2si(1/(2*pi*reac*comp), sig_figs); 
+		return; 
+	}
+	
+	if (reactance != "" && document.getElementById("config1").checked) {	// reactance provided (inductive)
+		document.getElementById("frequency").value = fnum2si(reac/(2*pi*comp), sig_figs); 
+		return; 
+	}
+	
+}
+
+function freq_chg() {
+	console.log("f");
+	// frequency changes
+	var component = document.getElementById("component").value;
+	var frequency = document.getElementById("frequency").value;
+	var reactance = document.getElementById("reactance").value;
+	
+	var comp = fsi2num(component);
+	var freq = fsi2num(frequency);
+	var reac = fsi2num(reactance);
+	
+	// Blank if box cleared
+	if (frequency == "") { document.getElementById("frequency").value = ""; return; }
+	
+	// Calculate Reactance (Component and Frequency Provided)
+	if (component != "" && document.getElementById("config0").checked) {	// component provided (capacitive)
+		document.getElementById("reactance").value = fnum2si(1/(2*pi*freq*comp), sig_figs); 
+		return; 
+	}
+	
+	if (component != "" && document.getElementById("config1").checked) {	// component provided (inductive)
+		document.getElementById("reactance").value = fnum2si(2*pi*freq*comp, sig_figs); 
+		return;
+	}
+	
+	// Calculate Component (Frequency and Reactance Provided)
+	if (reactance != "" && document.getElementById("config0").checked) {	// reactance provided (capacitive)
+		document.getElementById("component").value = fnum2si(1/(2*pi*freq*reac), sig_figs); 
+		return; 
+	}
+	
+	if (reactance != "" && document.getElementById("config1").checked) {	// reactance provided (inductive)
+		document.getElementById("component").value = fnum2si(reac/(2*pi*freq), sig_figs); 
+		return; 
+	}
+	
+}
+
+function reac_chg() {
+	console.log("X");
+	// reactance changes
+	var component = document.getElementById("component").value;
+	var frequency = document.getElementById("frequency").value;
+	var reactance = document.getElementById("reactance").value;
+	
+	var comp = fsi2num(component);
+	var freq = fsi2num(frequency);
+	var reac = fsi2num(reactance);
+	
+	// Blank if box cleared
+	if (reactance == "") { document.getElementById("reactance").value = ""; return; }
+	
+	// Calculate Frequency (Reactance and Component Provided)
+	if (component != "" && document.getElementById("config0").checked) {	// component provided (capacitive)
+		document.getElementById("frequency").value = fnum2si(1/(2*pi*reac*comp), sig_figs); 
+		return; 
+	}
+	
+	if (component != "" && document.getElementById("config1").checked) {	// component provided (inductive)
+		document.getElementById("frequency").value = fnum2si(reac/(2*pi*comp), sig_figs); 
+		return;
+	}
+	
+	// Calculate Component (Frequency and Reactance Provided)
+	if (frequency != "" && document.getElementById("config0").checked) {	// frequency provided (capacitive)
+		document.getElementById("component").value = fnum2si(1/(2*pi*freq*reac), sig_figs); 
+		return; 
+	}
+	
+	if (frequency != "" && document.getElementById("config1").checked) {	// frequency provided (inductive)
+		document.getElementById("component").value = fnum2si(reac/(2*pi*freq), sig_figs); 
+		return; 
+	}
+	
+}
+
+function comp_slct() {
+	if (document.getElementById("config0").checked) {
+		document.getElementById("c_label").innerHTML = "Capacitance";
+		document.getElementById("c_unit").innerHTML = "F<span style='color:#A00;'>*</span>";
+	}
+	if (document.getElementById("config1").checked) {
+		document.getElementById("c_label").innerHTML = "Inductance";
+		document.getElementById("c_unit").innerHTML = "H<span style='color:#A00;'>*</span>";
+	}
+	comp_chg();
 }
