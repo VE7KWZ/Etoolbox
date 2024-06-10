@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Etoolbox - RC Time Constant Calculator</title>
+	
+	<!-- DEFAULT LINKS, STYLES, AND SCRIPTS -->
+	<meta name="viewport" charset="UTF-8" content="width=device-width, initial-scale=1">
+	
+	<link rel="icon" href="../resources/images/favicon.ico">
+	<link rel="stylesheet" href="../resources/css/styles.css">
+	
+	<script type="text/javascript" src="../resources/js/functions.js"></script>
+	
+	
+	<!-- ADDITIONAL LINKS, STYLES, AND SCRIPTS -->
+	<script type="text/javascript" src="../resources/js/rc_time_const.js"></script>
+	
+</head>
+
+<body>
+	<div id="backdiv">
+	
+	<!-- HEADER -->
+	<header>
+		<span class="title">Michael's <span id="title_e" style="color:#E00" onclick="clrshft('title_e');">E</span>toolbox</span>
+		<a target="_top" href="../index.htm">Index</a>
+	</header>
+	
+	
+	<!-- CALCULATOR -->
+	<section class="card" id="calc">
+		
+		<!-- TITLE AND SHORT DESCRIPTION -->
+		<h2 style="margin:0">RC Time Constant Calculator</h2>
+		<a href="#info" style="font-size:0.95em; font-weight:bold;">&#x2B17; Further Information</a><br>
+		<p>
+			Given two of three values, R, C, and the time constant, calculate the missing value. Additionally, 
+			if the time constant is provided, given two of three values input voltage, output voltage, and time to
+			reach output voltage, calculate the missing value.
+		</p>
+		
+		<!-- METRIC INPUT NOTE -->
+		<p style="color:#A00; margin: 2em 0 1em 0; font-size:0.85em; text-align:center">
+			[*] Metric SI unit prefixes such as p=pico, n=nano, u=micro, m=milli, k=kilo, M=mega are valid.
+		</p>
+		
+		<!-- CALCULATOR INPUT TABLE FORM -->
+		<form name="inputform">
+		<div class="formwrapper">
+    
+			<div class="inputcontainer">
+				
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Resistance</span>
+					<div class="inputbox">
+						<input type="text" id="res" placeholder="Enter Value" onkeyup="resistor();">
+						<label for="res">&Omega;<span style="color:#A00;">*</span></label>
+					</div>
+				</div>
+			
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Capacitance</span>
+					<div class="inputbox">
+						<input type="text" id="cap" placeholder="Enter Value" onkeyup="capacitor();">
+						<label for="icap">F<span style="color:#A00;">*</span></label>
+					</div>
+				</div>
+			
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">RC Time Constant</span>
+					<div class="inputbox">
+						<input type="text" id="tau" placeholder="Enter Value" onkeyup="time_const();" onchange="involt();">
+						<label for="tau">sec<span style="color:#A00;">*</span></label>
+					</div>
+				</div>
+			
+				<div style="display: flex; flex-grow: 1; min-width: 0; margin:1.2em 0; border-bottom: 1px solid #AAA;">
+				</div>
+			
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Input Voltage</span>
+					<div class="inputbox">
+						<input type="text" id="volt_in" placeholder="Enter Value" onkeyup="input_volt();">
+						<label for="volt_in">V<span style="color:#A00;">*</span></label>
+					</div>
+				</div>
+			
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Output Voltage</span>
+					<div class="inputbox">
+						<input type="text" id="volt_out" placeholder="Enter Value" onkeyup="output_volt();">
+						<label for="volt_out">V<span style="color:#A00;">*</span></label>
+					</div>
+				</div>
+			
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Time to Out Voltage</span>
+					<div class="inputbox">
+						<input type="text" id="t_vo" placeholder="Enter Value" onkeyup="charge_time();">
+						<label for="t_vo">sec<span style="color:#A00;">*</span></label>
+					</div>
+				</div>
+				
+			</div>
+      
+		</div>
+		</form>
+		
+	</section>
+	
+	
+	<!-- CALCULATION INFO CARD -->
+	<section class="card" id="info">
+		Info
+		<br>
+		<a href="#top" style="font-size:0.95em; font-weight:bold;">&#x2B17; Top</a><br>
+	</section>
+	
+	
+	
+	<!-- FOOTER COPYRIGHT -->
+	<footer>
+		<span style="font-size: 0.9em">Copyright © <span id="year">2024</span> Michael Bell. All Rights Reserved.</span>
+		<script>
+			document.getElementById("year").innerHTML = new Date().getFullYear();
+		</script>
+	</footer>
+	
+	</div>
+	
+</body>
+</html>

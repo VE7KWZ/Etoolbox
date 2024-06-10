@@ -26,7 +26,6 @@ function divider_ratio (){
 		ratio = Number(ratio);
 	}
 	
-	
 	var E = eseries(series);
 	
 	// Invert ratio if greater than 1
@@ -84,7 +83,11 @@ function divider_ratio (){
 				if (ylen == 1) {
 					Ey = setr_base;
 				} else {
-					Ey = E[y]*(10**n);
+					if (setr_val > 0) {
+						Ey = E[y]*(10**n);
+					} else {
+						Ey = E[y];
+					}
 				}
 				
 				switch (calc_type) {

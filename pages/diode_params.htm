@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Etoolbox - Diode Parameter Solver</title>
+	
+	<!-- DEFAULT LINKS, STYLES, AND SCRIPTS -->
+	<meta name="viewport" charset="UTF-8" content="width=device-width, initial-scale=1">
+	
+	<link rel="icon" href="../resources/images/favicon.ico">
+	<link rel="stylesheet" href="../resources/css/styles.css">
+	
+	<script type="text/javascript" src="../resources/js/functions.js"></script>
+	
+	
+	<!-- ADDITIONAL LINKS, STYLES, AND SCRIPTS -->
+	<script type="text/javascript" src="../resources/js/diode_params.js"></script>
+	
+</head>
+
+<body>
+	<div id="backdiv">
+	
+	<!-- HEADER -->
+	<header>
+		<span class="title">Michael's <span id="title_e" style="color:#E00" onclick="clrshft('title_e');">E</span>toolbox</span>
+		<a target="_top" href="../index.htm">Index</a>
+	</header>
+	
+	
+	<!-- CALCULATOR -->
+	<section class="card" id="calc">
+		
+		<!-- TITLE AND SHORT DESCRIPTION -->
+		<h2 style="margin:0">Diode Parameter Solver</h2>
+		<a href="#info" style="font-size:0.95em; font-weight:bold;">&#x2B17; Further Information</a><br>
+		<p>
+			Provided 3 or more points from a diodes V-I Characteristic curve, solves for the Emission coefficient, 
+			Saturation Current, and Ohmic Resistance of the Shockley model for a diode. This is primarily used as a
+			way to find the parameters needed in a spice model of a diode. Note: The more V-I points, the more accurate
+			the results. To acquire points from a V-I plot, the site 
+			<a style="text-decoration: underline;" href="https://apps.automeris.io/wpd4/">WebPlotDigitizer</a>
+			may be useful.
+		</p>
+		
+		<!-- CALCULATOR INPUT TABLE FORM -->
+		<form name="inputform" onkeydown="enter_dsbl();">
+		<div class="formwrapper">
+    
+			<div class="inputcontainer">
+				
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Ambient Temp. (TA)</span>
+					<div class="inputbox">
+						<input type="text" id="amb_temp" placeholder="Ambient Temperature" value="25">
+						<label for="amb_temp">&deg;C</label>
+					</div>
+				</div>
+				
+				<!-- TEXTAREA INPUT -->
+				<div class="inputfield">
+					<span class="inputname">V-I Curve Points</span>
+					<div class="inputbox">
+						<textarea id="vi_points" style="resize: none;" rows=5 placeholder="Voltage, Current&#10;&#10;One set of V-I points per line"></textarea>
+					</div>
+				</div>
+				
+				<!-- CALCULATE & CLEAR BUTTONS -->
+				<div class="justified" style="margin: 0.8em 0;">
+					<input type="button" style="width:min(300px,75%); margin-left: 0;" onclick="diode_params()" id="calc_button" value="Calculate">
+					<input type="button" style="width:min(150px,25%); margin-right: 0;" onclick="this.form.reset()" value="Clear">
+				</div>
+				
+			</div>
+		  
+      
+			<div style="display: flex; flex-grow: 1; min-width: 0; margin:1.2em 0 0.6em 0; border-bottom: 1px solid #AAA;">
+				<span style="margin: auto 0.6em auto 0; font-weight: 700;">Results</span>
+				<span style="font-size:0.75em; color: #999; margin: auto 0 0 auto;" id="time">Time: 0.0ms</span>
+			</div>
+
+			<!-- OUTPUT TEXTFIELD -->
+			<div class="justified">
+				<textarea id="output" rows="6" readonly></textarea>
+			</div>
+      
+		</div>
+		</form>
+		
+		
+		<script type="text/javascript">
+			function enter_dsbl(){
+				if (document.activeElement.id == 'vi_points') return; else return event.key != 'Enter';
+			}
+		
+			// Pressing enter anywhere on page will trigger the calculate button if it has the ID "calculate_button"
+			window.addEventListener( "keyup", (event) => {
+				if (event.key === "Enter" && document.activeElement.id != 'vi_points') {
+					document.getElementById("calc_button").click();
+				} 
+			} );
+		</script>
+		
+	</section>
+	
+	
+	<!-- CALCULATION INFO CARD -->
+	<section class="card" id="info">
+		<a style="text-decoration: underline;" href="https://ltwiki.org/LTspiceHelp/LTspiceHelp/D_Diode.htm">LTwiki D.Diode</a>
+		<br>
+		<a href="#top" style="font-size:0.95em; font-weight:bold;">&#x2B17; Top</a><br>
+	</section>
+	
+	
+	
+	<!-- FOOTER COPYRIGHT -->
+	<footer>
+		<span style="font-size: 0.9em">Copyright © <span id="year">2024</span> Michael Bell. All Rights Reserved.</span>
+		<script>
+			document.getElementById("year").innerHTML = new Date().getFullYear();
+		</script>
+	</footer>
+	
+	</div>
+	
+</body>
+</html>

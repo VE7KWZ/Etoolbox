@@ -154,6 +154,7 @@ header a:active {
 
 .inputbox textarea {
 	border: 1px solid rgba(0, 0, 0, 0);
+	margin: 0;
 }
 
 .inputbox input[type="button"] {
