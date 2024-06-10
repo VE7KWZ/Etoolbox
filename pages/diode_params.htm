@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="../resources/css/styles.css">
 	
 	<script type="text/javascript" src="../resources/js/functions.js"></script>
+	<script type="text/javascript" src="../resources/js/chart.js"></script>
 	
 	
 	<!-- ADDITIONAL LINKS, STYLES, AND SCRIPTS -->
@@ -17,7 +18,7 @@
 	
 </head>
 
-<body>
+<body onload="init_chart();">
 	<div id="backdiv">
 	
 	<!-- HEADER -->
@@ -52,7 +53,7 @@
 				<div class="inputfield">
 					<span class="inputname">Ambient Temp. (TA)</span>
 					<div class="inputbox">
-						<input type="text" id="amb_temp" placeholder="Ambient Temperature" value="25">
+						<input type="text" inputmode="decimal" id="amb_temp" placeholder="Ambient Temperature" value="25">
 						<label for="amb_temp">&deg;C</label>
 					</div>
 				</div>
@@ -61,7 +62,7 @@
 				<div class="inputfield">
 					<span class="inputname">V-I Curve Points</span>
 					<div class="inputbox">
-						<textarea id="vi_points" style="resize: none;" rows=5 placeholder="Voltage, Current&#10;&#10;One set of V-I points per line"></textarea>
+						<textarea id="vi_points" inputmode="decimal" style="resize: none;" rows=5 placeholder="Voltage, Current&#10;&#10;One set of V-I points per line"></textarea>
 					</div>
 				</div>
 				
@@ -78,11 +79,13 @@
 				<span style="margin: auto 0.6em auto 0; font-weight: 700;">Results</span>
 				<span style="font-size:0.75em; color: #999; margin: auto 0 0 auto;" id="time">Time: 0.0ms</span>
 			</div>
-
+			
 			<!-- OUTPUT TEXTFIELD -->
 			<div class="justified">
-				<textarea id="output" rows="6" readonly></textarea>
+				<textarea id="output" rows="3" readonly></textarea>
 			</div>
+			
+			<canvas id="iv_chart" height="300" width="400" style="display:block; box-sizing:border-box; height:auto; width:100%; margin-top: 1.2em; padding: 0;"></canvas>
       
 		</div>
 		</form>

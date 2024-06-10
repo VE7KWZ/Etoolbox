@@ -1,19 +1,27 @@
 
-//	https://helloworld922.blogspot.com/2014/11/experimenting-with-diodes-and-non.html
-//	https://electronics.stackexchange.com/questions/559667/how-to-determine-the-ideality-factor-n-of-a-diode-from-the-datasheet
-//	https://github.com/wuyongzheng/wuyongzheng.github.com/tree/master/diode-fitting
-//	http://utkstair.org/clausius/docs/mse301/pdf/intronumericalrecipes_v01_chapter05_rootfindsys.pdf
-//	https://www.researchgate.net/profile/Rachid-Masrour/publication/290506513_Two_methods_for_extracting_the_parameters_of_a_non-ideal_diode/links/56a166ef08ae27f7de266b7f/Two-methods-for-extracting-the-parameters-of-a-non-ideal-diode.pdf
-//	https://www.allaboutcircuits.com/textbook/semiconductors/chpt-3/spice-models/
-//	https://en.wikipedia.org/wiki/Newton%27s_method#:~:text=In%20numerical%20analysis%2C%20Newton%27s%20method,of%20a%20real%2Dvalued%20function.
-//	https://electronics.stackexchange.com/questions/559667/how-to-determine-the-ideality-factor-n-of-a-diode-from-the-datasheet
+// Test Cases
 
-// inspiration from:
-// https://wuyongzheng.github.io/diode-fitting/diode-fitting.html
+// Test 1 v,i
+//	0.552, 200e-6
+//	0.842, 20e-3
+//	1.158, 200e-3
+// Result N,IS,RS
+//	2.282820621434911, 1.6412831075974897e-8, 1.0052772539099295
 
+// Test 2 v,i
+//	1.59214e-1, 1.00000e-4
+//	2.18182e-1, 9.66217e-4
+//	2.81572e-1,9.02036e-3
+//	3.71499e-1,	1.05290e-1 
+//	5.80835e-1,1.10860e+0
+//	8.37346e-1, 1.14736e+1
+//	9.67076e-1,2.28144e+1
+// Result N,IS,RS
+//	1.7219148039949106, 0.000007030363990270337, 0.01427631406519347
 
 
 // requires functions.js
+// requires chart.js
 
 const sig_figs = 4;
 
@@ -43,8 +51,9 @@ function diode_params(){
 	
 	var v = []; var i = [];
 	for (k = 0; k < vi_points.length; k++) {
-		v[k] = Number(vi_points[k].split(",")[0]);
-		i[k] = Number(vi_points[k].split(",")[1]);
+		vi_points[k] = vi_points[k].split(",");
+		v[k] = Number(vi_points[k][0]);
+		i[k] = Number(vi_points[k][1]);
 	}
 	
 	//console.log(v);
@@ -64,8 +73,8 @@ function diode_params(){
 	
 	result = "";
 	result += fstring(" N =\t{1}\nIS =\t{2}\nRS =\t{3}",fnum2si(NIsRs[0],sig_figs), fnum2si(NIsRs[1],sig_figs), fnum2si(NIsRs[2],sig_figs));
-	result += fstring("\n\nSpice Model:\n.MODEL diodeName D(IS={1} RS={2} N={3})",
-						fnum2eng(NIsRs[1],sig_figs), fnum2eng(NIsRs[2],sig_figs), fnum2eng(NIsRs[0],sig_figs));
+	result += fstring("\n\nSpice Model:\n.MODEL diodeName D(IS={1} RS={2} N={3} TNOM={4})",
+						fnum2eng(NIsRs[1],sig_figs), fnum2eng(NIsRs[2],sig_figs), fnum2eng(NIsRs[0],sig_figs), TA);
 	
 	// Number of rows for output
 	document.getElementById("output").rows = result.split(/\r\n|\r|\n/).length;
@@ -76,28 +85,92 @@ function diode_params(){
 	// Calculation Time
 	console.timeEnd("Runtime");
 	document.getElementById("time").innerHTML = fstring("Time: {1}ms (approx)", fnum(performance.now()-startTime, 4));
+	
+	
+	
+	// Plotting data
+	var input_data = [];
+	
+	vi_points = vi_points.sort(function(a, b) {return a[0] - b[0];}); // Sort array based on first elements (1st column)
+	// x=voltage, y=current
+	for (i = 0; i < vi_points.length; ++i) {
+			input_data[i] = {x:vi_points[i][0], y:vi_points[i][1]};
+	}
+	
+	var shockley_data = [];
+	
+	function shockley(xi, P){
+		return P[0]*VT*Math.log((xi/P[1])+1)+P[2]*xi;
+	}
+	
+	var y_min = Math.floor(Math.log10(vi_points[0][1]));
+	var y_max = Math.ceil(Math.log10(vi_points[vi_points.length-1][1]));
+	var n = 5;
+	var r = 1/n;
+	
+	for (i = 0; i <= n*Math.abs(y_max-y_min); ++i) {
+		var y = 10**(y_min + i*r);
+		shockley_data[i] = {x:shockley(y,NIsRs), y:y};
+	}
+	
+	iv_chart.options.scales.y.type = 'logarithmic';
+	//iv_chart.options.scales.y.type = 'linear';
+	iv_chart.data.datasets[0].data = input_data;
+	iv_chart.data.datasets[1].data = shockley_data;
+	iv_chart.update();
 
 }
 
-// Test Cases
+////////////////////////////////////////////////////////////////////////
+// Plot Result with Chart.js
 
-// Test 1 v,i
-//	0.552, 200e-6
-//	0.842, 20e-3
-//	1.158, 200e-3
-// Result N,IS,RS
-//	2.282820621434911, 1.6412831075974897e-8, 1.0052772539099295
-
-// Test 2 v,i
-//	1.59214e-1, 1.00000e-4
-//	2.18182e-1, 9.66217e-4
-//	2.81572e-1,9.02036e-3
-//	3.71499e-1,	1.05290e-1 
-//	5.80835e-1,1.10860e+0
-//	8.37346e-1, 1.14736e+1
-//	9.67076e-1,2.28144e+1
-// Result N,IS,RS
-//	1.7219148039949106, 0.000007030363990270337, 0.01427631406519347
+var iv_chart = null
+function init_chart() {
+	const ctx = document.getElementById('iv_chart');
+	iv_chart = new Chart(ctx, {
+			type: "scatter",
+			data: {
+				datasets: [
+					{
+						data: {},
+						label: 'Input Data',
+						showLine: false,
+						fill: false,
+						borderColor: 'rgb(208,0,0)',
+						backgroundColor: 'rgba(208,0,0,0.5)'
+					},
+					{
+						data: {},
+						label: 'Shockley Model',
+						showLine: true,
+						pointRadius: 1,
+						hoverRadius: 5,
+						fill: false,
+						borderColor: 'rgb(64,64,64)',
+						borderWidth: 1,
+					}
+				]
+			},
+			options: {
+				responsive: true,
+				scales: {
+					x: {
+						title: {
+						display: true,
+						text: 'Forward Voltage [V]'
+						}
+					},
+					y: {
+					type: 'logarithmic',
+						title: {
+						display: true,
+						text: 'Forward Current [A]'
+						}
+					}
+				}
+			}
+	});
+}
 
 
 ////////////////////////////////////////////////////////////////////////
@@ -152,6 +225,22 @@ fminsearch=function(fun,Parm0,x,y,Opt){ // fun = function(x,Parm)
 	}
 	return P0
 }
-	
+
+
+////////////////////////////////////////////////////////////////////////
+//	Resources
+//
+//	https://helloworld922.blogspot.com/2014/11/experimenting-with-diodes-and-non.html
+//	https://electronics.stackexchange.com/questions/559667/how-to-determine-the-ideality-factor-n-of-a-diode-from-the-datasheet
+//	https://github.com/wuyongzheng/wuyongzheng.github.com/tree/master/diode-fitting
+//	http://utkstair.org/clausius/docs/mse301/pdf/intronumericalrecipes_v01_chapter05_rootfindsys.pdf
+//	https://www.researchgate.net/profile/Rachid-Masrour/publication/290506513_Two_methods_for_extracting_the_parameters_of_a_non-ideal_diode/links/56a166ef08ae27f7de266b7f/Two-methods-for-extracting-the-parameters-of-a-non-ideal-diode.pdf
+//	https://www.allaboutcircuits.com/textbook/semiconductors/chpt-3/spice-models/
+//	https://en.wikipedia.org/wiki/Newton%27s_method#:~:text=In%20numerical%20analysis%2C%20Newton%27s%20method,of%20a%20real%2Dvalued%20function.
+//	https://electronics.stackexchange.com/questions/559667/how-to-determine-the-ideality-factor-n-of-a-diode-from-the-datasheet
+
+// inspiration from:
+// https://wuyongzheng.github.io/diode-fitting/diode-fitting.html
+
 
 
