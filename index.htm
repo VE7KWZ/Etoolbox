@@ -45,7 +45,6 @@
 			background-color: #EDD;
 		}
 		
-		
 		.section_title {
 			display: block;
 			box-sizing: border-box;
@@ -56,10 +55,10 @@
 		}
     
 		#sections {
-			width:100%;
+			width: 100%;
 			float: left;
 			display: grid;
-			grid-template-columns: repeat(5, 1fr);
+			grid-template-columns: repeat(auto-fit, 20%);
 			justify-content: center;
 			overflow: none;
 			margin: 15px 0 20px 0;
@@ -143,12 +142,13 @@
 		<h2 style="margin:0; text-align:center;">Index</h2>
 		
 		<!-- NAVIGATION -->
-		<div id="sections">
-			<a href="#components">Components</a>
-			<a href="#analog">Analog</a>
-			<a href="#spice">Spice</a>
-			<a href="#other">Other</a>
-			<a href="#miscellaneous">Miscellaneous</a>
+		<div class="justified">
+			<div id="sections">
+				<a href="#components">Components</a>
+				<a href="#analog">Analog</a>
+				<a href="#other">Other</a>
+				<a href="#miscellaneous">Miscellaneous</a>
+			</div>
 		</div>
 		
 		<!-- INDEX COLUMNS -->
@@ -162,6 +162,7 @@
 				<a target="_top" href="./pages/marking_decode.htm">Marking Decoder</a>
 				<a target="_top" href="./pages/divider_calculator.htm">Resistor Ratio Solver</a>
 				<a target="_top" href="./pages/wye_delta_network.htm">Delta-Wye Resistor Networks</a>
+				<a target="_top" href="./pages/diode_params.htm">Diode Parameter Solver</a>
 				
 			</div>
 			<div class="index_column">
@@ -177,12 +178,6 @@
 				<a target="_top" href="./pages/resistor_atten.htm">Resistor Attenuator Calculator</a>
 				<a target="_top" href="./pages/frequency_wavelength.htm">Wavelength Conversion</a>
 				<a target="_top" href="./pages/skin_depth.htm">Skin Depth Calculator</a>
-				
-			</div>
-			<div class="index_column">
-				<h4 id="spice" class="section_title">Spice</h4>
-				
-				<a target="_top" href="./pages/diode_params.htm">Diode Parameter Solver</a>
 				
 			</div>
 			<div class="index_column">

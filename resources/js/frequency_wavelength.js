@@ -23,26 +23,26 @@ function freq_wave() {
 	if (wfact === 2) wf = 0.25;
 	
 	// cant have vf of 0
-	if (vf == 0) vf = 1;
-	
-	if (vf > 0 && vel == "") {
-		nvel = c*vf;
-		vel = nvel;
-		document.getElementById("velocity").value = fnum(nvel, sig_figs);
-		document.getElementById("velo_f").value = "";
-	}
+	if (vf <= 0) vf = 1;
 	
 	var slct = 0;
 	if ((wl != "" && nwl >= 0) && (vel != "" && nvel >= 0)) slct = 3;
 	if ((freq != "" && nfreq >= 0) && (wl != "" && nwl >= 0)) slct = 2;
 	if ((freq != "" && nfreq >= 0) && (vel != "" && nvel >= 0)) slct = 1;
 	
+	if (vf < 1 && vel == "") {
+		nvel = c*vf;
+		vel = nvel;
+		document.getElementById("velocity").value = fnum(nvel, sig_figs);
+		document.getElementById("velo_f").value = "";
+	}
+	
 	switch (slct) {
 		case 1:	// solve for wavelength (freq + vel --> wl)
 			document.getElementById("wavelength").value = fnum2si((nvel*vf*wf)/nfreq, sig_figs);
 			break;
 		case 2: // solve for velocity (freq + wl --> vel)
-			document.getElementById("velocity").value = (nfreq*nwl*wf)/vf;
+			document.getElementById("velocity").value = fnum((nfreq*nwl*wf)/vf, sig_figs);
 			break;
 		case 3: // Solve for frequency (vel + wl --> freq)
 			document.getElementById("frequency").value = fnum2si((nvel*vf)/(nwl*wf), sig_figs);
@@ -62,6 +62,5 @@ function v_factor() {
 	if (vf === 0) vf = 1; 
 	
 	document.getElementById("velocity").value = fnum(v, sig_figs);
-	document.getElementById("velo_f").value = vf;
-	
+	document.getElementById("velo_f").value = fnum(vf, sig_figs+2);
 }

@@ -19,8 +19,8 @@ function f_inch() {
 	// inch to meters and feet
 	var inch = Number(document.getElementById("inch").value);
 	
-	var m = inch*0.0254;
-	var ft = inch*12;
+	var m = inch/39.37;
+	var ft = inch/12;
 	
 	document.getElementById("meter").value = fnum2si(m, sig_figs);
 	document.getElementById("feet").value = fnum(ft, sig_figs);
@@ -31,7 +31,7 @@ function f_feet() {
 	// feet to meters and inches
 	var ft = Number(document.getElementById("feet").value);
 	
-	var m = ft*12*0.0254;
+	var m = ft/(12*0.0254);
 	var inch = ft/12;
 	
 	document.getElementById("meter").value = fnum2si(m, sig_figs);

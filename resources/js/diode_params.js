@@ -73,8 +73,11 @@ function diode_params(){
 	
 	result = "";
 	result += fstring(" N =\t{1}\nIS =\t{2}\nRS =\t{3}",fnum2si(NIsRs[0],sig_figs), fnum2si(NIsRs[1],sig_figs), fnum2si(NIsRs[2],sig_figs));
-	result += fstring("\n\nSpice Model:\n.MODEL diodeName D(IS={1} RS={2} N={3} TNOM={4})",
-						fnum2eng(NIsRs[1],sig_figs), fnum2eng(NIsRs[2],sig_figs), fnum2eng(NIsRs[0],sig_figs), TA);
+	
+	document.getElementById("spice_line").value = fstring(".MODEL diodeName D(IS={1} RS={2} N={3} TNOM={4})",
+														fnum2eng(NIsRs[1],sig_figs), 
+														fnum2eng(NIsRs[2],sig_figs), 
+														fnum2eng(NIsRs[0],sig_figs), TA);
 	
 	// Number of rows for output
 	document.getElementById("output").rows = result.split(/\r\n|\r|\n/).length;
