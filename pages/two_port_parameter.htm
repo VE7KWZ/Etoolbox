@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Etoolbox - Site Template</title>
+	
+	<!-- DEFAULT LINKS, STYLES, AND SCRIPTS -->
+	<meta name="viewport" charset="UTF-8" content="width=device-width, initial-scale=1">
+	
+	<link rel="icon" href="../resources/images/favicon.ico">
+	<link rel="stylesheet" href="../resources/css/styles.css">
+	
+	<script type="text/javascript" src="../resources/js/functions.js"></script>
+	<script type="text/javascript" src="../resources/js/math.js"></script>
+	
+	<!-- ADDITIONAL LINKS, STYLES, AND SCRIPTS -->
+	<script type="text/javascript" src="../resources/js/two_port_parameter.js"></script>
+	
+</head>
+
+<body>
+	<div id="backdiv">
+	
+	<!-- HEADER -->
+	<header>
+		<span class="title">Michael's <span id="title_e" style="color:#E00" onclick="clrshft('title_e');">E</span>toolbox</span>
+		<a target="_top" href="../index.htm">Index</a>
+	</header>
+	
+	
+	<!-- CALCULATOR -->
+	<section class="card" id="calc">
+		
+		<!-- TITLE AND SHORT DESCRIPTION -->
+		<h2 style="margin:0">Two Port Parameter Conversions</h2>
+		<a href="#info" style="font-size:0.95em; font-weight:bold;">&#x2B17; Further Information</a><br>
+		<p>
+			Convert any one two port parameter into others. This converter includes S (scattering), Y (admittance), 
+			h (hybrid), ABCD (chain), T (chain scattering/transfer) parameters.
+		</p>
+		
+		<!-- COMPLEX NOTE -->
+		<p style="color:#00A; margin:0.5em 0 1.5em 0; font-size:0.85em; text-align:center">
+			[+] Rectangular Complex Notation <strong>R &plusmn; Xj</strong> is required. Entering only the real and imaginary value is accepted, ex. <strong>R</strong> or <strong>Xj</strong>.
+		</p>
+		
+		<!-- CALCULATOR INPUT TABLE FORM -->
+		<form name="inputform" onkeydown="return event.key != 'Enter';">
+		<div class="formwrapper">
+		
+			<div class="inputcontainer">
+				
+				<!-- SELECT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Input Parameters</span>
+					<div class="inputbox">
+						<select autocomplete="off" id="param" onchange="label_chg();">
+							<option value="0" selected="selected">S (scattering)</option>
+							<option value="1">Y (admittance)</option>
+							<option value="2">Z (impedance)</option>
+							<option value="3">h (hybrid)</option>
+							<option value="4">ABCD (chain)</option>
+							<option value="5">T (chain scattering/transfer)</option>
+						</select>
+					</div>
+				</div>
+				
+				<div style="display: flex; flex-grow: 1; min-width: 0; margin:0.6em 0; border-bottom: 1px solid #AAA;"></div>
+				<!-- TEXT INPUT style="white-space: nowrap;" -->
+				<div class="inputfield" style="margin-bottom: 0.25em;">
+					<span class="inputname" style="width:100%">Complex Impedance</span>
+					<div class="inputbox">
+						<label for="z1" style="margin:0 0.2em; font-size:0.8em;">Z1<span style="color:#00A;"><sup>+</sup></span></label>
+						<input type="text" id="z1" placeholder="Input Impedance">
+						<label for="z1">&Omega;</label>
+					</div>
+					<div class="inputbox">
+						<label for="z2" style="margin:0 0.2em; font-size:0.8em;">Z2<span style="color:#00A;"><sup>+</sup></span></label>
+						<input type="text" id="z2" placeholder="Output Impedance">
+						<label for="z2">&Omega;</label>
+					</div>
+				</div>
+				
+				<!-- TEXT INPUT -->
+				<div class="inputfield" style="margin-top: 0.25em;">
+					<span class="inputname"></span>
+					
+				</div>
+				
+				<div style="display: flex; flex-grow: 1; min-width: 0; margin:0.6em 0; border-bottom: 1px solid #AAA;"></div>
+				
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname" style="width:100%">Matrix Inputs</span>
+					<div class="inputbox">
+					<label for="mat11" id="m11" style="margin:0 0.2em; font-size:0.8em;">S<sub>1,1</sub><span style="color:#00A;"><sup>+</sup></span></label>
+						<input type="text" id="mat11" placeholder="Enter Value">
+					</div>
+					<div class="inputbox">
+						<label for="mat12" id="m12" style="margin:0 0.2em; font-size:0.8em;">S<sub>1,2</sub><span style="color:#00A;"><sup>+</sup></span></label>
+						<input type="text" id="mat12" placeholder="Enter Value">
+					</div>
+					<div class="inputbox">
+						<label for="mat21" id="m21" style="margin:0 0.2em; font-size:0.8em;">S<sub>2,1</sub><span style="color:#00A;"><sup>+</sup></span></label>
+						<input type="text" id="mat21" placeholder="Enter Value">
+					</div>
+					<div class="inputbox">
+						<label for="mat22" id="m22" style="margin:0 0.2em; font-size:0.8em;">S<sub>2,2</sub><span style="color:#00A;"><sup>+</sup></span></label>
+						<input type="text" id="mat22" placeholder="Enter Value">
+					</div>
+				</div>
+				
+				
+				<!-- CALCULATE & CLEAR BUTTONS -->
+				<div class="justified" style="margin: 0.8em 0;">
+					<input type="button" style="width:min(300px,75%);" onclick="param_calc()" id="calc_button" value="Calculate">
+					<input type="button" style="width:min(150px,25%)" onclick="this.form.reset();label_chg();" value="Clear">
+				</div>
+				
+				
+			</div>
+			
+			<div style="display: flex; flex-grow: 1; min-width: 0; margin:1.2em 0 0.6em 0; border-bottom: 1px solid #AAA;">
+				<span style="margin: auto 0.6em auto 0; font-weight: 700;">Results</span>
+			</div>
+			
+			<!-- OUTPUT TEXTFIELD -->
+			<div class="justified">
+				<textarea id="output" rows="4" readonly></textarea>
+			</div>
+			
+		</div>
+		</form>
+		
+		
+		<script type="text/javascript">
+			// Pressing enter anywhere on page will trigger the calculate button if it has the ID "calculate_button"
+			window.addEventListener( "keyup", (event) => {
+				if (event.key === "Enter") {
+					document.getElementById("calc_button").click() 
+				} 
+			} );
+		</script>
+		
+	</section>
+	
+	
+	<!-- CALCULATION INFO CARD -->
+	<section class="card" id="info">
+		Info
+		<br>
+		<a href="#top" style="font-size:0.95em; font-weight:bold;">&#x2B17; Top</a><br>
+	</section>
+	
+	
+	
+	<!-- FOOTER COPYRIGHT -->
+	<footer>
+		<span style="font-size: 0.9em">Copyright © <span id="year">2024</span> Michael Bell. All Rights Reserved.</span>
+		<script>
+			document.getElementById("year").innerHTML = new Date().getFullYear();
+		</script>
+	</footer>
+	
+	</div>
+	
+</body>
+</html>

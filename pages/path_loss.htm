@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Etoolbox - Site Template</title>
+	
+	<!-- DEFAULT LINKS, STYLES, AND SCRIPTS -->
+	<meta name="viewport" charset="UTF-8" content="width=device-width, initial-scale=1">
+	
+	<link rel="icon" href="../resources/images/favicon.ico">
+	<link rel="stylesheet" href="../resources/css/styles.css">
+	
+	<script type="text/javascript" src="../resources/js/functions.js"></script>
+	
+	
+	<!-- ADDITIONAL LINKS, STYLES, AND SCRIPTS -->
+	<script type="text/javascript" src="../resources/js/path_loss.js"></script>
+	
+</head>
+
+<body onload="cfg_update();">
+	<div id="backdiv">
+	
+	<!-- HEADER -->
+	<header>
+		<span class="title">Michael's <span id="title_e" style="color:#E00" onclick="clrshft('title_e');">E</span>toolbox</span>
+		<a target="_top" href="../index.htm">Index</a>
+	</header>
+	
+	
+	<!-- CALCULATOR -->
+	<section class="card" id="calc">
+		
+		<!-- TITLE AND SHORT DESCRIPTION -->
+		<h2 style="margin:0">Friis Path Loss Calculator</h2>
+		<a href="#info" style="font-size:0.95em; font-weight:bold;">&#x2B17; Further Information</a><br>
+		<p>
+			Provided information on the transmit power, antenna gains, and overall system losses, calculate
+			either the reciever power or range between transmitter and reciever.
+		</p>
+		
+		<!-- METRIC INPUT NOTE -->
+		<p style="color:#A00; margin: 2em 0 1em 0; font-size:0.85em; text-align:center">
+			[*] Metric SI unit prefixes such as p=pico, n=nano, u=micro, m=milli, k=kilo, M=mega are valid.
+		</p>
+		
+		<!-- CALCULATOR INPUT TABLE FORM -->
+		<form name="inputform" onkeydown="return event.key != 'Enter';">
+		<div class="formwrapper">
+		
+			<div class="inputcontainer">
+				
+				<!-- Remember for inputs on mobile that are numbers to use inputmode="decimal" -->
+				
+				<!-- RADIO BUTTONS -->
+				<div class="inputfield" style="margin-bottom: 0.6em;">
+					<label for="config0" style="text-align: left; font-size: 1em; padding: 0.3em 0; margin-right: 1.2em;">
+						<input type="radio" id="config0" name="config" onchange="cfg_update();" checked="checked">
+						Solve RX Power
+					</label>
+					<label for="config1" style="text-align: left; font-size: 1em; padding: 0.3em 0;">
+						<input type="radio" id="config1" name="config" onchange="cfg_update();">
+						Solve RX-TX Range
+					</label>
+				</div>
+			
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Frequency</span>
+					<div class="inputbox">
+						<input type="text" id="freq" placeholder="Enter Value">
+						<label for="freq">Hz<span style="color:#A00;">*</span></label>
+					</div>
+				</div>
+				
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Transmit Ant. Gain</span>
+					<div class="inputbox">
+						<input type="text" id="txgain" placeholder="Enter Value">
+						<label for="txgain">dB</label>
+					</div>
+				</div>
+				
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Transmit Power</span>
+					<div class="inputbox">
+						<input type="text" id="ptx" placeholder="Enter Value">
+						<label for="ptx">W<span style="color:#A00;">*</span></label>
+					</div>
+				</div>
+				
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Recieve Ant. Gain</span>
+					<div class="inputbox">
+						<input type="text" id="rxgain" placeholder="Enter Value">
+						<label for="rxgain">dB</label>
+					</div>
+				</div>
+				
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname" id="inlbl">RX-TX Range</span>
+					<div class="inputbox">
+						<input type="text" id="in" placeholder="Enter Value">
+						<label for="in"><span id="inunit">m</span><span style="color:#A00;">*</span></label>
+					</div>
+				</div>
+				
+				<!-- TEXT INPUT add white-space: nowrap; to .inputbox in styles.css -->
+				<div class="inputfield">
+					<span class="inputname">System Loss</span>
+					<div class="inputbox">
+						<input type="text" id="sysloss" placeholder="Enter Value">
+						<label for="sysloss">&ge; 0dB</label>
+					</div>
+				</div>
+				
+				<!-- CALCULATE & CLEAR BUTTONS -->
+				<div class="justified" style="margin: 0.8em 0;">
+					<input type="button" style="width:min(300px,75%);" onclick="path_loss();" id="calc_button" value="Calculate">
+					<input type="button" style="width:min(150px,25%)" onclick="this.form.reset(); cfg_update();" value="Clear">
+				</div>
+				
+			</div>
+			
+				<div style="display: flex; flex-grow: 1; min-width: 0; margin:1.2em 0 0.6em 0; border-bottom: 1px solid #AAA;"></div>
+				
+				<!-- OUTPUT TEXTBOXES -->
+				<div class="inputfield">
+					<span class="inputname" id="outlbl">Reciever Power</span>
+					<div class="inputbox">
+						<input type="text" id="out" readonly>
+						<label for="out"><span id="outunit">W</span></label>
+					</div>
+				</div>
+				
+				<!-- OUTPUT TEXTBOXES -->
+				<div class="inputfield" id="pwrdbm_out" style="display:none;">
+					<span class="inputname">Reciever Power</span>
+					<div class="inputbox">
+						<input type="text" id="pwrdbm" readonly>
+						<label for="pwrdbm">dBm</label>
+					</div>
+				</div>
+			
+		</div>
+		</form>
+		
+		
+		<script type="text/javascript">
+			// Pressing enter anywhere on page will trigger the calculate button if it has the ID "calculate_button"
+			window.addEventListener( "keyup", (event) => {
+				if (event.key === "Enter") {
+					document.getElementById("calc_button").click() 
+				} 
+			} );
+		</script>
+		
+	</section>
+	
+	
+	<!-- CALCULATION INFO CARD -->
+	<section class="card" id="info">
+		Info
+		<br>
+		<a href="#top" style="font-size:0.95em; font-weight:bold;">&#x2B17; Top</a><br>
+	</section>
+	
+	
+	
+	<!-- FOOTER COPYRIGHT -->
+	<footer>
+		<span style="font-size: 0.9em">Copyright © <span id="year">2024</span> Michael Bell. All Rights Reserved.</span>
+		<script>
+			document.getElementById("year").innerHTML = new Date().getFullYear();
+		</script>
+	</footer>
+	
+	</div>
+	
+</body>
+</html>

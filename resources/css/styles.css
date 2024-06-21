@@ -15,10 +15,15 @@
 	.header a { display: none !important; }
 }
 
+::selection {
+	color: #FFF;
+	background-color: rgba(170,34,34, 0.8);
+}
+
 /* BODY STYLING */
 body {
 	font-family: "Arial";
-	font-size: 17px;
+	font-size: 18px;
 	background-image: url('../images/background.jpg');
 	max-width: 850px;
 	min-width: 350px;
@@ -57,16 +62,16 @@ header {
 header span.title {
 	float: left;
 	color: #FFF;
-	font-size: inherit;
+	font-size: 1.25em;
 	font-weight: bold;
-	padding: 0.45em 1em;
+	padding: 0.3em 1em;
 }
 
 header a {
 	float: right;
 	color: #FFF;
 	font-size: 0.9em;
-	padding: 0.5em 1em;
+	padding: 0.52em 1em;
 	text-decoration: none;
 	border-left: 3px solid rgba(255, 255, 255, 0.22);
 	transition: background-color 0.35s;
@@ -104,7 +109,7 @@ header a:active {
 }
 
 .inputcontainer {
-	width: 100%;
+	width: 98%;
 	margin: 0 auto;
 	display: flex-end;
 }
@@ -112,7 +117,8 @@ header a:active {
 .inputfield {
 	display: flex;
 	flex-direction: row;
-	justify-content: center;
+	flex-flow: wrap;
+	justify-content: space-between;
 	overflow: hidden;
 	width: 100%;
 	min-width: 0;
@@ -126,7 +132,7 @@ header a:active {
 	font-weight: 550;
 	font-size: 0.95em;
 	vertical-align: middle;
-	width: 40%;
+	width: 45%;
 }
 
 .inputbox {
@@ -135,8 +141,10 @@ header a:active {
 	display: flex;
 	flex-grow: 1;
 	min-width: 0;
-	width: 55%;
-	margin-top: 0;
+	max-width: 55%;
+	flex-basis: 49%;
+	margin: 0.1em;
+	white-space: nowrap;
 }
 
 .inputbox label {
@@ -188,6 +196,10 @@ a {
 	color: black;
 	text-decoration: none;
 	transition: color 0.35s;
+}
+
+p {
+	font-size: 0.95em;
 }
 
 a:hover {
@@ -283,11 +295,11 @@ textarea:active {
 }
 
 
-/*      ====== MEDIA QUERIES ======      */
+/*			====== MEDIA QUERIES ======			*/
 
 @media only screen and (max-width: 770px) {
 	body {
-		font-size: 18px;
+		font-size: 19px;
 	}
 	
 	footer {
@@ -307,7 +319,7 @@ textarea:active {
 	.inputcontainer {
 		width: 100%;
 	}
-  
+	
 	.inputfield {
 		margin: 0.35em 0;
 	}
@@ -323,7 +335,7 @@ textarea:active {
 @media only screen and (max-width: 500px) { 
 	
 	body {
-		font-size: 19px;
+		font-size: 20px;
 	}
 	
 	header {
@@ -333,17 +345,16 @@ textarea:active {
 	
 	header span.title {
 		color: #FFF;
-		font-size: inherit;
 		font-weight: bold;
 		width: 100%;
-		font-size: 1.2em;
-		padding: 0.4em 0;
+		font-size: 1.35em;
+		padding: 0.2em 0;
 	}
 
 	header a {
 		width: 100%;
-		padding: 0.15em 0;
-		font-size: 0.88em;
+		padding: 0.35em 0;
+		font-size: 0.9em;
 		border-left: 0;
 		border-top: 3px solid rgba(255, 255, 255, 0.22);
 	}
@@ -357,7 +368,7 @@ textarea:active {
 		padding: 1em;
 		margin: 0 -0.9em;
 	}
-  
+	
 	.card {
 		padding: 0.9em;
 		margin: 0.6em 0;
@@ -369,6 +380,7 @@ textarea:active {
 	}
 	
 	.inputbox {
+		margin: 0;
 		margin-top: 0.25em;
 		max-width: 100%;
 		width: 100%;

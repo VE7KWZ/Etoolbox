@@ -1,6 +1,6 @@
 // functions.js required
 
-var precision = 3;
+const sig_figs = 4;
 
 function v_p() {
 	// vp changed
@@ -15,15 +15,15 @@ function v_p() {
 	var dbv = 20*Math.log10(vp/sqrt2/1);
 	var dbu = 20*Math.log10(vp/sqrt2/0.7746);
 	
-	document.getElementById("vpp").value = fnum2si(vpp,precision);
-	document.getElementById("vrms").value = fnum2si(vrms,precision);
-	document.getElementById("vavg").value = fnum2si(vavg,precision);
-	document.getElementById("dbv").value = fnum(dbv,precision);
-	document.getElementById("dbu").value = fnum(dbu,precision);
+	document.getElementById("vpp").value = fnum2si(vpp,sig_figs);
+	document.getElementById("vrms").value = fnum2si(vrms,sig_figs);
+	document.getElementById("vavg").value = fnum2si(vavg,sig_figs);
+	document.getElementById("dbv").value = fnum(dbv,sig_figs);
+	document.getElementById("dbu").value = fnum(dbu,sig_figs);
 	
 	if (!(z == 0 || z == undefined)) {
-		document.getElementById("pow").value = fnum2si((vrms**2)/z,precision);
-		document.getElementById("dbm").value = fnum(10*Math.log10(1000*(vrms**2)/z),precision);
+		document.getElementById("pow").value = fnum2si((vrms**2)/z,sig_figs);
+		document.getElementById("dbm").value = fnum(10*Math.log10(1000*(vrms**2)/z),sig_figs);
 	}
 	
 }
@@ -41,15 +41,15 @@ function v_pp() {
 	var dbv = 20*Math.log10(vpp/(2*sqrt2)/1);
 	var dbu = 20*Math.log10(vpp/(2*sqrt2)/0.7746);
 	
-	document.getElementById("vp").value = fnum2si(vp,precision);
-	document.getElementById("vrms").value = fnum2si(vrms,precision);
-	document.getElementById("vavg").value = fnum2si(vavg,precision);
-	document.getElementById("dbv").value = fnum(dbv,precision);
-	document.getElementById("dbu").value = fnum(dbu,precision);
+	document.getElementById("vp").value = fnum2si(vp,sig_figs);
+	document.getElementById("vrms").value = fnum2si(vrms,sig_figs);
+	document.getElementById("vavg").value = fnum2si(vavg,sig_figs);
+	document.getElementById("dbv").value = fnum(dbv,sig_figs);
+	document.getElementById("dbu").value = fnum(dbu,sig_figs);
 	
 	if (!(z == 0 || z == undefined)) {
-		document.getElementById("pow").value = fnum2si((vrms**2)/z,precision);
-		document.getElementById("dbm").value = fnum(10*Math.log10(1000*(vrms**2)/z),precision);
+		document.getElementById("pow").value = fnum2si((vrms**2)/z,sig_figs);
+		document.getElementById("dbm").value = fnum(10*Math.log10(1000*(vrms**2)/z),sig_figs);
 	}
 
 }
@@ -67,15 +67,15 @@ function v_rms() {
 	var dbv = 20*Math.log10(vrms/1);
 	var dbu = 20*Math.log10(vrms/0.7746);
 	
-	document.getElementById("vp").value = fnum2si(vp,precision);
-	document.getElementById("vpp").value = fnum2si(vpp,precision);
-	document.getElementById("vavg").value = fnum2si(vavg,precision);
-	document.getElementById("dbv").value = fnum(dbv,precision);
-	document.getElementById("dbu").value = fnum(dbu,precision);
+	document.getElementById("vp").value = fnum2si(vp,sig_figs);
+	document.getElementById("vpp").value = fnum2si(vpp,sig_figs);
+	document.getElementById("vavg").value = fnum2si(vavg,sig_figs);
+	document.getElementById("dbv").value = fnum(dbv,sig_figs);
+	document.getElementById("dbu").value = fnum(dbu,sig_figs);
 	
 	if (!(z == 0 || z == undefined)) {
-		document.getElementById("pow").value = fnum2si((vrms**2)/z,precision);
-		document.getElementById("dbm").value = fnum(10*Math.log10(1000*(vrms**2)/z),precision);
+		document.getElementById("pow").value = fnum2si((vrms**2)/z,sig_figs);
+		document.getElementById("dbm").value = fnum(10*Math.log10(1000*(vrms**2)/z),sig_figs);
 	}
 
 }
@@ -93,15 +93,15 @@ function v_avg() {
 	var dbv = 20*Math.log10(vavg*pi/(2*sqrt2)/1);
 	var dbu = 20*Math.log10(vavg*pi/(2*sqrt2)/0.7746);
 	
-	document.getElementById("vp").value = fnum2si(vp,precision);
-	document.getElementById("vpp").value = fnum2si(vpp,precision);
-	document.getElementById("vrms").value = fnum2si(vrms,precision);
-	document.getElementById("dbv").value = fnum(dbv,precision);
-	document.getElementById("dbu").value = fnum(dbu,precision);
+	document.getElementById("vp").value = fnum2si(vp,sig_figs);
+	document.getElementById("vpp").value = fnum2si(vpp,sig_figs);
+	document.getElementById("vrms").value = fnum2si(vrms,sig_figs);
+	document.getElementById("dbv").value = fnum(dbv,sig_figs);
+	document.getElementById("dbu").value = fnum(dbu,sig_figs);
 	
 	if (!(z == 0 || z == undefined)) {
-		document.getElementById("pow").value = fnum2si((vrms**2)/z,precision);
-		document.getElementById("dbm").value = fnum(10*Math.log10(1000*(vrms**2)/z),precision);
+		document.getElementById("pow").value = fnum2si((vrms**2)/z,sig_figs);
+		document.getElementById("dbm").value = fnum(10*Math.log10(1000*(vrms**2)/z),sig_figs);
 	}
 
 }
@@ -120,15 +120,15 @@ function f_dbv() {
 	var vavg = vrms*(2*sqrt2)/pi;
 	var dbu = 20*Math.log10(vrms/0.7746);
 	
-	document.getElementById("vp").value = fnum2si(vp,precision);
-	document.getElementById("vpp").value = fnum2si(vpp,precision);
-	document.getElementById("vrms").value = fnum2si(vrms,precision);
-	document.getElementById("dbv").value = fnum(dbv,precision);
-	document.getElementById("dbu").value = fnum(dbu,precision);
+	document.getElementById("vp").value = fnum2si(vp,sig_figs);
+	document.getElementById("vpp").value = fnum2si(vpp,sig_figs);
+	document.getElementById("vrms").value = fnum2si(vrms,sig_figs);
+	document.getElementById("dbv").value = fnum(dbv,sig_figs);
+	document.getElementById("dbu").value = fnum(dbu,sig_figs);
 	
 	if (!(z == 0 || z == undefined)) {
-		document.getElementById("pow").value = fnum2si((vrms**2)/z,precision);
-		document.getElementById("dbm").value = fnum(10*Math.log10(1000*(vrms**2)/z),precision);
+		document.getElementById("pow").value = fnum2si((vrms**2)/z,sig_figs);
+		document.getElementById("dbm").value = fnum(10*Math.log10(1000*(vrms**2)/z),sig_figs);
 	}
 
 }
@@ -147,22 +147,22 @@ function f_dbu() {
 	var vavg = vrms*(2*sqrt2)/pi;
 	var dbv = 20*Math.log10(vavg*pi/(2*sqrt2)/1);
 	
-	document.getElementById("vp").value = fnum2si(vp,precision);
-	document.getElementById("vpp").value = fnum2si(vpp,precision);
-	document.getElementById("vrms").value = fnum2si(vrms,precision);
-	document.getElementById("dbv").value = fnum(dbv,precision);
-	document.getElementById("dbu").value = fnum(dbu,precision);
+	document.getElementById("vp").value = fnum2si(vp,sig_figs);
+	document.getElementById("vpp").value = fnum2si(vpp,sig_figs);
+	document.getElementById("vrms").value = fnum2si(vrms,sig_figs);
+	document.getElementById("dbv").value = fnum(dbv,sig_figs);
+	document.getElementById("dbu").value = fnum(dbu,sig_figs);
 	
 	if (!(z == 0 || z == undefined)) {
-		document.getElementById("pow").value = fnum2si((vrms**2)/z,precision);
-		document.getElementById("dbm").value = fnum(10*Math.log10(1000*(vrms**2)/z),precision);
+		document.getElementById("pow").value = fnum2si((vrms**2)/z,sig_figs);
+		document.getElementById("dbm").value = fnum(10*Math.log10(1000*(vrms**2)/z),sig_figs);
 	}
 
 }
 
 function imped() {
 	// impedance changed
-	var z = fsi2num(document.getElementById("z").value,precision);
+	var z = fsi2num(document.getElementById("z").value,sig_figs);
 	
 	if (z <= 0 || z == undefined) {
 		// If Z field empty, clear power and dBm fields and lock them
@@ -203,13 +203,13 @@ function f_dbm() {
 	
 	var pow = (10**((dbm)/10))/1000;
 	
-	document.getElementById("vp").value = fnum2si(vp);
-	document.getElementById("vpp").value = fnum2si(vpp);
-	document.getElementById("vrms").value = fnum2si(vrms);
-	document.getElementById("vavg").value = fnum(vavg);
-	document.getElementById("dbv").value = fnum(dbv);
-	document.getElementById("dbu").value = fnum(dbu);
-	document.getElementById("pow").value = fnum2si(pow);
+	document.getElementById("vp").value = fnum2si(vp,sig_figs);
+	document.getElementById("vpp").value = fnum2si(vpp,sig_figs);
+	document.getElementById("vrms").value = fnum2si(vrms,sig_figs);
+	document.getElementById("vavg").value = fnum2si(vavg,sig_figs);
+	document.getElementById("dbv").value = fnum(dbv,sig_figs);
+	document.getElementById("dbu").value = fnum(dbu,sig_figs);
+	document.getElementById("pow").value = fnum2si(pow,sig_figs);
 	
 }
 
@@ -231,13 +231,13 @@ function powr() {
 	
 	var dbm = 10*Math.log10(pow*1000);
 	
-	document.getElementById("vp").value = fnum2si(vp);
-	document.getElementById("vpp").value = fnum2si(vpp);
-	document.getElementById("vrms").value = fnum2si(vrms);
-	document.getElementById("vavg").value = fnum(vavg);
-	document.getElementById("dbv").value = fnum(dbv);
-	document.getElementById("dbu").value = fnum(dbu);
-	document.getElementById("dbm").value = fnum(dbm);
+	document.getElementById("vp").value = fnum2si(vp,sig_figs);
+	document.getElementById("vpp").value = fnum2si(vpp,sig_figs);
+	document.getElementById("vrms").value = fnum2si(vrms,sig_figs);
+	document.getElementById("vavg").value = fnum(vavg,sig_figs);
+	document.getElementById("dbv").value = fnum(dbv,sig_figs);
+	document.getElementById("dbu").value = fnum(dbu,sig_figs);
+	document.getElementById("dbm").value = fnum(dbm,sig_figs);
 
 }
 

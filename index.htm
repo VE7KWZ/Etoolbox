@@ -12,21 +12,31 @@
 	<script type="text/javascript" src="./resources/js/functions.js"></script>
 	
 	<style>
+		
 		.index_container { 
 			width: 100%;
-			display: grid;
-			grid-template-columns: repeat(3, 1fr);
+			display: block;
 		}
-		
+    
 		.index_column { 
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
 			width: 100%;
 		}
 		
+		.index_column h4 {
+			width: 100%;
+		}
+    
 		.index_column a {
+			width: 32%;
 			display: block;
+			vertical-align: middle;
+			line-height: normal;
 			box-sizing: border-box;
 			padding: 0.25em;
-			margin: 0.35em 0.25em;
+			margin: 0.25em 0.25em;
 			border: 1px solid #AAA;
 			color: #000;
 			text-align: center;
@@ -37,12 +47,13 @@
 		
 		.index_column a:hover {
 			border: 1px solid #A22;
-			background-color: #EEE;
-			color: #A22;
+			background-color: rgba(170,34,34, 0.05);
+			color: #922;
+			/* font-weight: bold; */
 		}
 		
 		.index_column a:active {
-			background-color: #EDD;
+			background-color: rgba(170,34,34, 0.1);
 		}
 		
 		.section_title {
@@ -91,14 +102,11 @@
 		}
     
 		@media only screen and (max-width: 770px) { 
-			/* for 10 inches tablet screens */
-			.index_container {
-				grid-template-columns: repeat(2, 1fr);
-			}
-      
+			
 			.index_column a {
-				padding: 0.4em;
-				margin: 0.5em 0.4em;
+				width: calc(50% - 0.5em * 2);
+				padding: 0.5em;
+				margin: 0.5em 0.5em;
 			}
       
 			#sections {
@@ -108,12 +116,9 @@
 		}
     
 		@media only screen and (max-width: 450px) { 
-			/* for 10 inches tablet screens */
-			.index_container {
-				grid-template-columns: repeat(1, 1fr);
-			}
-      
+			
 			.index_column a {
+				width: 100%;
 				padding: 0.45em;
 				margin: 0.5em 0.4em;
 			}
@@ -170,7 +175,7 @@
 				
 				<a target="_top" href="./pages/ohms_law.htm">Ohms Law Calculator</a>
 				<a target="_top" href="./pages/three_phase.htm">Three Phase Calculator</a>
-				<a target="_top" href="./pages/ac_voltage_convert.htm">AC/RF Voltage Conversion</a>
+				<a target="_top" href="./pages/ac_voltage_convert.htm">AC Voltage Conversions</a>
 				<a target="_top" href="./pages/reactance_calc.htm">Reactance Calculator</a>
 				<a target="_top" href="./pages/resonance_calc.htm">Resonance Calculator</a>
 				<a target="_top" href="./pages/resistor_divider.htm">Resistor Divider Solver</a>
@@ -178,6 +183,8 @@
 				<a target="_top" href="./pages/resistor_atten.htm">Resistor Attenuator Calculator</a>
 				<a target="_top" href="./pages/frequency_wavelength.htm">Wavelength Conversion</a>
 				<a target="_top" href="./pages/skin_depth.htm">Skin Depth Calculator</a>
+				<a target="_top" href="./pages/two_port_parameter.htm">Two Port Parameters</a>
+				<a target="_top" href="./pages/path_loss.htm">Friis Path Loss Calculator</a>
 				
 			</div>
 			<div class="index_column">
