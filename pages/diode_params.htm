@@ -23,8 +23,8 @@
 	
 	<!-- HEADER -->
 	<header>
-		<span class="title">Michael's <span id="title_e" style="color:#E00" onclick="clrshft('title_e');">E</span>toolbox</span>
-		<a target="_top" href="../index.htm">Index</a>
+		<span class="title">Mi<span id="title_c">c</span>hael's <span id="title_e" style="color:#E00">E</span>toolbox</span>
+		<a target="_top" href="../index.htm">Index</a><script type="text/javascript" src="../resources/js/eggs.js"></script>
 	</header>
 	
 	
@@ -84,9 +84,23 @@
 			<div class="justified">
 				<textarea id="output" rows="3" readonly></textarea><br>
 			</div>
-			<div class="inputbox" style="width:100%; margin: 0.8em 0;">
-				<input type="text" id="spice_line" readonly>
+			
+			<div class="inputfield">
+				<div class="inputbox" style="max-width:100%;">
+					<input type="text" id="spice_line" readonly>
+					<input type="button" style="width: 3em; margin-left: 0.3em" value="Copy" onclick="copy_spice();">
+				</div>
 			</div>
+			
+			<script type="text/javascript">
+				function copy_spice() {
+					var spiceline = document.getElementById("spice_line");
+					spiceline.select();
+					spiceline.setSelectionRange(0, 99999); // For mobile devices
+					navigator.clipboard.writeText(spiceline.value);
+					//alert("Text copied to clipboard");
+				}
+			</script>
 			
 			<canvas id="iv_chart" height="300" width="400" style="display:block; box-sizing:border-box; height:auto; width:100%; margin-top: 1.2em; padding: 0;"></canvas>
       

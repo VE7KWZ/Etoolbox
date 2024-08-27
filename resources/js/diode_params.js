@@ -72,7 +72,7 @@ function diode_params(){
 	console.log(NIsRs);
 	
 	result = "";
-	result += fstring(" N =\t{1}\nIS =\t{2}\nRS =\t{3}",fnum2si(NIsRs[0],sig_figs), fnum2si(NIsRs[1],sig_figs), fnum2si(NIsRs[2],sig_figs));
+	result += fstring(" N =\t{1}\nIS =\t{2}\nRS =\t{3}", fnum2eng(NIsRs[0],sig_figs), fnum2si(NIsRs[1],sig_figs,true) + "A", fnum2si(NIsRs[2],sig_figs,true)  + "\u03A9");
 	
 	document.getElementById("spice_line").value = fstring(".MODEL diodeName D(IS={1} RS={2} N={3} TNOM={4})",
 														fnum2eng(NIsRs[1],sig_figs), 

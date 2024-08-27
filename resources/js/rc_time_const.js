@@ -16,13 +16,13 @@ function resistor() {
 	if ((tau == 0 || tau == undefined) && (cap == 0 || cap == undefined)) return;
 	
 	if (!(cap == 0 || cap == undefined)) {
-		document.getElementById("tau").value = fnum2si(res*cap, sig_figs);
+		document.getElementById("tau").value = fnum2eng(res*cap, sig_figs);
 		involt();
 		return;
 	}
 		
 	if (!(tau == 0 || tau == undefined)) {
-		document.getElementById("cap").value = fnum2si(tau/res, sig_figs);
+		document.getElementById("cap").value = fnum2eng(tau/res, sig_figs);
 		return;
 	}
 	
@@ -37,13 +37,13 @@ function capacitor() {
 	if ((tau == 0 || tau == undefined) && (res == 0 || res == undefined)) return;
 	
 	if (!(res == 0 || res == undefined)) {
-		document.getElementById("tau").value = fnum2si(res*cap, sig_figs);
+		document.getElementById("tau").value = fnum2eng(res*cap, sig_figs);
 		involt();
 		return;
 	}
 	
 	if (!(tau == 0 || tau == undefined)) {
-		document.getElementById("res").value = fnum2si(tau/cap, sig_figs);
+		document.getElementById("res").value = fnum2eng(tau/cap, sig_figs);
 		return;	
 	}
 	
@@ -60,12 +60,12 @@ function time_const() {
 			(tau == 0 || tau == undefined)) return;
 	
 	if (!(cap == 0 || cap == undefined)) {
-		document.getElementById("res").value = fnum2si(tau/cap, sig_figs);
+		document.getElementById("res").value = fnum2eng(tau/cap, sig_figs);
 		return;
 	}
 	
 	if (!(res == 0 || res == undefined)) {
-		document.getElementById("cap").value = fnum2si(tau/res, sig_figs);
+		document.getElementById("cap").value = fnum2eng(tau/res, sig_figs);
 		return;
 	}
 	
@@ -84,12 +84,12 @@ function input_volt() {
 	if ((tau == 0 || tau == undefined) || (vi == 0 || vi == undefined)) return;
 	
 	if (!(vo == 0 || vo == undefined)) {	// vi & vo = tvo
-		document.getElementById("t_vo").value = fnum2si(-tau*Math.log(1-(vo/vi)), sig_figs);
+		document.getElementById("t_vo").value = fnum2eng(-tau*Math.log(1-(vo/vi)), sig_figs);
 		return;
 	}
 	
 	if (!(tvo == 0 || tvo == undefined)) { // vi & tvo = vo
-		document.getElementById("volt_out").value = fnum2si(vi*(1-Math.exp(-tvo/tau)), sig_figs);
+		document.getElementById("volt_out").value = fnum2eng(vi*(1-Math.exp(-tvo/tau)), sig_figs);
 		return;
 	}
 	
@@ -105,12 +105,12 @@ function output_volt() {
 	if ((tau == 0 || tau == undefined) || (vo == 0 || vo == undefined)) return;
 	
 	if (!(vi == 0 || vi == undefined)) {	// vi & vo = tvo
-		document.getElementById("t_vo").value = fnum2si(-tau*Math.log(1-(vo/vi)), sig_figs);
+		document.getElementById("t_vo").value = fnum2eng(-tau*Math.log(1-(vo/vi)), sig_figs);
 		return;
 	}
 	
 	if (!(tvo == 0 || tvo == undefined)) { // vo & tvo = vi
-		document.getElementById("volt_in").value = fnum2si(vo/(1-Math.exp(-tvo/tau)), sig_figs);
+		document.getElementById("volt_in").value = fnum2eng(vo/(1-Math.exp(-tvo/tau)), sig_figs);
 		return;
 	}
 
@@ -126,12 +126,12 @@ function charge_time() {
 	if ((tau == 0 || tau == undefined) || (tvo == 0 || tvo == undefined)) return;
 	
 	if (!(vi == 0 || vi == undefined)) {	// vi & tvo = vo
-		document.getElementById("volt_out").value = fnum2si(vi*(1-Math.exp(-tvo/tau)), sig_figs);
+		document.getElementById("volt_out").value = fnum2eng(vi*(1-Math.exp(-tvo/tau)), sig_figs);
 		return;
 	}
 	
 	if (!(vo == 0 || vo == undefined)) { // vo & tvo = vi
-		document.getElementById("volt_in").value = fnum2si(vo/(1-Math.exp(-tvo/tau)), sig_figs);
+		document.getElementById("volt_in").value = fnum2eng(vo/(1-Math.exp(-tvo/tau)), sig_figs);
 		return;
 	}
 

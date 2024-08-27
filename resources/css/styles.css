@@ -31,6 +31,46 @@ body {
 	padding: 0;
 }
 
+/* Fade In/Out animation */
+
+.flier {
+	pointer-events: none;
+}
+
+.flier > * {
+/* Adjust animation duration to change the element’s speed */
+  animation: drop 6s linear 1;
+  pointer-events: none !important;
+	transform: translateX(0) translateY(0);
+	position: fixed;
+	animation-delay: 0;
+	z-index: 999;
+}
+
+@keyframes drop {
+  0% {
+    display: block;
+	  transform: translateY(-40vh);
+    opacity: 1;
+  }
+  
+  70% {
+    opacity: 1;
+  }
+  
+  85% {
+    opacity: 0;
+  }
+  
+  100% {
+    transform: translateY(140vh);
+    opacity: 0;
+  }
+  
+}
+
+/* ===================== */
+
 #backdiv {
 	display: block;
 	max-width: inherit; 

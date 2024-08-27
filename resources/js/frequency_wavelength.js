@@ -39,13 +39,13 @@ function freq_wave() {
 	
 	switch (slct) {
 		case 1:	// solve for wavelength (freq + vel --> wl)
-			document.getElementById("wavelength").value = fnum2si((nvel*vf*wf)/nfreq, sig_figs);
+			document.getElementById("wavelength").value = fnum2eng((nvel*vf*wf)/nfreq, sig_figs);
 			break;
 		case 2: // solve for velocity (freq + wl --> vel)
 			document.getElementById("velocity").value = fnum((nfreq*nwl*wf)/vf, sig_figs);
 			break;
 		case 3: // Solve for frequency (vel + wl --> freq)
-			document.getElementById("frequency").value = fnum2si((nvel*vf)/(nwl*wf), sig_figs);
+			document.getElementById("frequency").value = fnum2eng((nvel*vf)/(nwl*wf), sig_figs);
 			break;
 	}
 	

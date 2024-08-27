@@ -1,6 +1,7 @@
-// **********************************************************************************************************
-// Wye Delta Resistor Network Conversion [wye_delta_network.htm]
-// **********************************************************************************************************
+
+var sig_figs = 4;
+
+
 function yd_network() {
   
 	var Rin1 = fsi2num(document.getElementById("rin1").value);
@@ -13,18 +14,18 @@ function yd_network() {
 		// delta (pi) to wye (tee) resistor network
 		var Rab = Rin1; var Rbc = Rin2; var Rac = Rin3;
     
-		document.getElementById("rout1").value = fnum(Rab*Rac/(Rab+Rac+Rbc),2); // Ra
-		document.getElementById("rout2").value = fnum(Rab*Rbc/(Rab+Rac+Rbc),2); // Rb
-		document.getElementById("rout3").value = fnum(Rac*Rbc/(Rab+Rac+Rbc),2); // Rc
+		document.getElementById("rout1").value = fnum2eng(Rab*Rac/(Rab+Rac+Rbc), sig_figs); // Ra
+		document.getElementById("rout2").value = fnum2eng(Rab*Rbc/(Rab+Rac+Rbc), sig_figs); // Rb
+		document.getElementById("rout3").value = fnum2eng(Rac*Rbc/(Rab+Rac+Rbc), sig_figs); // Rc
 	}
   
 	if (document.getElementById("config1").checked) {
 		// wye (tee) to delta (pi) resistor network
 		var Ra = Rin1; var Rb = Rin2; var Rc = Rin3;
     
-		document.getElementById("rout1").value = fnum((Ra*Rb+Ra*Rc+Rb*Rc)/Rc,2); // Rab
-		document.getElementById("rout2").value = fnum((Ra*Rb+Ra*Rc+Rb*Rc)/Ra,2); // Rbc
-		document.getElementById("rout3").value = fnum((Ra*Rb+Ra*Rc+Rb*Rc)/Rb,2); // Rac
+		document.getElementById("rout1").value = fnum2eng((Ra*Rb+Ra*Rc+Rb*Rc)/Rc, sig_figs); // Rab
+		document.getElementById("rout2").value = fnum2eng((Ra*Rb+Ra*Rc+Rb*Rc)/Ra, sig_figs); // Rbc
+		document.getElementById("rout3").value = fnum2eng((Ra*Rb+Ra*Rc+Rb*Rc)/Rb, sig_figs); // Rac
 	}
 
 }

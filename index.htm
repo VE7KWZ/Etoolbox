@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
 	<title>Etoolbox by Michael Bell</title>
-    
+		
 	<!-- DEFAULT LINKS, STYLES, AND SCRIPTS -->
 	<meta name="viewport" charset="UTF-8" content="width=device-width, initial-scale=1">
-  
+	
 	<link rel="icon" href="./resources/images/favicon.ico" />
 	<link rel="stylesheet" href="./resources/css/styles.css">
-    
+		
 	<script type="text/javascript" src="./resources/js/functions.js"></script>
 	
 	<style>
@@ -17,7 +17,7 @@
 			width: 100%;
 			display: block;
 		}
-    
+		
 		.index_column { 
 			display: flex;
 			flex-direction: row;
@@ -28,9 +28,10 @@
 		.index_column h4 {
 			width: 100%;
 		}
-    
+		
 		.index_column a {
-			width: 32%;
+			width: calc(50% - 0.5em * 2);
+			height: 3em;
 			display: block;
 			vertical-align: middle;
 			line-height: normal;
@@ -48,12 +49,29 @@
 		.index_column a:hover {
 			border: 1px solid #A22;
 			background-color: rgba(170,34,34, 0.05);
-			color: #922;
 			/* font-weight: bold; */
 		}
 		
 		.index_column a:active {
 			background-color: rgba(170,34,34, 0.1);
+		}
+		
+		.label_div {
+			width: 100%;
+			height: 100%;
+			display: flex;
+			flex-direction: row;
+			flex-wrap: nowrap;
+			justify-content: space-between;
+			align-items: center;
+		}
+		
+		.label_div > svg {
+			min-width: 2.2em;
+			width: 2.2em;
+			height: 110%;
+			padding: 0 0.25em 0 0.5em;
+			vertical-align: middle;
 		}
 		
 		.section_title {
@@ -64,7 +82,7 @@
 			color: #A22;
 			text-decoration: underline;
 		}
-    
+		
 		#sections {
 			width: 100%;
 			float: left;
@@ -100,7 +118,7 @@
 		#sections a:active {
 			background-color: #222;
 		}
-    
+		
 		@media only screen and (max-width: 770px) { 
 			
 			.index_column a {
@@ -108,13 +126,25 @@
 				padding: 0.5em;
 				margin: 0.5em 0.5em;
 			}
-      
+			
 			#sections {
 				grid-template-columns: repeat(3, 1fr);
 			}
-      
+			
 		}
-    
+		
+		@media only screen and (max-width: 550px) { 
+			
+			.index_column a {
+				height: 3.5em;
+			}
+			
+			#sections {
+				grid-template-columns: repeat(3, 1fr);
+			}
+			
+		}
+		
 		@media only screen and (max-width: 450px) { 
 			
 			.index_column a {
@@ -122,7 +152,7 @@
 				padding: 0.45em;
 				margin: 0.5em 0.4em;
 			}
-      
+			
 			#sections {
 				grid-template-columns: repeat(2, 1fr);
 			}
@@ -136,7 +166,8 @@
 	
 	<!-- HEADER -->
 	<header id="top">
-		<span class="title">Michael's <span id="title_e" style="color:#E00" onclick="clrshft('title_e');">E</span>toolbox</span>
+		<span class="title">Mi<span id="title_c">c</span>hael's <span id="title_e" style="color:#E00">E</span>toolbox</span>
+		<script type="text/javascript" src="./resources/js/eggs.js"></script>
 	</header>
 	
 	
@@ -161,45 +192,191 @@
 			<div class="index_column">
 				<h4 id="components" class="section_title">Components</h4>
 				
-				<a target="_top" href="./pages/equivalent_solver.htm">Equivalent Solver</a>
-				<a target="_top" href="./pages/combination_calculator.htm">Component Combinations</a>
-				<a target="_top" href="./pages/standard_value.htm">Closest Standard Value</a>
-				<a target="_top" href="./pages/marking_decode.htm">Marking Decoder</a>
-				<a target="_top" href="./pages/divider_calculator.htm">Resistor Ratio Solver</a>
-				<a target="_top" href="./pages/wye_delta_network.htm">Delta-Wye Resistor Networks</a>
-				<a target="_top" href="./pages/diode_params.htm">Diode Parameter Solver</a>
+				<a target="_top" href="./pages/equivalent_solver.htm">
+					<div class="label_div">
+						<span>Equivalent Solver</span>
+						<svg><use href="#equiv_op"/></svg>
+					</div>
+				</a>
+				
+				<a target="_top" href="./pages/combination_calculator.htm">
+					<div class="label_div">
+						<span>Component Combinations</span>
+						<svg><use href="#equiv_op"/></svg>
+					</div>
+				</a>
+				
+				<a target="_top" href="./pages/standard_value.htm">
+					<div class="label_div">
+						<span>Closest Standard Value</span>
+						<svg><use href="#std_val"/></svg>
+					</div>
+				</a>
+				
+				<a target="_top" href="./pages/marking_decode.htm">
+					<div class="label_div">
+						<span>Marking Decoder</span>
+						<svg><use href="#smd_comp"/></svg>
+					</div>
+				</a>
+				
+				<a target="_top" href="./pages/divider_calculator.htm">
+					<div class="label_div">
+						<span>Resistor Ratio Solver</span>
+						<svg><use href="#opamp"/></svg>
+					</div>
+				</a>
+				
+				<a target="_top" href="./pages/comp_hysterisis.htm">
+					<div class="label_div">
+						<span>Comparator Hysterisis Calculator</span>
+						<svg><use href="#opamp"/></svg>
+					</div>
+				</a>
+				
+				<a target="_top" href="./pages/wye_delta_network.htm">
+					<div class="label_div">
+						<span>Delta-Wye Resistor Networks</span>
+						<svg><use href="#res45"/></svg>
+					</div>
+				</a>
+				
+				<a target="_top" href="./pages/diode_params.htm">
+					<div class="label_div">
+						<span>Diode Parameter Solver</span>
+						<svg><use href="#diode"/></svg>
+					</div>
+				</a>
 				
 			</div>
 			<div class="index_column">
 				<h4 id="analog" class="section_title">Analog</h4>
 				
-				<a target="_top" href="./pages/ohms_law.htm">Ohms Law Calculator</a>
-				<a target="_top" href="./pages/three_phase.htm">Three Phase Calculator</a>
-				<a target="_top" href="./pages/ac_voltage_convert.htm">AC Voltage Conversions</a>
-				<a target="_top" href="./pages/reactance_calc.htm">Reactance Calculator</a>
-				<a target="_top" href="./pages/resonance_calc.htm">Resonance Calculator</a>
-				<a target="_top" href="./pages/resistor_divider.htm">Resistor Divider Solver</a>
-				<a target="_top" href="./pages/rc_time_const.htm">RC Time Constant Calculator</a>
-				<a target="_top" href="./pages/resistor_atten.htm">Resistor Attenuator Calculator</a>
-				<a target="_top" href="./pages/frequency_wavelength.htm">Wavelength Conversion</a>
-				<a target="_top" href="./pages/skin_depth.htm">Skin Depth Calculator</a>
-				<a target="_top" href="./pages/two_port_parameter.htm">Two Port Parameters</a>
-				<a target="_top" href="./pages/path_loss.htm">Friis Path Loss Calculator</a>
+				<a target="_top" href="./pages/ohms_law.htm">
+					<div class="label_div">
+						<span>Ohms Law Calculator</span>
+						<svg><use href="#ohms_law"/></svg>
+					</div>
+				</a>
+				
+				<a target="_top" href="./pages/three_phase.htm">
+					<div class="label_div">
+						<span>Three Phase Calculator</span>
+						<svg><use href="#sine"/></svg>
+					</div>
+				</a>
+				
+				<a target="_top" href="./pages/ac_voltage_convert.htm">
+					<div class="label_div">
+						<span>AC/RF Voltage Conversion</span>
+						<svg><use href="#sine"/></svg>
+					</div>
+				</a>
+				
+				<a target="_top" href="./pages/reactance_calc.htm">
+					<div class="label_div">
+						<span>Reactance Calculator</span>
+						<svg><use href="#reactance"/></svg>
+					</div>
+				</a>
+				
+				<a target="_top" href="./pages/resonance_calc.htm">
+					<div class="label_div">
+						<span>Resonance Calculator</span>
+						<svg><use href="#sine"/></svg>
+					</div>
+				</a>
+				
+				<a target="_top" href="./pages/resistor_divider.htm">
+					<div class="label_div">
+						<span>Resistor Divider Solver</span>
+						<svg><use href="#res45"/></svg>
+					</div>
+				</a>
+				
+				<a target="_top" href="./pages/rc_time_const.htm">
+				<div class="label_div">
+						<span>RC Time Constant Calculator</span>
+						<svg><use href="#res45"/></svg>
+					</div>
+				</a>
+				
+				<a target="_top" href="./pages/resistor_atten.htm">
+					<div class="label_div">
+						<span>Resistor Attenuator Calculator</span>
+						<svg><use href="#res45"/></svg>
+					</div>
+				</a>
+				
+				<a target="_top" href="./pages/frequency_wavelength.htm">
+					<div class="label_div">
+						<span>Wavelength Conversion</span>
+						<svg><use href="#wavelength"/></svg>
+					</div>
+				</a>
+				
+				<a target="_top" href="./pages/skin_depth.htm">
+					<div class="label_div">
+						<span>Skin Depth Calculator</span>
+						<svg><use href="#wavelength"/></svg>
+					</div>
+				</a>
+				
+				<a target="_top" href="./pages/two_port_parameter.htm">
+					<div class="label_div">
+						<span>Two Port Parameters</span>
+						<svg><use href="#twoport"/></svg>
+					</div>
+				</a>
+				<a target="_top" href="./pages/path_loss.htm">
+					<div class="label_div">
+						<span>Friis Path Loss Calculator</span>
+						<svg><use href="#wavelength"/></svg>
+					</div>
+				</a>
 				
 			</div>
 			<div class="index_column">
 				<h4 id="other" class="section_title">Other</h4>
-        
-				<a target="_top" href="./pages/length_convert.htm">Length Conversion</a>
-				<a target="_top" href="./pages/temp_convert.htm">Temperature Unit Conversion</a>
-				<a target="_top" href="./pages/wire_gauge.htm">Wire Gauge Calculator</a>
+				
+				<a target="_top" href="./pages/length_convert.htm">
+					<div class="label_div">
+						<span>Length Conversion</span>
+						<svg><use href="#lengthunits"/></svg>
+					</div>
+				</a>
+				
+				<a target="_top" href="./pages/temp_convert.htm">
+					<div class="label_div">
+						<span>Temperature Unit Conversion</span>
+						<svg><use href="#temp"/></svg>
+					</div>
+				</a>
+				
+				<a target="_top" href="./pages/wire_gauge.htm">
+					<div class="label_div">
+						<span>Wire Gauge Calculator</span>
+						<svg><use href="#wiregauge"/></svg>
+					</div>
+				</a>
 				
 			</div>
 			<div class="index_column">
 				<h4 id="miscellaneous" class="section_title">Miscellaneous</h4>
 				
-				<a target="_top" href="./pages/riaa_filter.htm">RIAA Filter Calculator</a>
-				<a target="_top" href="./pages/template.htm">template</a>
+				<a target="_top" href="./pages/riaa_filter.htm">
+					<div class="label_div">
+						<span>RIAA Filter Calculator (incomplete)</span>
+						<svg><use href="#lpfilter"/></svg>
+					</div>
+				</a>
+				
+				<a target="_top" href="./pages/template.htm">
+					<div class="label_div">
+						<span>Site Template</span>
+						<svg><use href=""/></svg>
+					</div>
+				</a>
 				
 			</div>
 		</div>
@@ -221,5 +398,388 @@
 	
 	</div>
 </body>
+
+<!-- SYMBOLS https://editor.method.ac/ -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+	
+	<!-- GENERIC SYMBOLS https://editor.method.ac/#cut-->
+
+	<symbol viewBox="0 0 40 40" id="res45">
+		<title>res45</title>
+		<g stroke-width="1.75">
+			<line fill="none" x1="7.90199" y1="33.0177" x2="3.73586" y2="22.15355" stroke="#000000"/>
+			<line fill="none" x1="3.29373" y1="21.72319" x2="21.23415" y2="32.37746" stroke="#000000"/>
+			<line fill="none" x1="10.85279" y1="14.36523" x2="28.79321" y2="25.0195" stroke="#000000"/>
+			<line fill="none" x1="21.7891" y1="32.69801" x2="11.1821" y2="14.90542" stroke="#000000"/>
+			<line fill="none" x1="29.38272" y1="25.59333" x2="18.77571" y2="7.80073" stroke="#000000"/>
+			<line fill="none" x1="18.29903" y1="7.11709" x2="36.23944" y2="17.77136" stroke="#000000"/>
+			<line fill="none" x1="32.34887" y1="8.07356" x2="38.95449" y2="1.64368" stroke="#000000"/>
+			<line fill="none" x1="36.66693" y1="18.21599" x2="32.2406" y2="7.3182" stroke="#000000"/>
+			<line fill="none" x1="1.04552" y1="38.54412" x2="7.65113" y2="32.11424" stroke="#000000"/>
+		</g>
+	</symbol>
+
+	<symbol viewBox="0 0 40 40" id="smd_comp">
+		<title>smd_comp</title>
+		<g stroke-width="1.75">
+			<rect stroke="#000000" rx="2" height="22.52665" width="37.49518" y="8.73668" x="1.25241" fill="none"/>
+			<line y2="31.0404" x2="9.99701" y1="8.8439" x1="9.99701" stroke="#000000" fill="none"/>
+			<line y2="31.0404" x2="29.54056" y1="8.8439" x1="29.54056" stroke="#000000" fill="none"/>
+		</g>
+	</symbol>
+	
+	<symbol viewBox="0 0 40 40" id="diode">
+		<title>diode</title>
+		<g stroke-width="1.75">
+			<line stroke="#000000" y2="1.61848" x2="38.17918" y1="37.91909" x1="1.93643" fill="none"/>
+			<line stroke="#000000" y2="31.87862" x2="23.10983" y1="16.72833" x1="8.20808" fill="none"/>
+			<line id="svg_21" y2="13.17915" x2="26.64739" y1="16.99417" x1="8.38152" stroke="#000000" fill="none"/>
+			<line stroke="#000000" y2="12.94794" x2="26.763" y1="32.13866" x1="22.83237" fill="none"/>
+			<line stroke="#000000" y2="21.01158" x2="33.97687" y1="5.86129" x1="19.07512" fill="none"/>
+		</g>
+	</symbol>
+	
+	<symbol viewBox="0 0 40 40" id="sine">
+		<title>sine</title>
+		<g stroke-width="1.75">
+			<line stroke="#000000" y2="38.40531" x2="4.2461" y1="1.59469" x1="4.2461" fill="none"/>
+			<line stroke="#000000" y2="19.85663" x2="38.24474" y1="19.85663" x1="1.75526" fill="none"/>
+			<line stroke="#000000" y2="7.77803" x2="12.12719" y1="19.46491" x1="8.40853" fill="none"/>
+			<line stroke="#000000" y2="8.12951" x2="11.98906" y1="6.6357" x1="14.22316" fill="none"/>
+			<line stroke="#000000" y2="6.6357" x2="13.8851" y1="7.86401" x1="16.1163" fill="none"/>
+			<line stroke="#000000" y2="7.60228" x2="15.91346" y1="32.29413" x1="23.75645" fill="none"/>
+			<line stroke="#000000" y2="6.6357" x2="13.8851" y1="7.86401" x1="16.1163" fill="none"/>
+			<line stroke="#000000" y2="32.10092" x2="23.48928" y1="33.32923" x1="25.72048" fill="none"/>
+			<line stroke="#000000" y2="33.3643" x2="25.38541" y1="31.87049" x1="27.61952" fill="none"/>
+			<line stroke="#000000" y2="19.47152" x2="31.57761" y1="32.27617" x1="27.46201" fill="none"/>
+		</g>
+	</symbol>
+	
+	<symbol viewBox="0 0 40 40" id="wavelength">
+		<title>wavelength</title>
+		<g stroke-width="1.75">
+			<line stroke="#000000" y2="15.12972" x2="38.24474" y1="15.12972" x1="1.75526" fill="none"/>
+			<line stroke="#000000" y2="3.64722" x2="12.84404" y1="14.75734" x1="9.12538" fill="none"/>
+			<line stroke="#000000" y2="3.98135" x2="12.70591" y1="2.56126" x1="14.94001" fill="none"/>
+			<line stroke="#000000" y2="2.56126" x2="14.60195" y1="3.72895" x1="16.83314" fill="none"/>
+			<line stroke="#000000" y2="3.48015" x2="16.63031" y1="26.95341" x1="24.47329" fill="none"/>
+			<line stroke="#000000" y2="2.56126" x2="14.60195" y1="3.72895" x1="16.83314" fill="none"/>
+			<line stroke="#000000" y2="26.76973" x2="24.20613" y1="27.93742" x1="26.43732" fill="none"/>
+			<line stroke="#000000" y2="27.97077" x2="26.10226" y1="26.55068" x1="28.33636" fill="none"/>
+			<line stroke="#000000" y2="14.76362" x2="32.29446" y1="26.93634" x1="28.17885" fill="none"/>
+			<line stroke="#000000" y2="36.61845" x2="38.24474" y1="36.61845" x1="1.75526" fill="none"/>
+			<line stroke="#000000" y2="37.43873" x2="2.25808" y1="31.70887" x1="2.25808" fill="none"/>
+			<line stroke="#000000" y2="37.43873" x2="37.75901" y1="31.70887" x1="37.75901" fill="none"/>
+			<line stroke="#000000" y2="37.43873" x2="20" y1="31.70887" x1="20" fill="none"/>
+			<line stroke="#000000" y2="37.43873" x2="10.90313" y1="33.42674" x1="10.90313" fill="none"/>
+			<line stroke="#000000" y2="37.43873" x2="6.63503" y1="33.42674" x1="6.63503" fill="none"/>
+			<line stroke="#000000" y2="37.43873" x2="15.42437" y1="33.42674" x1="15.42437" fill="none"/>
+			<line stroke="#000000" y2="37.43873" x2="28.85234" y1="33.42674" x1="28.85234" fill="none"/>
+			<line stroke="#000000" y2="37.43873" x2="24.58425" y1="33.42674" x1="24.58425" fill="none"/>
+			<line stroke="#000000" y2="37.43873" x2="33.37358" y1="33.42674" x1="33.37358" fill="none"/>
+		</g>
+	</symbol>
+	
+	<symbol viewBox="0 0 40 40" id="antenna">
+		<title>antenna</title>
+		<g stroke-width="1.75">
+			<ellipse stroke="#000000" ry="4.04131" rx="4.11978" cy="12.2205" cx="19.84953" fill="none"/>
+			<line stroke="#000000" y2="38.46939" x2="10.15823" y1="15.32014" x1="16.82835" fill="none"/>
+			<line stroke="#000000" y2="37.99856" x2="28.44222" y1="15.32014" x1="22.63528" fill="none"/>
+			<line stroke="#000000" y2="24.73679" x2="25.06792" y1="15.55556" x1="16.90683" fill="none"/>
+			<line stroke="#000000" y2="16.02639" x2="22.79223" y1="24.50137" x1="14.23878" fill="none"/>
+			<line stroke="#000000" y2="34.31038" x2="11.41378" y1="24.18748" x1="24.51861" fill="none"/>
+			<line stroke="#000000" y2="34.62427" x2="27.57902" y1="23.55971" x1="14.23878" fill="none"/>
+			<line stroke="#000000" y2="23.87359" x2="24.8328" y1="23.87359" x1="14.31725" fill="none"/>
+			<line stroke="#000000" y2="4.96074" x2="15.0919" y1="4.96074" x1="17.84849" fill="none"/>
+			<line stroke="#000000" y2="4.80046" x2="15.41919" y1="8.49198" x1="11.72767" fill="none"/>
+			<line stroke="#000000" y2="8.09962" x2="11.96309" y1="10.84614" x1="11.96309" fill="none"/>
+			<line stroke="#000000" y2="1.68228" x2="12.88173" y1="1.68228" x1="16.81541" fill="none"/>
+			<line stroke="#000000" y2="1.53061" x2="13.13056" y1="6.55615" x1="8.10501" fill="none"/>
+			<line stroke="#000000" y2="6.16099" x2="8.26196" y1="9.92765" x1="8.26196" fill="none"/>
+			<line stroke="#000000" y2="8.09962" x2="27.90564" y1="10.84614" x1="27.90564" fill="none"/>
+			<line stroke="#000000" y2="4.96074" x2="22.11986" y1="4.96074" x1="24.87645" fill="none"/>
+			<line stroke="#000000" y2="8.40194" x2="28.03719" y1="4.88336" x1="24.51861" fill="none"/>
+			<line stroke="#000000" y2="1.68228" x2="23.32893" y1="1.68228" x1="27.26261" fill="none"/>
+			<line stroke="#000000" y2="6.03692" x2="31.83761" y1="9.80358" x1="31.83761" fill="none"/>
+			<line stroke="#000000" y2="1.54691" x2="26.91062" y1="6.53127" x1="31.89499" fill="none"/>
+		</g>
+	</symbol>
+	
+	<symbol viewBox="0 0 40 40" id="lpfilter">
+		<title>lpfilter</title>
+		<g stroke-width="1.75">
+			<line stroke="#000" y2="38.30538" x2="4.40661" y1="1.86437" x1="4.40661" fill="none"/>
+			<line stroke="#000" y2="35.25415" x2="38.55948" y1="35.25415" x1="1.44051" fill="none"/>
+			<line stroke="#000" y2="10.53579" x2="14.90616" y1="10.53579" x1="4.49155" fill="none"/>
+			<line stroke="#000" y2="10.90956" x2="16.31719" y1="10.51116" x1="14.56421" fill="none"/>
+			<line stroke="#000" y2="10.7502" x2="15.91879" y1="12.10478" x1="17.35305" fill="none"/>
+			<line stroke="#000" y2="35.02203" x2="30.60152" y1="11.93921" x1="17.14443" fill="none"/>
+		</g>
+	</symbol>
+	
+	<symbol viewBox="0 0 40 40" id="opamp">
+		<title>opamp</title>
+		<g stroke-width="1.75">
+			<line stroke="#000000" y2="17.42704" x2="14.46911" y1="12.39728" x1="14.46911" fill="none"/>
+			<line stroke="#000000" y2="14.7812" x2="16.68276" y1="14.7812" x1="12.08519" fill="none"/>
+			<line stroke="#000000" y2="25.72964" x2="16.68276" y1="25.72964" x1="12.08519" fill="none"/>
+			<line stroke="#000000" y2="12.42067" x2="1.34647" y1="12.42067" x1="9.77535" fill="none"/>
+			<line stroke="#000000" y2="27.57933" x2="1.34647" y1="27.57933" x1="9.77535" fill="none"/>
+			<line stroke="#000000" y2="34.35265" x2="9.53364" y1="5.64735" x1="9.53364" fill="none"/>
+			<line stroke="#000000" y2="19.89318" x2="31.13183" y1="34.16519" x1="9.19308" fill="none"/>
+			<line stroke="#000000" y2="5.81763" x2="9.19308" y1="19.9509" x1="30.73355" fill="none"/>
+			<line stroke="#000000" y2="19.91672" x2="30.22465" y1="19.91672" x1="38.65353" fill="none"/>
+		</g>
+	</symbol>
+	
+	<symbol viewBox="0 0 40 40" id="svg">
+		<title>sine</title>
+		<!-- svg icon code -->
+	</symbol>
+	
+	<symbol viewBox="0 0 40 40" id="svg">
+		<title>sine</title>
+		<!-- svg icon code -->
+	</symbol>
+	
+	<symbol viewBox="0 0 40 40" id="svg">
+		<title>sine</title>
+		<!-- svg icon code -->
+	</symbol>
+	
+	<symbol viewBox="0 0 40 40" id="svg">
+		<title>sine</title>
+		<!-- svg icon code -->
+	</symbol>
+	
+	
+	
+	
+	<!-- NON GENERIC SYMBOLS -->
+	
+	<symbol viewBox="0 0 40 40" id="ohms_law">
+		<title>ohms_law</title>
+		<g stroke-width="1.75">
+			<line fill="none" x1="20" y1="2.15017" x2="20" y2="37.84983" stroke="#000000"/>
+			<line fill="none" x1="0.87433" y1="20" x2="39.12567" y2="20" stroke="#000000"/>
+			<line fill="none" x1="26.97088" y1="23.64674" x2="26.97088" y2="34.55573" stroke="#000000"/>
+			<line fill="none" x1="33.26733" y1="23.64674" x2="33.26733" y2="34.55573" stroke="#000000"/>
+			<line fill="none" x1="27.05189" y1="34.30408" x2="30.05087" y2="29.7185" stroke="#000000"/>
+			<line fill="none" x1="33.1605" y1="34.22273" x2="30.01893" y2="29.26015" stroke="#000000"/>
+			<line fill="none" x1="27.00353" y1="5.91601" x2="27.00353" y2="16.43719" stroke="#000000"/>
+			<line fill="none" x1="26.45405" y1="10.13871" x2="33.69145" y2="10.13871" stroke="#000000"/>
+			<line fill="none" x1="33.0728" y1="5.91601" x2="33.0728" y2="16.43719" stroke="#000000"/>
+			<line fill="none" x1="26.72879" y1="6.4645" x2="28.7237" y2="4.47321" stroke="#000000"/>
+			<line fill="none" x1="31.39942" y1="4.45338" x2="33.32153" y2="6.37199" stroke="#000000"/>
+			<line fill="none" x1="28.19409" y1="4.63621" x2="32.04049" y2="4.63621" stroke="#000000"/>
+			<line fill="none" x1="4.52857" y1="14.76157" x2="9.41011" y2="14.76157" stroke="#000000"/>
+			<line fill="none" x1="5.77092" y1="11.69544" x2="8.78937" y2="14.95461" stroke="#000000"/>
+			<line fill="none" x1="5.85966" y1="8.05441" x2="5.85966" y2="12.17898" stroke="#000000"/>
+			<line fill="none" x1="8.61058" y1="5.46737" x2="5.71875" y2="8.58983" stroke="#000000"/>
+			<line fill="none" x1="8.16689" y1="5.659" x2="12.16124" y2="5.659" stroke="#000000"/>
+			<line fill="none" x1="10.83292" y1="14.76157" x2="15.71445" y2="14.76157" stroke="#000000"/>
+			<line fill="none" x1="14.58848" y1="11.8262" x2="11.60791" y2="15.04447" stroke="#000000"/>
+			<line fill="none" x1="11.61325" y1="5.38718" x2="14.54295" y2="8.55053" stroke="#000000"/>
+			<line fill="none" x1="14.40817" y1="8.05441" x2="14.40817" y2="12.17898" stroke="#000000"/>
+			<line y2="34.51128" x2="10.27402" y1="23.89538" x1="7.11613" fill="none" stroke="#000000"/>
+			<line y2="34.37673" x2="9.97327" y1="23.88999" x1="13.73267" fill="none" stroke="#000000"/>
+		</g>
+	</symbol>
+	
+	<symbol viewBox="0 0 40 40" id="std_val">
+		<title>std_val</title>
+		<g stroke-width="1.75">
+			<line y2="35.5343" x2="13.73547" y1="24.56172" x1="13.73547" stroke="#000000" fill="none"/>
+			<line y2="35.33841" x2="13.24921" y1="35.33841" x1="18.97818" stroke="#000000" fill="none"/>
+			<line y2="25.04533" x2="13.24921" y1="25.04533" x1="18.97818" stroke="#000000" fill="none"/>
+			<line stroke="#000000" y2="30.28987" x2="13.24921" y1="30.28987" x1="17.52187" fill="none"/>
+			<line y2="25.04716" x2="27.81312" y1="25.04716" x1="22.27915" stroke="#000000" fill="none"/>
+			<line stroke="#000000" y2="30.38696" x2="27.32769" y1="24.95007" x1="27.32769" fill="none"/>
+			<line y2="30.38784" x2="27.81312" y1="30.38784" x1="22.27915" stroke="#000000" fill="none"/>
+			<line stroke="#000000" y2="35.4355" x2="22.76459" y1="30.19278" x1="22.76459" fill="none"/>
+			<line y2="35.34985" x2="27.81312" y1="35.34985" x1="22.27915" stroke="#000000" fill="none"/>
+			<line stroke="#000000" y2="30.38784" x2="36.65287" y1="30.38784" x1="31.21598" fill="none"/>
+			<line stroke="#000000" y2="30.77531" x2="31.63008" y1="25.04716" x1="31.63008" fill="none"/>
+			<line y2="35.5343" x2="36.19287" y1="24.56172" x1="36.19287" stroke="#000000" fill="none"/>
+			<line stroke="#000000" y2="30.78126" x2="8.88573" y1="25.24267" x1="3.34713" fill="none"/>
+			<line stroke="#000000" y2="29.79538" x2="8.8915" y1="35.33975" x1="3.34713" fill="none"/>
+			<rect fill="none" x="2.36996" y="4.36861" width="35.26007" height="15.60692" stroke="#000000"/>
+			<line stroke="#000000" fill="none" x1="35.29407" y1="6.31989" x2="35.29407" y2="17.92715"/>
+			<line y2="17.23731" x2="5.39308" y1="7.05327" x1="7.60167" stroke="#000000" fill="none"/>
+			<line y2="17.23731" x2="8.70823" y1="7.05327" x1="10.91682" stroke="#000000" fill="none"/>
+			<line stroke="#000000" y2="10.24345" x2="4.65689" y1="10.24345" x1="12.63234" fill="none"/>
+			<line stroke="#000000" y2="13.44306" x2="3.79799" y1="13.44306" x1="11.77345" fill="none"/>
+			<line y2="17.23731" x2="14.37112" y1="7.05327" x1="16.5797" stroke="#000000" fill="none"/>
+			<line y2="17.23731" x2="17.68627" y1="7.05327" x1="19.89486" stroke="#000000" fill="none"/>
+			<line stroke="#000000" y2="10.24345" x2="13.63492" y1="10.24345" x1="21.61038" fill="none"/>
+			<line stroke="#000000" y2="13.44306" x2="12.77603" y1="13.44306" x1="20.75148" fill="none"/>
+			<line y2="17.23731" x2="24.7228" y1="7.05327" x1="26.93139" stroke="#000000" fill="none"/>
+			<line y2="17.23731" x2="28.03795" y1="7.05327" x1="30.24654" stroke="#000000" fill="none"/>
+			<line stroke="#000000" y2="10.24345" x2="23.9866" y1="10.24345" x1="31.96206" fill="none"/>
+			<line stroke="#000000" y2="13.44306" x2="23.12771" y1="13.44306" x1="31.10317" fill="none"/>
+			<rect height="0.19417" width="0.29126" y="16.60057" x="21.42291" stroke="#000000" fill="none"/>
+		</g>
+	</symbol>
+	
+	<symbol viewBox="0 0 40 40" id="equiv_op">
+		<title>equiv_op</title>
+		<g stroke-width="1.75">
+			<line stroke="#000000" y2="22.15355" x2="3.73586" y1="33.0177" x1="7.90199" fill="none"/>
+			<line stroke="#000000" y2="32.37746" x2="21.23415" y1="21.72319" x1="3.29373" fill="none"/>
+			<line stroke="#000000" y2="25.0195" x2="28.79321" y1="14.36523" x1="10.85279" fill="none"/>
+			<line stroke="#000000" y2="14.90542" x2="11.1821" y1="32.69801" x1="21.7891" fill="none"/>
+			<line stroke="#000000" y2="7.80073" x2="18.77571" y1="25.59333" x1="29.38272" fill="none"/>
+			<line stroke="#000000" y2="17.77136" x2="36.23944" y1="7.11709" x1="18.29903" fill="none"/>
+			<line stroke="#000000" y2="1.64368" x2="38.95449" y1="8.07356" x1="32.34887" fill="none"/>
+			<line stroke="#000000" y2="7.3182" x2="32.2406" y1="18.21599" x1="36.66693" fill="none"/>
+			<line stroke="#000000" y2="32.11424" x2="7.65113" y1="38.54412" x1="1.04552" fill="none"/>
+			<line stroke="#000000" y2="11.94455" x2="8.1977" y1="0.84857" x1="8.1977" fill="none"/>
+			<line stroke="#000000" id="svg_27" y2="6.39657" x2="2.49805" y1="6.39657" x1="13.8973" fill="none"/>
+			<line stroke="#000000" y2="38.27313" x2="30.69268" y1="27.17715" x1="30.69268" fill="none"/>
+			<line stroke="#000000" y2="38.27313" x2="37.35039" y1="27.17715" x1="37.35039" fill="none"/>
+		</g>
+	</symbol>
+	
+	<symbol viewBox="0 0 40 40" id="twoport">
+		<title>twoport</title>
+		<g stroke-width="1.75">
+			<rect stroke="#000000" height="32.91951" width="19.68643" y="3.54024" x="10.12452" fill="none"/>
+			<line stroke="#000000" y2="11.13194" x2="39.44163" y1="11.13194" x1="30.18331" fill="none"/>
+			<line stroke="#000000" y2="28.86806" x2="39.44163" y1="28.86806" x1="30.18331" fill="none"/>
+			<line stroke="#000000" y2="11.13194" x2="9.81669" y1="11.13194" x1="0.55837" fill="none"/>
+			<line stroke="#000000" y2="28.86806" x2="9.81669" y1="28.86806" x1="0.55837" fill="none"/>
+		</g>
+	</symbol>
+	
+	<symbol viewBox="0 0 40 40" id="temp">
+		<title>temp</title>
+		<g stroke-width="1.75">
+			<line stroke="#000000" y2="37.92983" x2="34.66252" y1="2.01389" x1="34.66252" fill="none"/>
+			<line stroke="#000000" y2="37.43056" x2="30.70358" y1="37.43056" x1="35.14863" fill="none"/>
+			<line stroke="#000000" y2="2.52258" x2="30.70358" y1="2.52258" x1="35.14863" fill="none"/>
+			<line stroke="#000000" y2="20" x2="30.70358" y1="20" x1="35.14863" fill="none"/>
+			<line stroke="#000000" y2="28.75248" x2="32.23136" y1="28.75248" x1="35.14863" fill="none"/>
+			<line stroke="#000000" y2="24.41957" x2="32.23136" y1="24.41957" x1="35.14863" fill="none"/>
+			<line stroke="#000000" y2="33.19186" x2="32.23136" y1="33.19186" x1="35.14863" fill="none"/>
+			<line stroke="#000000" y2="11.03748" x2="32.23136" y1="11.03748" x1="35.14863" fill="none"/>
+			<line stroke="#000000" y2="6.70457" x2="32.23136" y1="6.70457" x1="35.14863" fill="none"/>
+			<line stroke="#000000" y2="15.47686" x2="32.23136" y1="15.47686" x1="35.14863" fill="none"/>
+			<ellipse stroke="#000000" ry="4.70818" rx="4.59144" cy="32.17904" cx="9.44281" fill="none"/>
+			<line y2="7.23724" x2="6.71908" y1="28.40472" x1="6.71908" stroke="#000000" fill="none"/>
+			<line y2="7.23724" x2="6.71908" y1="28.40472" x1="6.71908" stroke="#000000" fill="none"/>
+			<line y2="7.23724" x2="6.71908" y1="28.40472" x1="6.71908" stroke="#000000" fill="none"/>
+			<line stroke="#000000" y2="5.47689" x2="8.71303" y1="7.47084" x1="6.71908" fill="none"/>
+			<line stroke="#000000" y2="5.78642" x2="10.63777" y1="7.47084" x1="12.32219" fill="none"/>
+			<line stroke="#000000" y2="5.75878" x2="10.76577" y1="5.75878" x1="8.43114" fill="none"/>
+			<line y2="7.23724" x2="12.3658" y1="28.40472" x1="12.3658" stroke="#000000" fill="none"/>
+			<line y2="9.02726" x2="21.04067" y1="9.02726" x1="24.07968" stroke="#000000" fill="none"/>
+			<line y2="10.95249" x2="19.43072" y1="8.94944" x1="21.43376" stroke="#000000" fill="none"/>
+			<line y2="15.73482" x2="19.64388" y1="10.66151" x1="19.64388" stroke="#000000" fill="none"/>
+			<line y2="17.16001" x2="21.31747" y1="15.36337" x1="19.52083" stroke="#000000" fill="none"/>
+			<line y2="17.12215" x2="21.04067" y1="17.12215" x1="24.07968" stroke="#000000" fill="none"/>
+			<rect stroke="#000000" height="0.46693" width="0.46693" y="8.63816" x="16.92014" fill="none"/>
+		</g>
+	</symbol>
+	
+	<symbol viewBox="0 0 40 40" id="lengthunits">
+		<title>lengthunits</title>
+		<g stroke-width="1.75">
+			<line stroke="#000000" y2="38.94418" x2="24.33744" y1="26.34626" x1="24.33744" fill="none"/>
+			<line stroke="#000000" y2="26.80724" x2="24.0577" y1="24.71502" x1="26.14992" fill="none"/>
+			<line stroke="#000000" y2="24.89627" x2="25.87411" y1="24.89627" x1="29.41239" fill="none"/>
+			<line stroke="#000000" y2="30.96809" x2="24.15534" y1="30.96809" x1="28.95927" fill="none"/>
+			<line stroke="#000000" y2="26.27813" x2="30.52238" y1="24.6244" x1="28.86864" fill="none"/>
+			<line stroke="#000000" y2="36.5882" x2="34.94046" y1="24.80565" x1="34.94046" fill="none"/>
+			<line stroke="#000000" y2="35.95052" x2="34.6667" y1="38.30864" x1="37.02481" fill="none"/>
+			<line stroke="#000000" y2="31.05871" x2="38.2036" y1="31.05871" x1="32.13111" fill="none"/>
+			<line stroke="#000000" y2="38.03676" x2="38.6581" y1="38.03676" x1="36.66231" fill="none"/>
+			<line stroke="#000000" y2="14.16364" x2="13.67779" y1="3.49635" x1="13.67779" fill="none"/>
+			<line stroke="#000000" y2="14.54352" x2="1.72386" y1="1.05582" x1="1.72386" fill="none"/>
+			<line stroke="#000000" y2="1.95496" x2="5.74326" y1="1.95496" x1="1.34189" fill="none"/>
+			<line stroke="#000000" y2="1.61978" x2="4.8729" y1="5.67999" x1="8.9331" fill="none"/>
+			<line stroke="#000000" y2="1.95496" x2="12.16669" y1="1.95496" x1="9.17826" fill="none"/>
+			<line stroke="#000000" y2="1.6529" x2="9.99314" y1="4.78084" x1="6.8652" fill="none"/>
+			<line stroke="#000000" y2="1.74823" x2="11.56922" y1="4.1386" x1="13.95958" fill="none"/>
+			<line stroke="#000000" y2="7.3152" x2="32.49407" y1="7.3152" x1="22.97808" fill="none"/>
+			<line stroke="#000000" y2="6.6725" x2="32.22174" y1="14.92762" x1="32.22174" fill="none"/>
+			<line stroke="#000000" y2="16.03194" x2="31.75179" y1="11.93703" x1="35.8467" fill="none"/>
+			<line stroke="#000000" y2="16.15339" x2="32.54126" y1="12.02765" x1="28.41552" fill="none"/>
+			<line stroke="#000000" y2="33.23249" x2="16.27117" y1="33.23249" x1="7.38955" fill="none"/>
+			<line stroke="#000000" y2="25.61294" x2="7.93448" y1="33.86806" x1="7.93448" fill="none"/>
+			<line stroke="#000000" y2="28.57014" x2="11.89152" y1="24.4444" x1="7.76578" fill="none"/>
+			<line stroke="#000000" y2="28.44744" x2="4.46198" y1="24.35253" x1="8.55688" fill="none"/>
+		</g>
+	</symbol>
+	
+	<symbol viewBox="0 0 40 40" id="wiregauge">
+		<title>wiregauge</title>
+		<g stroke-width="1.75">
+			<line stroke="#000000" y2="14.87229" x2="3.2627" y1="6.27431" x1="3.37226" fill="none"/>
+			<line stroke="#000000" y2="6.87496" x2="3.19054" y1="3.93905" x1="5.23474" fill="none"/>
+			<line stroke="#000000" y2="4.25749" x2="7.64695" y1="4.25749" x1="4.57739" fill="none"/>
+			<line stroke="#000000" y2="6.87496" x2="3.19054" y1="3.93905" x1="5.23474" fill="none"/>
+			<line stroke="#000000" y2="14.87229" x2="8.88871" y1="6.27431" x1="8.99826" fill="none"/>
+			<line stroke="#000000" y2="6.87496" x2="9.13403" y1="3.93905" x1="7.14514" fill="none"/>
+			<line stroke="#000000" y2="9.71419" x2="9.21131" y1="9.71419" x1="3.05556" fill="none"/>
+			<line stroke="#000000" y2="14.75339" x2="12.42505" y1="3.75" x1="12.42505" fill="none"/>
+			<line stroke="#000000" y2="14.75339" x2="17.94401" y1="3.75" x1="17.94401" fill="none"/>
+			<line stroke="#000000" y2="11.04391" x2="15.61638" y1="14.23875" x1="12.31892" fill="none"/>
+			<line stroke="#000000" y2="11.05099" x2="14.44159" y1="14.23875" x1="17.73174" fill="none"/>
+			<line stroke="#000000" y2="14.75339" x2="21.41669" y1="3.75" x1="21.41669" fill="none"/>
+			<line stroke="#000000" y2="14.03309" x2="26.9611" y1="14.03309" x1="21.09829" fill="none"/>
+			<line stroke="#000000" y2="4.46926" x2="26.9611" y1="4.46926" x1="21.09829" fill="none"/>
+			<line stroke="#000000" y2="8.88787" x2="26.19271" y1="14.65007" x1="26.19271" fill="none"/>
+			<line stroke="#000000" y2="9.50853" x2="24.07004" y1="9.50853" x1="26.82951" fill="none"/>
+			<ellipse stroke="#000000" ry="10.0578" rx="10.41581" id="svg_187" cy="27.1941" cx="14.69065" fill="none"/>
+			<line stroke="#000000" y2="37.92983" x2="36.45833" y1="2.01389" x1="36.45833" fill="none"/>
+			<line stroke="#000000" y2="37.43056" x2="32.49939" y1="37.43056" x1="36.94444" fill="none"/>
+			<line stroke="#000000" y2="2.52258" x2="32.49939" y1="2.52258" x1="36.94444" fill="none"/>
+			<line stroke="#000000" y2="20" x2="32.49939" y1="20" x1="36.94444" fill="none"/>
+			<line stroke="#000000" y2="28.75248" x2="34.02717" y1="28.75248" x1="36.94444" fill="none"/>
+			<line stroke="#000000" y2="24.41957" x2="34.02717" y1="24.41957" x1="36.94444" fill="none"/>
+			<line stroke="#000000" y2="33.19186" x2="34.02717" y1="33.19186" x1="36.94444" fill="none"/>
+			<line stroke="#000000" y2="11.03748" x2="34.02717" y1="11.03748" x1="36.94444" fill="none"/>
+			<line stroke="#000000" y2="6.70457" x2="34.02717" y1="6.70457" x1="36.94444" fill="none"/>
+			<line stroke="#000000" y2="15.47686" x2="34.02717" y1="15.47686" x1="36.94444" fill="none"/>
+		</g>
+	</symbol>
+	
+	<symbol viewBox="0 0 40 40" id="reactance">
+		<title>reactance</title>
+		<g stroke-width="1.75">
+			<line stroke="#000000" y2="37.55804" x2="3.30135" y1="2.44196" x1="3.30135" fill="none"/>
+			<line stroke="#000000" y2="34.87302" x2="37.29658" y1="34.87302" x1="0.85187" fill="none"/>
+			<line stroke="#000000"	y2="26.23058" x2="17.82322" y1="11.70367" x1="3.29631" fill="none"/>
+			<line stroke="#000000" y2="25.99533" x2="17.66204" y1="30.74069" x1="19.96296" fill="none"/>
+			<line stroke="#000000" y2="26.07403" x2="21.96296" y1="30.81477" x1="19.88889" fill="none"/>
+			<line stroke="#000000" y2="26.41494" x2="21.7702" y1="11.11108" x1="37.07406" fill="none"/>
+			<line stroke="#000000" y2="10.59256" x2="17.66796" y1="10.59256" x1="22.92721" fill="none"/>
+			<line stroke="#000000" y2="4.66618" x2="17.66796" y1="4.66618" x1="22.92721" fill="none"/>
+			<line stroke="#000000" y2="4.47529" x2="22.60005" y1="10.74071" x1="18.03833" fill="none"/>
+			<line stroke="#000000" y2="12.08209" x2="16.1124" y1="3.55553" x1="16.1124" fill="none"/>
+			<line stroke="#000000" y2="12.08209" x2="16.1124" y1="3.55553" x1="16.1124" fill="none"/>
+			<line stroke="#000000" y2="12.08209" x2="24.71009" y1="3.55553" x1="24.71009" fill="none"/>
+		</g>
+	</symbol>
+	
+	<symbol viewBox="0 0 40 40" id="svg">
+		<title>sine</title>
+		<!-- svg icon code -->
+	</symbol>
+	
+	<symbol viewBox="0 0 40 40" id="svg">
+		<title>sine</title>
+		<!-- svg icon code -->
+	</symbol>
+	
+	<symbol viewBox="0 0 40 40" id="svg">
+		<title>sine</title>
+		<!-- svg icon code -->
+	</symbol>
+	
+	
+	
+</svg>
 
 </html>

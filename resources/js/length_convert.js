@@ -22,7 +22,7 @@ function f_inch() {
 	var m = inch/39.37;
 	var ft = inch/12;
 	
-	document.getElementById("meter").value = fnum2si(m, sig_figs);
+	document.getElementById("meter").value = fnum2eng(m, sig_figs);
 	document.getElementById("feet").value = fnum(ft, sig_figs);
 	document.getElementById("ftin").value = m2fracimperial(m);
 }
@@ -34,7 +34,7 @@ function f_feet() {
 	var m = ft/(12*0.0254);
 	var inch = ft/12;
 	
-	document.getElementById("meter").value = fnum2si(m, sig_figs);
+	document.getElementById("meter").value = fnum2eng(m, sig_figs);
 	document.getElementById("inch").value = fnum(inch, sig_figs);
 	document.getElementById("ftin").value = m2fracimperial(m);
 	

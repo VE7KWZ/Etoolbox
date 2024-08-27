@@ -46,7 +46,7 @@ function path_loss() {
   	
     var prx = (ptx*G_tx*G_rx*(lambda**2))/(16*(pi**2)*(val_in**2)*loss);
     
-    document.getElementById("out").value = fnum2si(prx, sig_figs);
+    document.getElementById("out").value = fnum2eng(prx, sig_figs);
     document.getElementById("pwrdbm").value = fnum(10*Math.log10(prx*1000),sig_figs);
   	return;
   }
@@ -56,7 +56,7 @@ function path_loss() {
   	
     var range = Math.sqrt((G_tx*G_rx*(lambda**2)*ptx)/(16*(pi**2)*val_in*loss));
     
-    document.getElementById("out").value = fnum2si(range, sig_figs);
+    document.getElementById("out").value = fnum2eng(range, sig_figs);
     return;
   }
   

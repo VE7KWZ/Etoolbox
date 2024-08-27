@@ -18,23 +18,23 @@ function comp_chg() {
 	
 	// Calculate Reactance (Component and Frequency Provided)
 	if (frequency != "" && document.getElementById("config0").checked) {	// frequency provided (capacitive)
-		document.getElementById("reactance").value = fnum2si(1/(2*pi*freq*comp), sig_figs); 
+		document.getElementById("reactance").value = fnum2eng(1/(2*pi*freq*comp), sig_figs); 
 		return; 
 	}
 	
 	if (frequency != "" && document.getElementById("config1").checked) {	// frequency provided (inductive)
-		document.getElementById("reactance").value = fnum2si(2*pi*freq*comp, sig_figs); 
+		document.getElementById("reactance").value = fnum2eng(2*pi*freq*comp, sig_figs); 
 		return;
 	}
 	
 	// Calculate Frequency (Component and Reactance Provided)
 	if (reactance != "" && document.getElementById("config0").checked) {	// reactance provided (capacitive)
-		document.getElementById("frequency").value = fnum2si(1/(2*pi*reac*comp), sig_figs); 
+		document.getElementById("frequency").value = fnum2eng(1/(2*pi*reac*comp), sig_figs); 
 		return; 
 	}
 	
 	if (reactance != "" && document.getElementById("config1").checked) {	// reactance provided (inductive)
-		document.getElementById("frequency").value = fnum2si(reac/(2*pi*comp), sig_figs); 
+		document.getElementById("frequency").value = fnum2eng(reac/(2*pi*comp), sig_figs); 
 		return; 
 	}
 	
@@ -56,23 +56,23 @@ function freq_chg() {
 	
 	// Calculate Reactance (Component and Frequency Provided)
 	if (component != "" && document.getElementById("config0").checked) {	// component provided (capacitive)
-		document.getElementById("reactance").value = fnum2si(1/(2*pi*freq*comp), sig_figs); 
+		document.getElementById("reactance").value = fnum2eng(1/(2*pi*freq*comp), sig_figs); 
 		return; 
 	}
 	
 	if (component != "" && document.getElementById("config1").checked) {	// component provided (inductive)
-		document.getElementById("reactance").value = fnum2si(2*pi*freq*comp, sig_figs); 
+		document.getElementById("reactance").value = fnum2eng(2*pi*freq*comp, sig_figs); 
 		return;
 	}
 	
 	// Calculate Component (Frequency and Reactance Provided)
 	if (reactance != "" && document.getElementById("config0").checked) {	// reactance provided (capacitive)
-		document.getElementById("component").value = fnum2si(1/(2*pi*freq*reac), sig_figs); 
+		document.getElementById("component").value = fnum2eng(1/(2*pi*freq*reac), sig_figs); 
 		return; 
 	}
 	
 	if (reactance != "" && document.getElementById("config1").checked) {	// reactance provided (inductive)
-		document.getElementById("component").value = fnum2si(reac/(2*pi*freq), sig_figs); 
+		document.getElementById("component").value = fnum2eng(reac/(2*pi*freq), sig_figs); 
 		return; 
 	}
 	
@@ -94,23 +94,23 @@ function reac_chg() {
 	
 	// Calculate Frequency (Reactance and Component Provided)
 	if (component != "" && document.getElementById("config0").checked) {	// component provided (capacitive)
-		document.getElementById("frequency").value = fnum2si(1/(2*pi*reac*comp), sig_figs); 
+		document.getElementById("frequency").value = fnum2eng(1/(2*pi*reac*comp), sig_figs); 
 		return; 
 	}
 	
 	if (component != "" && document.getElementById("config1").checked) {	// component provided (inductive)
-		document.getElementById("frequency").value = fnum2si(reac/(2*pi*comp), sig_figs); 
+		document.getElementById("frequency").value = fnum2eng(reac/(2*pi*comp), sig_figs); 
 		return;
 	}
 	
 	// Calculate Component (Frequency and Reactance Provided)
 	if (frequency != "" && document.getElementById("config0").checked) {	// frequency provided (capacitive)
-		document.getElementById("component").value = fnum2si(1/(2*pi*freq*reac), sig_figs); 
+		document.getElementById("component").value = fnum2eng(1/(2*pi*freq*reac), sig_figs); 
 		return; 
 	}
 	
 	if (frequency != "" && document.getElementById("config1").checked) {	// frequency provided (inductive)
-		document.getElementById("component").value = fnum2si(reac/(2*pi*freq), sig_figs); 
+		document.getElementById("component").value = fnum2eng(reac/(2*pi*freq), sig_figs); 
 		return; 
 	}
 	

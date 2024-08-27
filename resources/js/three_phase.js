@@ -1,6 +1,6 @@
-// **********************************************************************************************************
-// Three Phase Calculator [three_phase.htm]
-// **********************************************************************************************************
+
+var sig_figs = 4;
+
 function three_phase () {
 	
 	var v_line = fsi2num(document.getElementById("lv").value);
@@ -61,16 +61,16 @@ function three_phase () {
 	
 	
 	// Outputs
-	document.getElementById("lv").value = fnum2si(v_line,3);
-	document.getElementById("pv").value = fnum2si(v_phase,3);
-	document.getElementById("li").value = fnum2si(i_line,3);
-	document.getElementById("pi").value = fnum2si(i_phase,3);
-	document.getElementById("s").value = fnum2si(s,3);
-	document.getElementById("p").value = fnum2si(p,3);
-	document.getElementById("q").value = fnum2si(q,3);
+	document.getElementById("lv").value = fnum2eng(v_line, sig_figs);
+	document.getElementById("pv").value = fnum2eng(v_phase, sig_figs);
+	document.getElementById("li").value = fnum2eng(i_line, sig_figs);
+	document.getElementById("pi").value = fnum2eng(i_phase, sig_figs);
+	document.getElementById("s").value = fnum2eng(s, sig_figs);
+	document.getElementById("p").value = fnum2eng(p, sig_figs);
+	document.getElementById("q").value = fnum2eng(q, sig_figs);
 	
-	document.getElementById("pf").value = fnum(pf,6);
-	document.getElementById("ph_a").value = fnum(ph_a*180/Math.PI,3);
+	document.getElementById("pf").value = fnum(pf, 6);
+	document.getElementById("ph_a").value = fnum(ph_a*180/Math.PI, sig_figs);
 	
 	
 	// If zero, clear the inputs

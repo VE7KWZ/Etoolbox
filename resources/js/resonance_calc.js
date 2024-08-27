@@ -20,13 +20,13 @@ function res_freq_calc() {
 	
 	switch (opt) {
 		case 0:	// Cap + Ind --> Freq
-			document.getElementById("freq").value = fnum2si(1/(2*pi*Math.sqrt(nind*ncap)), sig_figs);
+			document.getElementById("freq").value = fnum2eng(1/(2*pi*Math.sqrt(nind*ncap)), sig_figs);
 			break;
 		case 1:	// Cap + Freq --> Ind
-			document.getElementById("ind").value = fnum2si(1/(((2*pi*nfreq)**2)*ncap), sig_figs);
+			document.getElementById("ind").value = fnum2eng(1/(((2*pi*nfreq)**2)*ncap), sig_figs);
 			break;
 		case 2:	// Ind + Freq --> Cap
-			document.getElementById("cap").value = fnum2si(1/(((2*pi*nfreq)**2)*nind), sig_figs);
+			document.getElementById("cap").value = fnum2eng(1/(((2*pi*nfreq)**2)*nind), sig_figs);
 			break;
 	}
 	
@@ -49,11 +49,11 @@ function res_chg() {
 	var nind = fsi2num(ind);
 	var nres = fsi2num(res);
 	
-	var zd_ser = fnum2si(nres, sig_figs);
-	var zd_par = fnum2si(nind/(nres*ncap), sig_figs);
+	var zd_ser = fnum2si(nres, sig_figs, true) + "\u2126";
+	var zd_par = fnum2si(nind/(nres*ncap), sig_figs, true) + "\u2126";
 	
-	var qf_ser = fnum2si((1/nres)*Math.sqrt(nind/ncap), sig_figs);
-	var qf_par = fnum2si(nres*Math.sqrt(ncap/nind), sig_figs);
+	var qf_ser = fnum2eng((1/nres)*Math.sqrt(nind/ncap), sig_figs);
+	var qf_par = fnum2eng(nres*Math.sqrt(ncap/nind), sig_figs);
 	
 	var result = fstring("Serial Resonant ----\nZd = {1}\nQ  = {2}\n\nParallel Resonant --\nZd = {3}\nQ  = {4}", zd_ser, qf_ser, zd_par, qf_par);
 	
