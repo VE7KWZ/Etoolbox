@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Etoolbox - Capacitor Discharge Calculator</title>
+	
+	<!-- DEFAULT LINKS, STYLES, AND SCRIPTS -->
+	<meta name="viewport" charset="UTF-8" content="width=device-width, initial-scale=1">
+	
+	<link rel="icon" href="../resources/images/favicon.ico">
+	<link rel="stylesheet" href="../resources/css/styles.css">
+	
+	<script type="text/javascript" src="../resources/js/functions.js"></script>
+	
+	
+	<!-- ADDITIONAL LINKS, STYLES, AND SCRIPTS -->
+	<script type="text/javascript" src="../resources/js/cap_discharge.js"></script>
+	
+</head>
+
+<body onload="cfg_chg()">
+	<div id="backdiv">
+	
+	<!-- HEADER -->
+	<header>
+		<span class="title">Mi<span id="title_c">c</span>hael's <span id="title_e" style="color:#E00">E</span>toolbox</span>
+		<a target="_top" href="../index.htm">Index</a><script type="text/javascript" src="../resources/js/eggs.js"></script>
+	</header>
+	
+	
+	<!-- CALCULATOR -->
+	<section class="card" id="calc">
+		
+		<!-- TITLE AND SHORT DESCRIPTION -->
+		<h2 style="margin:0">Capacitor Discharge Calculator</h2>
+		<a href="#info" style="font-size:0.95em; font-weight:bold;">&#x2B17; Further Information</a><br>
+		<p>
+			Calculates time taken to discharge a capacitor from one volage to anoter through a resistor, 
+			or resistance needed to discharge a capacitor from one volage to anoter given a target time.
+		</p>
+		
+		<!-- METRIC INPUT NOTE -->
+		<p style="color:#A00; margin: 2em 0 1em 0; font-size:0.85em; text-align:center">
+			[*] Metric SI unit prefixes such as p=pico, n=nano, u=micro, m=milli, k=kilo, M=mega are valid.
+		</p>
+		
+		<!-- CALCULATOR INPUT TABLE FORM -->
+		<form name="inputform" onkeydown="return event.key != 'Enter';">
+		<div class="formwrapper">
+    
+			<div class="inputcontainer">
+				
+				<!-- Remember for inputs on mobile that are numbers to use inputmode="decimal" -->
+				
+				<!-- CHECKBOX & RADIO BUTTON OPTIONS -->
+				<div class="inputfield" style="margin-bottom: 0.6em; justify-content: space-evenly;">
+					
+					<label for="config0" style="text-align: left; font-size: 0.96em;">
+					<input type="radio" id="config0" name="cfg" checked="checked" onchange="cfg_chg()">
+					Solve for time
+					</label>
+					
+					<label for="config1" style="text-align: left; font-size: 0.96em;">
+					<input type="radio" id="config1" name="cfg" onchange="cfg_chg()">
+					Solve for resistance
+					</label>
+					
+				</div>				
+				
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Capacitance</span>
+					<div class="inputbox">
+						<input type="text" id="cap" placeholder="Enter Value">
+						<label for="cap">F<span style="color:#A00;">*</span></label>
+					</div>
+				</div>
+				
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Initial Voltage</span>
+					<div class="inputbox">
+						<input type="text" id="vo" placeholder="Enter Value">
+						<label for="vo">V<span style="color:#A00;">*</span></label>
+					</div>
+				</div>
+				
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Threshold Voltage</span>
+					<div class="inputbox">
+						<input type="text" id="vc" placeholder="Enter Value">
+						<label for="vc">V<span style="color:#A00;">*</span></label>
+					</div>
+				</div>
+				
+				<div style="display: flex; flex-grow: 1; min-width: 0; margin:1.2em 0 0.6em 0; border-bottom: 1px solid #AAA;">
+				</div>
+				
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Resistance</span>
+					<div class="inputbox">
+						<input type="text" id="res" placeholder="Enter Value">
+						<label for="res">&Omega;<span style="color:#A00;">*</span></label>
+					</div>
+				</div>
+				
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Time to threshold</span>
+					<div class="inputbox">
+						<input type="text" id="time" placeholder="Enter Value">
+						<label for="time">s<span style="color:#A00;">*</span></label>
+					</div>
+				</div>
+				
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Initial Power</span>
+					<div class="inputbox">
+						<input type="text" id="pow" readonly>
+						<label for="pow">W</label>
+					</div>
+				</div>
+				
+				<!-- TEXT INPUT -->
+				<div class="inputfield">
+					<span class="inputname">Initial Energy</span>
+					<div class="inputbox">
+						<input type="text" id="energy" readonly>
+						<label for="energy">J</label>
+					</div>
+				</div>
+				
+				<!-- CALCULATE & CLEAR BUTTONS -->
+				<div class="justified" style="margin: 0.8em 0;">
+					<input type="button" style="width:min(300px,75%); margin-left: 0;" onclick="cap_discharge()" id="calc_button" value="Calculate">
+					<input type="button" style="width:min(150px,25%); margin-right: 0;" onclick="this.form.reset()" value="Clear">
+				</div>
+				
+			</div>
+      
+		</div>
+		</form>
+		
+		
+		<script type="text/javascript">
+			// Pressing enter anywhere on page will trigger the calculate button if it has the ID "calculate_button"
+			window.addEventListener( "keyup", (event) => {
+				if (event.key === "Enter") {
+					document.getElementById("calc_button").click() 
+				} 
+			} );
+		</script>
+		
+	</section>
+	
+	
+	<!-- CALCULATION INFO CARD -->
+	<section class="card" id="info">
+		Info
+		<br>
+		<a href="#top" style="font-size:0.95em; font-weight:bold;">&#x2B17; Top</a><br>
+	</section>
+	
+	
+	
+	<!-- FOOTER COPYRIGHT -->
+	<footer>
+		<span style="font-size: 0.9em">Copyright © <span id="year">2024</span> Michael Bell. All Rights Reserved.</span>
+		<script>
+			document.getElementById("year").innerHTML = new Date().getFullYear();
+		</script>
+	</footer>
+	
+	</div>
+	
+</body>
+</html>
